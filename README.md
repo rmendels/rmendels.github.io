@@ -10,7 +10,9 @@ You can find here the following:
 
 
 The xtractomatic package is available through CRAN, or the under-development version at the [xtractomatic repository](https://github.com/rmendels/xtractomatic)
+
 The rerddapXtracto is available through the [rerddapXtracto repository](https://github.com/rmendels/rerddapXtracto)
+
 The source code for the PICES2017 notebooks can be found at the [pices2017 repository](https://github.com/rmendels/pices2017)
 
 
