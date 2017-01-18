@@ -6,7 +6,8 @@ You can find here the following:
 * [xtractomatic vignette RNotebook](https://rmendels.github.io/Usingxtractomatic.nb.html)
 * [rerddapXtracto vignette RNotebook](https://rmendels.github.io/UsingrerddapXtracto.nb.html)
 * [PICES2017 RNotebook](https://rmendels.github.io/pices2017.nb.html)
-* [PICES2017 Jupyter Notebook](https://rmendels.github.io/pices2017Notebook.html)
+* [PICES2017 Jupyter Python Notebook](https://rmendels.github.io/pices2017Notebook.html)
+* [PICES2017 Jupyter Matlab Notebook](https://rmendels.github.io/pices2017MNotebook.html)
 
  
  
