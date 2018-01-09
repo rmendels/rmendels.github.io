@@ -3,7 +3,11 @@ Github Web Page:
 
 You can find here the following:
 
-* [xtractomatic vignette RNotebook](https://rmendels.github.io/Usingxtractomatic.nb.html)
+* [xtractomatic version 3.3.2 vignette RNotebook](https://rmendels.github.io/Usingxtractomatic.nb.html)
+
+* [xtractomatic version 3.4.0 vignette RNotebook](https://rmendels.github.io/Usingxtractomatic_3.4.0.nb.html)
+
+
 * [xtractomatic development version vignette RNotebook](https://rmendels.github.io/Usingxtractomatic_Dev.nb.html)
 
 * [rerddapXtracto vignette RNotebook](https://rmendels.github.io/UsingrerddapXtracto.nb.html)
