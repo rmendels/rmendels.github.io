@@ -32,9 +32,10 @@ The source code for the PICES2017 notebooks can be found at the [pices2017 repos
 * [PICES2017 Jupyter Matlab Notebook](https://rmendels.github.io/pices2017MNotebook.html)
 
  
- ## Phase_talk
+## Phase Talk
 
 [slides](https://rmendels.github.io/phase_talk/phase_talk.html)
+
 
 
 
