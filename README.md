@@ -9,7 +9,7 @@ The `xtractomatic` package development version is available at the [xtractomatic
 * [xtractomatic version 3.3.2 vignette RNotebook](https://rmendels.github.io/Usingxtractomatic.nb.html)
 * [xtractomatic version 3.4.0 vignette RNotebook](https://rmendels.github.io/Usingxtractomatic_3.4.0.nb.html)
 * [xtractomatic development version vignette RNotebook](https://rmendels.github.io/Usingxtractomatic_Dev.nb.html)
-* [xtractomatic complete documention via `pkgdown](https://rmendels.github.io/xtractomatic_docs)
+* [xtractomatic complete documention via `pkgdown](https://rmendels.github.io/xtractomatic_docs/index.html)
 
 ## `rerddapXtracto` links
 
