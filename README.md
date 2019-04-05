@@ -26,7 +26,7 @@ The `xtractomatic` package development version is available at the [xtractomatic
 
 ## `plotdap`  links
 
-* [plotdap vignette](https://Using_plotdap.html)
+* [plotdap vignette](https://rmendels.github.io/Using_plotdap.html)
 
 ## PICES2017 Talk
 
