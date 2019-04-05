@@ -24,6 +24,10 @@ The `xtractomatic` package development version is available at the [xtractomatic
 
 * [rerddap (new) vignette RNotebook](https://rmendels.github.io/Using_rerddap.nb.html)
 
+## `plotdap`  links
+
+* [plotdap vignette](https://Using plotdap.html)
+
 ## PICES2017 Talk
 
 The source code for the PICES2017 notebooks can be found at the [pices2017 repository](https://github.com/rmendels/pices2017)
