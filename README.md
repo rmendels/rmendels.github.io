@@ -43,7 +43,7 @@ The source code for the PICES2017 notebooks can be found at the [pices2017 repos
 
 ## Reproducible Research Talk
 
-[slides](https://rmendels.github.io/Repro_talk.html)
+[slides](https://rmendels.github.io/repro_talk/Repro_talk.html)
 
 
 
