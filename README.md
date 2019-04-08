@@ -41,6 +41,11 @@ The source code for the PICES2017 notebooks can be found at the [pices2017 repos
 
 [slides](https://rmendels.github.io/phase_talk/phase_talk.html)
 
+## Reproducible Research Talk
+
+[slides](https://rmendels.github.io/Repro_talk.html)
+
+
 
 
 

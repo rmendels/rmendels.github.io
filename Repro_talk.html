@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Reproducible Research with R - Some Quick Overviews</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Roy Mendelssohn" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  <script type="text/javascript">
+// automatically refresh the page when necessary (R will send a message to ws)
+(function() {
+  var protocol = 'ws:';
+  if (window.location.protocol === 'https:') protocol = 'wss:';
+  var path = window.location.pathname;
+  if (!/\/$/.test(path)) path += '/';
+  path += 'websocket/';
+
+  var ws = new WebSocket(protocol + '//' + window.location.host + path);
+  var flag, focused = false;
+  ws.onmessage = function(event) {
+    flag = true;
+    var d = JSON.parse(event.data);
+    if (d === true) {
+      // fire a servr:reload event
+      Event && document.dispatchEvent(new Event('servr:reload'));
+      return location.reload();
+    }
+    if (!window.slideshow || !window.remark || d === false || d === null) return;
+    var p = d.page; if (p < 1) p = 1;
+    if (!focused) slideshow.gotoSlide(p);
+    if (d.markdown === false) return;
+    var el = document.getElementsByClassName('remark-slides-area');
+    el = el[0].children[p - 1].querySelector('.remark-slide-content');
+    var n = el.querySelector('.remark-slide-number').outerHTML.toString();
+    el.innerHTML = remark.convert(d.markdown) + n;
+    if (window.MathJax) {
+      slideshow._releaseMath(el);
+      MathJax.Hub.Queue(['Typeset', MathJax.Hub, el]);
+    }
+    var i, code, codes = el.getElementsByTagName('pre');
+    for (i = 0; i < codes.length; i++) {
+      code = codes[i];
+      if (code.querySelector('.\\.hidden')) {
+        code.style.display = 'none'; continue;
+      }
+      remark.highlighter.engine.highlightBlock(codes[i]);
+    }
+  };
+  
+  // send the page number to R, so RStudio can move to the Rmd source of the
+  // current slide
+  setInterval(function() {
+    if (flag === false || ws.readyState !== ws.OPEN) return;
+    flag = false;
+    ws.send((window.slideshow && window.remark) ? JSON.stringify({
+      'n': slideshow.getCurrentSlideIndex() + 1,
+      'N': slideshow.getSlideCount(),
+      'focused': focused
+    }) : '{}');
+  }, 1000);
+  
+  window.addEventListener('focus', function(e) { focused = true; });
+  window.addEventListener('blur',  function(e) { focused = false; });
+})();
+</script>
+</head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Reproducible Research with R - Some Quick Overviews
+## YMMV
+### Roy Mendelssohn
+### Other Worldly
+### 2019/03/25 (updated: 2019-04-08)
+
+---
+
+
+
+
+
+
+# Overview
+
+- packages
+
+--
+
+- style guidelines
+
+--
+
+- RMarkdown (demystified)
+
+--
+
+- functions and documentation
+
+--
+
+- git and github
+
+--
+
+- pkgdown,  bookdown,  pagedown
+
+---
+
+# Let's Make a Musical!
+
+---
+
+# Let's Make a Package!
+
+
+---
+
+# Let's Make a Musical Redux!
+
+--
+
+Over a short time period,  Mickey Rooney and Judy Garland made 10 films together
+
+--
+
+No matter what the situation, solution always "let's make a musical"
+
+--
+
+Musical solved all problems.  Baddies vanquished. Judy finds Mickey.  Mickey finds Judy.
+
+--
+
+[Latest Example of Plotline](https://www.youtube.com/watch?v=qkHmUWFFNDc)
+
+---
+
+# inscrutable question "Why"? (a package?) (a duck?)
+
+--
+ 
+Everything loads on a simple command
+
+--
+
+All functions and data immediately available
+
+--
+
+Everything is documented
+
+--
+
+Essential for sending to collaborator or yourself 3 years from now
+  
+--
+
+See https://swcarpentry.github.io/r-novice-inflammation/08-making-packages-R/
+
+
+---
+# inscrutable question "Why"? (a package?) (a duck?)
+
+Package Reference - http://r-pkgs.had.co.nz
+
+2nd Edition - https://r-pkgs.org
+
+--
+
+[Where we are headed](https://rmendels.github.io/xtractomatic_docs/index.html)
+
+---
+
+# Creating the package (assuming central repository)
+
+--
+
+Create the package, enabling git
+
+--
+
+Use `Github Desktop` to push to Github
+
+--
+
+Else create package, create repository on Github
+Clone Repository
+Copy files over to cloned repository
+
+
+---
+
+# An aside about Git
+
+--
+
+Difference between git and Github or Gitlab or Bitbucket
+
+--
+
+Git reference aimed at R - https://happygitwithr.com
+
+--
+
+Git workflows  (more on this at the end)
+
+- https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
+
+- https://nvie.com/posts/a-successful-git-branching-model/
+
+---
+
+# Create vignette  (demystifying RMarkdown,  Notebooks, Vignettes)
+
+--
+
+Though can do from GUI,  I prefer command as it creates directory:
+
+
+```r
+devtools::use_vignette("my-tracking-package")
+```
+
+--
+
+Rmarkdown file, RNotebook, Vignette, Pagedown,  Bookdown
+
+- YAML info at top of file determines what type,  what it can do
+
+--
+
+RMarkdown Cheatsheet  - https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf
+
+From within IDE - https://rmarkdown.rstudio.com/lesson-15.html
+
+
+---
+# Controlling behavior of code chunks
+
+knitr options - https://yihui.name/knitr/options/
+
+--
+
+good practice to name chunks
+
+
+---
+
+# Coding Guidelines
+
+Stay DRY
+
+--
+
+Think functions,  not scripts
+
+--
+
+follow coding guidelines
+
+--
+
+document functions
+
+--
+
+write tests  (usethis::use_testthat())
+
+--
+
+Package book guidelines - http://r-pkgs.had.co.nz/r.html
+
+tidyverse guidelines - https://style.tidyverse.org
+
+rOpenSci - https://ropensci.github.io/dev_guide/building.html#function-and-argument-naming
+
+---
+# One final check
+
+Install package `goodpractice` and run on your package.
+
+https://github.com/MangoTheCat/goodpractice
+
+--
+
+If in Github,  create a README file
+
+devtools::use_readme_rmd()
+
+---
+# git worklow
+
+https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
+
+https://nvie.com/posts/a-successful-git-branching-model/
+
+Basic idea is work on branches only,  merge into master
+
+Each branch fairly specific, branch name reflects purpose
+
+After merging, if needed branches can be deleted
+
+Formally define versions
+
+Version number system - https://semver.org,
+
+http://r-pkgs.had.co.nz/description.html#version
+
+http://r-pkgs.had.co.nz/release.html
+
+
+
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
