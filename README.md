@@ -30,8 +30,6 @@ The `xtractomatic` package development version is available at the [xtractomatic
 * [plotdap vignette](https://rmendels.github.io/Using_plotdap.html)
 
 
-![](y_wind_.gif)
-
 ## PICES2017 Talk
 
 The source code for the PICES2017 notebooks can be found at the [pices2017 repository](https://github.com/rmendels/pices2017)
@@ -50,6 +48,7 @@ The source code for the PICES2017 notebooks can be found at the [pices2017 repos
 [slides](https://rmendels.github.io/repro_talk/Repro_talk.html)
 
 
+![](y_wind_.gif)
 
 
 
