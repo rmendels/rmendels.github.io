@@ -48,8 +48,5 @@ The source code for the PICES2017 notebooks can be found at the [pices2017 repos
 [slides](https://rmendels.github.io/repro_talk/Repro_talk.html)
 
 
-![](y_wind_.gif)
-
-
 
 
