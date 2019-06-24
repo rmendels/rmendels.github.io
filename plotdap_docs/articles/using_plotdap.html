@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Using plotdap • plotdap</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Using plotdap">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
@@ -38,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -64,7 +65,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/ropensci/plotdap">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -77,12 +78,13 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Using plotdap</h1>
             
-            <h4 class="date">2019-05-20</h4>
+            <h4 class="date">2019-06-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropensci/plotdap/blob/master/vignettes/using_plotdap.Rmd"><code>vignettes/using_plotdap.Rmd</code></a></small>
       <div class="hidden name"><code>using_plotdap.Rmd</code></div>
@@ -100,16 +102,16 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p><strong>plotdap</strong> can be installed from CRAN with:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"plotdap"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"plotdap"</span>)</a></code></pre></div>
 <p>and the development version can be installed with:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">'ropensci/plotdap'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">'ropensci/plotdap'</span>)</a></code></pre></div>
 </div>
 <div id="getting-started-with-plotdap" class="section level2">
 <h2 class="hasAnchor">
-<a href="#getting-started-with-plotdap" class="anchor"></a>Getting started with <code><a href="../reference/plotdap.html">plotdap()</a></code>
+<a href="#getting-started-with-plotdap" class="anchor"></a>Getting started with <code>plotdap()</code>
 </h2>
-<p>The <code><a href="../reference/plotdap.html">plotdap()</a></code> function makes it easy to visualize data acquired via <code><a href="https://www.rdocumentation.org/packages/rerddap/topics/tabledap">rerddap::tabledap()</a></code> or <code><a href="https://www.rdocumentation.org/packages/rerddap/topics/griddap">rerddap::griddap()</a></code>. Regardless of the data you want to visualize, you’ll always want to start a plot via <code><a href="../reference/plotdap.html">plotdap()</a></code>, where you may specify some “global” plotting options. Subsequent sections will demonstrate how to add tables/grids via <code><a href="../reference/add_tabledap.html">add_tabledap()</a></code>/<code><a href="../reference/add_griddap.html">add_griddap()</a></code>, but for now we’ll focus on options provided by <code><a href="../reference/plotdap.html">plotdap()</a></code>. Most importantly, the first argument decides whether <a href="https://stat.ethz.ch/R-manual/R-devel/library/graphics/html/plot.html">base</a> or <a href="https://cran.r-project.org/package=ggplot2">ggplot2</a> graphics should be used for the actual plotting.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(plotdap)</a>
+<p>The <code><a href="../reference/plotdap.html">plotdap()</a></code> function makes it easy to visualize data acquired via <code><a href="https://rdrr.io/pkg/rerddap/man/tabledap.html">rerddap::tabledap()</a></code> or <code><a href="https://rdrr.io/pkg/rerddap/man/griddap.html">rerddap::griddap()</a></code>. Regardless of the data you want to visualize, you’ll always want to start a plot via <code><a href="../reference/plotdap.html">plotdap()</a></code>, where you may specify some “global” plotting options. Subsequent sections will demonstrate how to add tables/grids via <code><a href="../reference/add_tabledap.html">add_tabledap()</a></code>/<code><a href="../reference/add_griddap.html">add_griddap()</a></code>, but for now we’ll focus on options provided by <code><a href="../reference/plotdap.html">plotdap()</a></code>. Most importantly, the first argument decides whether <a href="https://stat.ethz.ch/R-manual/R-devel/library/graphics/html/plot.html">base</a> or <a href="https://cran.r-project.org/package=ggplot2">ggplot2</a> graphics should be used for the actual plotting.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(plotdap)</a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="../reference/plotdap.html">plotdap</a></span>()</a></code></pre></div>
 <p><img src="using_plotdap_files/figure-html/world-1.png" width="480" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="../reference/plotdap.html">plotdap</a></span>(<span class="st">"base"</span>)</a></code></pre></div>
@@ -127,32 +129,32 @@
 <a class="sourceLine" id="cb6-2" title="2"><span class="kw"><a href="../reference/plotdap.html">plotdap</a></span>(<span class="st">"base"</span>, <span class="dt">crs =</span> alaska)</a></code></pre></div>
 <p><img src="using_plotdap_files/figure-html/alaska-1.png" width="480" style="display: block; margin: auto;"></p>
 <p>That does not mean we can’t use this (or similar) projections – we just have to be careful that they are sensible given the lat/lon limits. By default, those limits span the entire world, but as we’ll see later, the limits are shrunk to the given data (i.e., <code>griddap()</code> / <code>tabledap()</code>) limits. In other words, we should expect this projection to work once we “add” some data located near Alaska to the visualization. However, in case you want to make a map without any data, or want to customize the background map in some special way, you can supply an <a href="https://CRAN.R-project.org/package=sf"><strong>sf</strong></a> object (or something coercable to an <strong>sf</strong> object) to the <code>mapData</code> argument.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(sf)</a>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(sf)</a>
 <a class="sourceLine" id="cb7-2" title="2"><span class="co">#&gt; Linking to GEOS 3.6.1, GDAL 2.1.3, PROJ 4.9.3</span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(mapdata)</a>
-<a class="sourceLine" id="cb7-4" title="4">w &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/sf/topics/st_as_sf">st_as_sf</a></span>(maps<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"world"</span>, <span class="dt">plot =</span> <span class="ot">FALSE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb7-5" title="5">us &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/sf/topics/st_transform">st_transform</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(w, ID <span class="op">==</span><span class="st"> "USA"</span>), alaska)</a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(mapdata)</a>
+<a class="sourceLine" id="cb7-4" title="4">w &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/sf/man/st_as_sf.html">st_as_sf</a></span>(maps<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"world"</span>, <span class="dt">plot =</span> <span class="ot">FALSE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb7-5" title="5">us &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/sf/man/st_transform.html">st_transform</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(w, ID <span class="op">==</span><span class="st"> "USA"</span>), alaska)</a>
 <a class="sourceLine" id="cb7-6" title="6"><span class="kw"><a href="../reference/plotdap.html">plotdap</a></span>(<span class="dt">mapData =</span> us)</a></code></pre></div>
 <p><img src="using_plotdap_files/figure-html/usmap-1.png" width="480" style="display: block; margin: auto;"></p>
 <p>With the odd exception of window sizing and projections, the options in <code><a href="../reference/plotdap.html">plotdap()</a></code> should <em>just work</em> in a similar way for either plotting method. However, there are some useful options that are deliberately left out, since they work differently based on the plotting method.</p>
 <p>The <code>mapData</code> argument can be used to change the resolution of the continental outlines or to limit the outline to a pre-selected area, which can speed up processing because fewer unused polygons need to be clipped. This is particularly important for maps that will cross the dateline. So for example to use the hi-res outlines for VIIIRS SST off the coast of North America:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">sstInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rerddap/topics/info">info</a></span>(<span class="st">'erdVHsstaWS3day'</span>)</a>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">sstInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rerddap/man/info.html">info</a></span>(<span class="st">'erdVHsstaWS3day'</span>)</a>
 <a class="sourceLine" id="cb8-2" title="2"><span class="co"># get latest 3-day composite sst</span></a>
-<a class="sourceLine" id="cb8-3" title="3">viirsSST &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rerddap/topics/griddap">griddap</a></span>(sstInfo, </a>
-<a class="sourceLine" id="cb8-4" title="4">                             <span class="dt">latitude =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">41.</span>, <span class="fl">31.</span>), </a>
-<a class="sourceLine" id="cb8-5" title="5">                             <span class="dt">longitude =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="op">-</span><span class="fl">128.</span>, <span class="dv">-115</span>), </a>
-<a class="sourceLine" id="cb8-6" title="6">                             <span class="dt">time =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'last'</span>,<span class="st">'last'</span>), </a>
+<a class="sourceLine" id="cb8-3" title="3">viirsSST &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rerddap/man/griddap.html">griddap</a></span>(sstInfo, </a>
+<a class="sourceLine" id="cb8-4" title="4">                             <span class="dt">latitude =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">41.</span>, <span class="fl">31.</span>), </a>
+<a class="sourceLine" id="cb8-5" title="5">                             <span class="dt">longitude =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="fl">128.</span>, <span class="dv">-115</span>), </a>
+<a class="sourceLine" id="cb8-6" title="6">                             <span class="dt">time =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'last'</span>,<span class="st">'last'</span>), </a>
 <a class="sourceLine" id="cb8-7" title="7">                             <span class="dt">fields =</span> <span class="st">'sst'</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">w &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">"worldHires"</span>, <span class="dt">xlim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="op">-</span><span class="fl">140.</span>, <span class="dv">-114</span>), <span class="dt">ylim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">30.</span>, <span class="fl">42.</span>), </a>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">w &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">"worldHires"</span>, <span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="fl">140.</span>, <span class="dv">-114</span>), <span class="dt">ylim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">30.</span>, <span class="fl">42.</span>), </a>
 <a class="sourceLine" id="cb9-2" title="2">         <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">plot =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb9-3" title="3"><span class="co"># map using that outline,  temperature color from cmocean</span></a>
 <a class="sourceLine" id="cb9-4" title="4"><span class="kw"><a href="../reference/add_griddap.html">add_griddap</a></span>(<span class="kw"><a href="../reference/plotdap.html">plotdap</a></span>(<span class="dt">mapData =</span> w), viirsSST, <span class="op">~</span>sst, <span class="dt">fill =</span> <span class="st">"temperature"</span> )</a></code></pre></div>
 <p><img src="viirs_hires.png"></p>
 <p>Maps that cross the dateline work better using the “world2” or “world2Hires” databases frpm the <code>mapdata</code> package. There is a known problem with that continental database in that polygons from certain countries cause artificial lines in the map, and must removed, as done below.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">xpos &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">135.25</span>, <span class="fl">240.25</span>)</a>
-<a class="sourceLine" id="cb10-2" title="2">ypos &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">20.25</span>, <span class="fl">60.25</span>)</a>
-<a class="sourceLine" id="cb10-3" title="3">zpos &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">70.02</span>, <span class="fl">70.02</span>)</a>
-<a class="sourceLine" id="cb10-4" title="4">remove &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"UK:Great Britain"</span>, <span class="st">"France"</span>, <span class="st">"Spain"</span>, <span class="st">"Algeria"</span>, <span class="st">"Mali"</span>, <span class="st">"</span></a>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">xpos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">135.25</span>, <span class="fl">240.25</span>)</a>
+<a class="sourceLine" id="cb10-2" title="2">ypos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">20.25</span>, <span class="fl">60.25</span>)</a>
+<a class="sourceLine" id="cb10-3" title="3">zpos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">70.02</span>, <span class="fl">70.02</span>)</a>
+<a class="sourceLine" id="cb10-4" title="4">remove &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"UK:Great Britain"</span>, <span class="st">"France"</span>, <span class="st">"Spain"</span>, <span class="st">"Algeria"</span>, <span class="st">"Mali"</span>, <span class="st">"</span></a>
 <a class="sourceLine" id="cb10-5" title="5"><span class="st">            Burkina Faso"</span>, <span class="st">"Ghana"</span>, <span class="st">"Togo"</span>)</a>
 <a class="sourceLine" id="cb10-6" title="6"><span class="co">#subset world2Hires with those countries removed</span></a>
 <a class="sourceLine" id="cb10-7" title="7">w &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">"world2Hires"</span>, <span class="dt">plot =</span> <span class="ot">FALSE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">ylim =</span> ypos, <span class="dt">xlim =</span> xpos)</a>
@@ -163,15 +165,15 @@
 <p><img src="using_plotdap_files/figure-html/world2Hires-1.png" width="480" style="display: block; margin: auto;"></p>
 <p>Since the result of <code><a href="../reference/plotdap.html">plotdap()</a></code> is always a map, it always forces a fixed aspect ratio (i.e., <span class="math inline">\(\frac{height}{width}\)</span> of graph equals <span class="math inline">\(r=\frac{latitude}{longitude}\)</span>). For this reason, the current size of your graphics device may not be sensible for the value of <span class="math inline">\(r\)</span> (for instance, if <span class="math inline">\(r\)</span> is high, but the height of the graphics device is small, you may see an error such as: <code>polygon edge not found</code> since the device cannot possibly render the result under the conditions). For a number of reasons, <code><a href="../reference/plotdap.html">plotdap()</a></code> will not automatically resize your graphics device; instead, it’s recommended that you use a reliable graphics device such as Cairo, and use a height/width ratio close to <span class="math inline">\(r\)</span>.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># write plot to disk using the Cairo package</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(Cairo)</a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(Cairo)</a>
 <a class="sourceLine" id="cb11-3" title="3"><span class="co"># (latitude limits) / (longitude limits)</span></a>
 <a class="sourceLine" id="cb11-4" title="4">r &lt;-<span class="st"> </span><span class="dv">85</span> <span class="op">/</span><span class="st"> </span><span class="dv">120</span></a>
-<a class="sourceLine" id="cb11-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/Cairo/topics/Cairo">CairoPNG</a></span>(<span class="st">"myPlot.png"</span>, <span class="dt">height =</span> <span class="dv">400</span> <span class="op">*</span><span class="st"> </span>r, <span class="dt">width =</span> <span class="dv">400</span>, <span class="dt">res =</span> <span class="dv">96</span>)</a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="kw"><a href="https://rdrr.io/pkg/Cairo/man/Cairo.html">CairoPNG</a></span>(<span class="st">"myPlot.png"</span>, <span class="dt">height =</span> <span class="dv">400</span> <span class="op">*</span><span class="st"> </span>r, <span class="dt">width =</span> <span class="dv">400</span>, <span class="dt">res =</span> <span class="dv">96</span>)</a>
 <a class="sourceLine" id="cb11-6" title="6"><span class="co"># alter default margins for base plotting </span></a>
 <a class="sourceLine" id="cb11-7" title="7"><span class="co"># (leaving just enough space for a title)</span></a>
-<a class="sourceLine" id="cb11-8" title="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="kw"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="dt">mar =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>))</a>
 <a class="sourceLine" id="cb11-9" title="9"><span class="kw"><a href="../reference/plotdap.html">plotdap</a></span>(<span class="st">"base"</span>, <span class="dt">mapData =</span> us, <span class="dt">mapTitle =</span> <span class="st">"Albers projection of Alaska"</span>)</a>
-<a class="sourceLine" id="cb11-10" title="10"><span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/dev">dev.off</a></span>()</a></code></pre></div>
+<a class="sourceLine" id="cb11-10" title="10"><span class="kw"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span>()</a></code></pre></div>
 <p>More advanced users that know some base/ggplot2 plotting may want more control of certain aspects of the plot (a later section – Customizing <code><a href="../reference/plotdap.html">plotdap()</a></code> objects – covers this topic).</p>
 </div>
 <div id="adding-tabledap-layers" class="section level2">
@@ -180,14 +182,14 @@
 <p>The <code><a href="../reference/add_tabledap.html">add_tabledap()</a></code> function allows you to add markers that encode variable(s) obtained via <code>tabledap()</code> to an existing <code><a href="../reference/plotdap.html">plotdap()</a></code> object. For example, suppose we have the following <code>sardines</code> data, and wish to understand the frequency of subsample counts:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">sardines &lt;-<span class="st"> </span><span class="kw">tabledap</span>(</a>
 <a class="sourceLine" id="cb12-2" title="2">  <span class="st">'FRDCPSTrawlLHHaulCatch'</span>,</a>
-<a class="sourceLine" id="cb12-3" title="3">  <span class="dt">fields =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'latitude'</span>,  <span class="st">'longitude'</span>, <span class="st">'time'</span>, <span class="st">'scientific_name'</span>, </a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="dt">fields =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'latitude'</span>,  <span class="st">'longitude'</span>, <span class="st">'time'</span>, <span class="st">'scientific_name'</span>, </a>
 <a class="sourceLine" id="cb12-4" title="4">             <span class="st">'subsample_count'</span>),</a>
 <a class="sourceLine" id="cb12-5" title="5">  <span class="st">'time&gt;=2010-01-01'</span>, <span class="st">'time&lt;=2012-01-01'</span>, <span class="st">'scientific_name="Sardinops sagax"'</span></a>
 <a class="sourceLine" id="cb12-6" title="6">)</a>
-<a class="sourceLine" id="cb12-7" title="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(sardines)</a>
+<a class="sourceLine" id="cb12-7" title="7"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(sardines)</a>
 <a class="sourceLine" id="cb12-8" title="8"><span class="co">#&gt; &lt;ERDDAP tabledap&gt; FRDCPSTrawlLHHaulCatch</span></a>
 <a class="sourceLine" id="cb12-9" title="9"><span class="co">#&gt;    Path: [/Users/rmendels/Library/Caches/R/rerddap/8cb244e059b86865b7933a3d9b72fe16.csv]</span></a>
-<a class="sourceLine" id="cb12-10" title="10"><span class="co">#&gt;    Last updated: [2019-05-01 10:29:41]</span></a>
+<a class="sourceLine" id="cb12-10" title="10"><span class="co">#&gt;    Last updated: [2019-06-23 16:55:55]</span></a>
 <a class="sourceLine" id="cb12-11" title="11"><span class="co">#&gt;    File size:    [0 mb]</span></a>
 <a class="sourceLine" id="cb12-12" title="12"><span class="co">#&gt; # A tibble: 6 x 5</span></a>
 <a class="sourceLine" id="cb12-13" title="13"><span class="co">#&gt;   latitude longitude time                 scientific_name subsample_count</span></a>
@@ -207,7 +209,7 @@
 <a class="sourceLine" id="cb13-6" title="6">p2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/add_tabledap.html">add_tabledap</a></span>(</a>
 <a class="sourceLine" id="cb13-7" title="7">  <span class="kw"><a href="../reference/plotdap.html">plotdap</a></span>(<span class="dt">crs =</span> <span class="st">"+proj=robin"</span>, <span class="dt">mapTitle =</span> <span class="st">"Log subsample count"</span>), </a>
 <a class="sourceLine" id="cb13-8" title="8">  sardines, </a>
-<a class="sourceLine" id="cb13-9" title="9">  <span class="op">~</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log2</a></span>(subsample_count)</a>
+<a class="sourceLine" id="cb13-9" title="9">  <span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/Log.html">log2</a></span>(subsample_count)</a>
 <a class="sourceLine" id="cb13-10" title="10">) </a>
 <a class="sourceLine" id="cb13-11" title="11"></a>
 <a class="sourceLine" id="cb13-12" title="12">p1</a>
@@ -234,7 +236,7 @@
 <a class="sourceLine" id="cb14-14" title="14">p1</a>
 <a class="sourceLine" id="cb14-15" title="15">p2</a></code></pre></div>
 <p><img src="sardines2.png"></p>
-<p>For further details about these arguments, please refer to the documentation on <code><a href="https://www.rdocumentation.org/packages/utils/topics/help">help(add_tabledap)</a></code>.</p>
+<p>For further details about these arguments, please refer to the documentation on <code><a href="https://rdrr.io/r/utils/help.html">help(add_tabledap)</a></code>.</p>
 </div>
 <div id="adding-griddap-layers" class="section level2">
 <h2 class="hasAnchor">
@@ -242,14 +244,14 @@
 <p>Similar to <code><a href="../reference/add_tabledap.html">add_tabledap()</a></code>, the <code><a href="../reference/add_griddap.html">add_griddap()</a></code> function makes it easy to add rasters (i.e., rectangular tiles) to a <code><a href="../reference/plotdap.html">plotdap()</a></code> object. To demonstrate, lets obtain some of the latest sea surface temperatures along the western coast of the US.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">murSST_west &lt;-<span class="st"> </span><span class="kw">griddap</span>(</a>
 <a class="sourceLine" id="cb15-2" title="2">  <span class="st">'jplMURSST41'</span>, </a>
-<a class="sourceLine" id="cb15-3" title="3">  <span class="dt">latitude =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">22</span>, <span class="dv">51</span>), </a>
-<a class="sourceLine" id="cb15-4" title="4">  <span class="dt">longitude =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="op">-</span><span class="dv">140</span>, <span class="dv">-105</span>),</a>
-<a class="sourceLine" id="cb15-5" title="5">  <span class="dt">time =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'last'</span>, <span class="st">'last'</span>), </a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="dt">latitude =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">22</span>, <span class="dv">51</span>), </a>
+<a class="sourceLine" id="cb15-4" title="4">  <span class="dt">longitude =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="dv">140</span>, <span class="dv">-105</span>),</a>
+<a class="sourceLine" id="cb15-5" title="5">  <span class="dt">time =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'last'</span>, <span class="st">'last'</span>), </a>
 <a class="sourceLine" id="cb15-6" title="6">  <span class="dt">fields =</span> <span class="st">'analysed_sst'</span></a>
 <a class="sourceLine" id="cb15-7" title="7">  )</a></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(murSST_west<span class="op">$</span>data)</a>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(murSST_west<span class="op">$</span>data)</a>
 <a class="sourceLine" id="cb16-2" title="2"><span class="co">#&gt; 'data.frame':    10156401 obs. of  4 variables:</span></a>
-<a class="sourceLine" id="cb16-3" title="3"><span class="co">#&gt;  $ time        : chr  "2019-04-29T09:00:00Z" "2019-04-29T09:00:00Z" "2019-04-29T09:00:00Z" "2019-04-29T09:00:00Z" ...</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="co">#&gt;  $ time        : chr  "2019-06-22T09:00:00Z" "2019-06-22T09:00:00Z" "2019-06-22T09:00:00Z" "2019-06-22T09:00:00Z" ...</span></a>
 <a class="sourceLine" id="cb16-4" title="4"><span class="co">#&gt;  $ lat         : num  22 22 22 22 22 22 22 22 22 22 ...</span></a>
 <a class="sourceLine" id="cb16-5" title="5"><span class="co">#&gt;  $ lon         : num  -140 -140 -140 -140 -140 ...</span></a>
 <a class="sourceLine" id="cb16-6" title="6"><span class="co">#&gt;  $ analysed_sst: num  23.9 23.9 23.9 23.9 23.9 ...</span></a></code></pre></div>
@@ -264,14 +266,14 @@
 <p>The <code>murSST_west</code> grid has a single time point (i.e., <code>length(unique(murSST_west$data$time)) == 1</code>), but what do we do when there are multiple time points? In addition to animating multiple grids (a la <code><a href="../reference/add_tabledap.html">add_tabledap()</a></code>), you also have the option to summarize multiple grids into a single grid. To demonstrate, lets grab some wind speeds measured along the west coast of the US.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">wind &lt;-<span class="st"> </span><span class="kw">griddap</span>(</a>
 <a class="sourceLine" id="cb18-2" title="2">  <span class="st">'erdQMwindmday'</span>, </a>
-<a class="sourceLine" id="cb18-3" title="3">  <span class="dt">time =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'2016-04-16'</span>, <span class="st">'2016-06-16'</span>),</a>
-<a class="sourceLine" id="cb18-4" title="4">  <span class="dt">latitude =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">30</span>, <span class="dv">50</span>), </a>
-<a class="sourceLine" id="cb18-5" title="5">  <span class="dt">longitude =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">210</span>, <span class="dv">240</span>),</a>
+<a class="sourceLine" id="cb18-3" title="3">  <span class="dt">time =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'2016-04-16'</span>, <span class="st">'2016-06-16'</span>),</a>
+<a class="sourceLine" id="cb18-4" title="4">  <span class="dt">latitude =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">30</span>, <span class="dv">50</span>), </a>
+<a class="sourceLine" id="cb18-5" title="5">  <span class="dt">longitude =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">210</span>, <span class="dv">240</span>),</a>
 <a class="sourceLine" id="cb18-6" title="6">  <span class="dt">fields =</span> <span class="st">'y_wind'</span></a>
 <a class="sourceLine" id="cb18-7" title="7">)</a>
-<a class="sourceLine" id="cb18-8" title="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/unique">unique</a></span>(wind<span class="op">$</span>data<span class="op">$</span>time)</a>
+<a class="sourceLine" id="cb18-8" title="8"><span class="kw"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(wind<span class="op">$</span>data<span class="op">$</span>time)</a>
 <a class="sourceLine" id="cb18-9" title="9"><span class="co">#&gt; [1] "2016-04-16T00:00:00Z" "2016-05-16T00:00:00Z" "2016-06-16T00:00:00Z"</span></a></code></pre></div>
-<p>When faced with multiple time periods, and <code>animate = FALSE</code> (the default), the <code>time</code> argument is used to reduce multiple grids (i.e., raster bricks) to a single grid (i.e., a single raster layer). You can pass any R function to the <code>time</code> argument, but when <code>animate = FALSE</code>, you should take care to ensure the function returns a single value. The default uses the <code><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean(na.rm = TRUE)</a></code> function so that each cell represents the average (in this case amongst three time points), but we could easily set this to <code><a href="https://www.rdocumentation.org/packages/stats/topics/cor">var()</a></code> to get the variance for each cell:</p>
+<p>When faced with multiple time periods, and <code>animate = FALSE</code> (the default), the <code>time</code> argument is used to reduce multiple grids (i.e., raster bricks) to a single grid (i.e., a single raster layer). You can pass any R function to the <code>time</code> argument, but when <code>animate = FALSE</code>, you should take care to ensure the function returns a single value. The default uses the <code><a href="https://rdrr.io/r/base/mean.html">mean(na.rm = TRUE)</a></code> function so that each cell represents the average (in this case amongst three time points), but we could easily set this to <code><a href="https://rdrr.io/r/stats/cor.html">var()</a></code> to get the variance for each cell:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">p1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/add_griddap.html">add_griddap</a></span>(</a>
 <a class="sourceLine" id="cb19-2" title="2">  <span class="kw"><a href="../reference/plotdap.html">plotdap</a></span>(<span class="dt">mapTitle =</span> <span class="st">"Mean Meridional Wind"</span>), </a>
 <a class="sourceLine" id="cb19-3" title="3">  wind, </a>
@@ -279,7 +281,7 @@
 <a class="sourceLine" id="cb19-5" title="5">  <span class="dt">fill =</span> <span class="st">"velocity"</span>, </a>
 <a class="sourceLine" id="cb19-6" title="6">  <span class="dt">time =</span> mean</a>
 <a class="sourceLine" id="cb19-7" title="7">) </a>
-<a class="sourceLine" id="cb19-8" title="8">my_func &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/cor">var</a></span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb19-8" title="8">my_func &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw"><a href="https://rdrr.io/r/stats/cor.html">var</a></span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb19-9" title="9">p2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/add_griddap.html">add_griddap</a></span>(</a>
 <a class="sourceLine" id="cb19-10" title="10">  <span class="kw"><a href="../reference/plotdap.html">plotdap</a></span>(<span class="dt">mapTitle =</span> <span class="st">"Variance of Meridional Wind"</span>), </a>
 <a class="sourceLine" id="cb19-11" title="11">  wind, </a>
@@ -308,7 +310,7 @@
 <a class="sourceLine" id="cb21-4" title="4">      <span class="op">~</span>sst, </a>
 <a class="sourceLine" id="cb21-5" title="5">      <span class="dt">fill =</span> <span class="st">"temperature"</span></a>
 <a class="sourceLine" id="cb21-6" title="6">      ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb21-7" title="7"><span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="dt">landmask =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb21-7" title="7"><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="dt">landmask =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="viirsSST_landgrid.png"></p>
 </div>
 <div id="maxpixels" class="section level3">
@@ -347,7 +349,7 @@
 <a class="sourceLine" id="cb25-5" title="5">      <span class="dt">fill =</span> <span class="st">"temperature"</span>,  </a>
 <a class="sourceLine" id="cb25-6" title="6">      <span class="dt">maxpixels =</span> <span class="dv">100000</span></a>
 <a class="sourceLine" id="cb25-7" title="7">      ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb25-8" title="8"><span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="dt">landmask =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb25-8" title="8"><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="dt">landmask =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="viirsSST_100000_mask.png"></p>
 </div>
 <div id="working-with-other-continental-outlines" class="section level3">
@@ -355,7 +357,7 @@
 <a href="#working-with-other-continental-outlines" class="anchor"></a>Working with other continental outlines</h3>
 <p>My default, <code><a href="../reference/plotdap.html">plotdap()</a></code> uses the global “world” database from the <code>map</code> package, and then trims the polygons based on the limit of the map. Higher resolution coastlines or coastlines that cross the dateline require can be used in <code><a href="../reference/plotdap.html">plotdap()</a></code>by passing this information in the function call. Similarly, computations can be sped up by pre-selecting the area of the coastline database before calling <code><a href="../reference/plotdap.html">plotdap()</a></code>.</p>
 <p>To map the VIIRS SST data from the previous section using a subsetted, high-resolution continental outline, first the subset is defined for the high-resolution database:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">w &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">"worldHires"</span>, <span class="dt">xlim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="op">-</span><span class="fl">130.</span>, <span class="dv">-114</span>), <span class="dt">ylim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">30.</span>, <span class="fl">42.</span>), </a>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">w &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">"worldHires"</span>, <span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="fl">130.</span>, <span class="dv">-114</span>), <span class="dt">ylim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">30.</span>, <span class="fl">42.</span>), </a>
 <a class="sourceLine" id="cb26-2" title="2">         <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">plot =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>and then plotted, with the landmask option:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw"><a href="../reference/plotdap.html">plotdap</a></span>(<span class="dt">mapData =</span> w) <span class="op">%&gt;%</span></a>
@@ -365,15 +367,15 @@
 <a class="sourceLine" id="cb27-5" title="5">      <span class="dt">fill =</span> <span class="st">'temperature'</span>,  </a>
 <a class="sourceLine" id="cb27-6" title="6">      <span class="dt">maxpixels =</span> <span class="dv">50000</span></a>
 <a class="sourceLine" id="cb27-7" title="7">      ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb27-8" title="8"><span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="dt">landmask =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb27-8" title="8"><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="dt">landmask =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="using_plotdap_files/figure-html/viirs_hires_mask-1.png" width="480" style="display: block; margin: auto;"></p>
 <p>The “Simple Ocean Data Assimilation (SODA)” model (see <a href="https://www.atmos.umd.edu/~ocean/" class="uri">https://www.atmos.umd.edu/~ocean/</a>) reconstructs the historical physical history of the ocean since the beginning of the 20th century. Here is the temperature at 70m depth for December 2015 for the North Pacific Ocean, as an example of using <code><a href="../reference/plotdap.html">plotdap()</a></code> when the data cross the dateline:</p>
 <p>First, get the SODA data:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">soda70Info &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rerddap/topics/info">info</a></span>(<span class="st">'hawaii_d90f_20ee_c4cb'</span>)</a>
-<a class="sourceLine" id="cb28-2" title="2">xpos &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">135.25</span>, <span class="fl">240.25</span>)</a>
-<a class="sourceLine" id="cb28-3" title="3">ypos &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">20.25</span>, <span class="fl">60.25</span>)</a>
-<a class="sourceLine" id="cb28-4" title="4">zpos &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">70.02</span>, <span class="fl">70.02</span>)</a>
-<a class="sourceLine" id="cb28-5" title="5">tpos &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'2010-12-15'</span>, <span class="st">'2010-12-15'</span>)</a>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">soda70Info &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rerddap/man/info.html">info</a></span>(<span class="st">'hawaii_d90f_20ee_c4cb'</span>)</a>
+<a class="sourceLine" id="cb28-2" title="2">xpos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">135.25</span>, <span class="fl">240.25</span>)</a>
+<a class="sourceLine" id="cb28-3" title="3">ypos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">20.25</span>, <span class="fl">60.25</span>)</a>
+<a class="sourceLine" id="cb28-4" title="4">zpos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">70.02</span>, <span class="fl">70.02</span>)</a>
+<a class="sourceLine" id="cb28-5" title="5">tpos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'2010-12-15'</span>, <span class="st">'2010-12-15'</span>)</a>
 <a class="sourceLine" id="cb28-6" title="6">soda70 &lt;-<span class="st"> </span><span class="kw">griddap</span>(soda70Info,  </a>
 <a class="sourceLine" id="cb28-7" title="7">                  <span class="dt">longitude =</span> xpos, </a>
 <a class="sourceLine" id="cb28-8" title="8">                  <span class="dt">latitude =</span> ypos, </a>
@@ -381,7 +383,7 @@
 <a class="sourceLine" id="cb28-10" title="10">                  <span class="dt">depth =</span> zpos, </a>
 <a class="sourceLine" id="cb28-11" title="11">                  <span class="dt">fields =</span> <span class="st">'temp'</span> )</a></code></pre></div>
 <p>then plot with <code>plotdap</code></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">remove &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"UK:Great Britain"</span>, <span class="st">"France"</span>, <span class="st">"Spain"</span>, <span class="st">"Algeria"</span>, <span class="st">"Mali"</span>, </a>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">remove &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"UK:Great Britain"</span>, <span class="st">"France"</span>, <span class="st">"Spain"</span>, <span class="st">"Algeria"</span>, <span class="st">"Mali"</span>, </a>
 <a class="sourceLine" id="cb29-2" title="2">            <span class="st">"Burkina Faso"</span>, <span class="st">"Ghana"</span>, <span class="st">"Togo"</span>)</a>
 <a class="sourceLine" id="cb29-3" title="3"><span class="co">#subset world2Hires with those countries removed</span></a>
 <a class="sourceLine" id="cb29-4" title="4">w &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">"mapdata::world2Hires"</span>, <span class="dt">plot =</span> <span class="ot">FALSE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, </a>
@@ -395,7 +397,7 @@
 <a class="sourceLine" id="cb29-12" title="12">          <span class="op">~</span>temp, </a>
 <a class="sourceLine" id="cb29-13" title="13">          <span class="dt">fill =</span> <span class="st">"temperature"</span></a>
 <a class="sourceLine" id="cb29-14" title="14">          ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb29-15" title="15"><span class="st">        </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="dt">landmask =</span> <span class="ot">TRUE</span>) </a></code></pre></div>
+<a class="sourceLine" id="cb29-15" title="15"><span class="st">        </span><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="dt">landmask =</span> <span class="ot">TRUE</span>) </a></code></pre></div>
 <p><img src="using_plotdap_files/figure-html/soda70-1.png" width="480" style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -421,7 +423,7 @@
 <h2 class="hasAnchor">
 <a href="#modifying-ggplotdap-objects" class="anchor"></a>Modifying <code>ggplotdap</code> objects</h2>
 <p>By this point, you might have noticed some subtle differences in the defaults of <code><a href="../reference/plotdap.html">plotdap("ggplot2")</a></code> versus <code><a href="../reference/plotdap.html">plotdap("base")</a></code>. The default base version is intentionally left minimal as it is often much harder (or impossible) to modify/remove elements from a base graphic once it’s drawn. However, this is fairly easy using the <strong>ggplot2</strong> approach (assuming you know a bit of <strong>ggplot2</strong>), thanks to the <code><a href="../reference/add_ggplot.html">add_ggplot()</a></code> function (think of it like the <code>+</code> operator in <strong>ggplot2</strong>).</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
 <a class="sourceLine" id="cb31-2" title="2"><span class="kw"><a href="../reference/plotdap.html">plotdap</a></span>(<span class="dt">crs =</span> <span class="st">"+proj=robin"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb31-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/add_tabledap.html">add_tabledap</a></span>(</a>
 <a class="sourceLine" id="cb31-4" title="4">    sardines, </a>
@@ -429,12 +431,12 @@
 <a class="sourceLine" id="cb31-6" title="6">    <span class="dt">size =</span> <span class="dv">1</span></a>
 <a class="sourceLine" id="cb31-7" title="7">    ) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb31-8" title="8"><span class="st">  </span><span class="kw"><a href="../reference/add_ggplot.html">add_ggplot</a></span>(</a>
-<a class="sourceLine" id="cb31-9" title="9">    <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(</a>
+<a class="sourceLine" id="cb31-9" title="9">    <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(</a>
 <a class="sourceLine" id="cb31-10" title="10">      <span class="dt">subtitle =</span> <span class="st">"Sardinops sagax samples"</span>,</a>
 <a class="sourceLine" id="cb31-11" title="11">      <span class="dt">caption =</span> <span class="st">"Sardines are yummy"</span></a>
 <a class="sourceLine" id="cb31-12" title="12">    ), </a>
-<a class="sourceLine" id="cb31-13" title="13">    <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_minimal</a></span>(),</a>
-<a class="sourceLine" id="cb31-14" title="14">    <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">axis.ticks =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_blank</a></span>(), <span class="dt">axis.text =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_blank</a></span>())</a>
+<a class="sourceLine" id="cb31-13" title="13">    <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>(),</a>
+<a class="sourceLine" id="cb31-14" title="14">    <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">axis.ticks =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(), <span class="dt">axis.text =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>())</a>
 <a class="sourceLine" id="cb31-15" title="15">  )</a>
 <a class="sourceLine" id="cb31-16" title="16"><span class="co">#&gt; Date in ISO8601 format; converting timezone from UTC to "GMT".</span></a></code></pre></div>
 <p><img src="using_plotdap_files/figure-html/modify-1.png" width="480" style="display: block; margin: auto;"></p>
@@ -447,19 +449,19 @@
 <a class="sourceLine" id="cb32-6" title="6">      <span class="dt">fill =</span> <span class="st">"temperature"</span></a>
 <a class="sourceLine" id="cb32-7" title="7">      ) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb32-8" title="8"><span class="st">    </span><span class="kw"><a href="../reference/add_ggplot.html">add_ggplot</a></span>(</a>
-<a class="sourceLine" id="cb32-9" title="9">       <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_gradient">scale_fill_gradientn</a></span>(<span class="dt">colours =</span> temp_color, <span class="dt">na.value =</span> <span class="ot">NA</span>, <span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">10</span>, <span class="dv">20</span>)),</a>
-<a class="sourceLine" id="cb32-10" title="10">        <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_gradient">scale_colour_gradientn</a></span>(<span class="dt">colors =</span> temp_color, <span class="dt">na.value =</span> <span class="ot">NA</span>, <span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">10</span>, <span class="dv">20</span>)),</a>
-<a class="sourceLine" id="cb32-11" title="11">        <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/guides">guides</a></span>(<span class="dt">colour =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb32-9" title="9">       <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradientn</a></span>(<span class="dt">colours =</span> temp_color, <span class="dt">na.value =</span> <span class="ot">NA</span>, <span class="dt">limits =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">10</span>, <span class="dv">20</span>)),</a>
+<a class="sourceLine" id="cb32-10" title="10">        <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_colour_gradientn</a></span>(<span class="dt">colors =</span> temp_color, <span class="dt">na.value =</span> <span class="ot">NA</span>, <span class="dt">limits =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">10</span>, <span class="dv">20</span>)),</a>
+<a class="sourceLine" id="cb32-11" title="11">        <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span>(<span class="dt">colour =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb32-12" title="12">     ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb32-13" title="13"><span class="st">     </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="dt">landmask =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb32-13" title="13"><span class="st">     </span><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="dt">landmask =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="modify2.png"></p>
 </div>
 <div id="animating-plotdap-objects" class="section level2">
 <h2 class="hasAnchor">
 <a href="#animating-plotdap-objects" class="anchor"></a>Animating <code>plotdap</code> objects</h2>
 <p>Since <code>time</code> is an important variable in many <code>tabledap()</code> and <code>griddap()</code> objects, both functions have an <code>animate</code> argument which will animate the maps over the <code>time</code> variable. The animations only work for the <code>ggplot2</code> option, and are based on the latest version of <code>gganimate</code>.</p>
-<p><code>gganimate</code> is a very powerful package, and many of the options available are designed to allow for “tweening”, that is for smooth animation between frames. Unfortunately for complex maps with many features, that can lead to very large animations that can take hours to render. For this reason, all <code>plotdap</code> animations use <code><a href="https://www.rdocumentation.org/packages/gganimate/topics/transition_manual">gganimate::transition_manual</a></code> so that there is one frame for each time period, and no “tweening” between frames. The animation can be controlled by saving the animation to an object, and then displaying the saved object using <code><a href="https://www.rdocumentation.org/packages/gganimate/topics/animate">gganimate::animate()</a></code> to control the display. The</p>
-<p>Since <code>time</code> is an important variable in many <code>tabledap()</code> objects, <code><a href="../reference/add_tabledap.html">add_tabledap()</a></code> also has a <code>animate</code> argument which allows you to easily animate over the <code>time</code> variable. It is also easy to alter the color scale and symbol type via the <code>color</code> and <code>shape</code> arguments. For details about these arguments, please refer to the documentation on <code><a href="https://www.rdocumentation.org/packages/utils/topics/help">help(add_tabledap)</a></code></p>
+<p><code>gganimate</code> is a very powerful package, and many of the options available are designed to allow for “tweening”, that is for smooth animation between frames. Unfortunately for complex maps with many features, that can lead to very large animations that can take hours to render. For this reason, all <code>plotdap</code> animations use <code><a href="https://rdrr.io/pkg/gganimate/man/transition_manual.html">gganimate::transition_manual</a></code> so that there is one frame for each time period, and no “tweening” between frames. The animation can be controlled by saving the animation to an object, and then displaying the saved object using <code><a href="https://rdrr.io/pkg/gganimate/man/animate.html">gganimate::animate()</a></code> to control the display. The</p>
+<p>Since <code>time</code> is an important variable in many <code>tabledap()</code> objects, <code><a href="../reference/add_tabledap.html">add_tabledap()</a></code> also has a <code>animate</code> argument which allows you to easily animate over the <code>time</code> variable. It is also easy to alter the color scale and symbol type via the <code>color</code> and <code>shape</code> arguments. For details about these arguments, please refer to the documentation on <code><a href="https://rdrr.io/r/utils/help.html">help(add_tabledap)</a></code></p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw"><a href="../reference/add_tabledap.html">add_tabledap</a></span>(</a>
 <a class="sourceLine" id="cb33-2" title="2">  <span class="kw"><a href="../reference/plotdap.html">plotdap</a></span>(<span class="dt">crs =</span> <span class="st">"+proj=robin"</span>), </a>
 <a class="sourceLine" id="cb33-3" title="3">  sardines, </a>
@@ -479,7 +481,7 @@
 <a class="sourceLine" id="cb34-5" title="5">  <span class="dt">fill =</span> <span class="st">'velocity'</span>,</a>
 <a class="sourceLine" id="cb34-6" title="6">  <span class="dt">animate =</span> <span class="ot">TRUE</span></a>
 <a class="sourceLine" id="cb34-7" title="7">)</a></code></pre></div>
-<p><img src="y_wind.gif" alt="y_wind animation"> The frames per second and the total number of frames for an animated <code>plotdap</code> object <code>p</code> can be controlled calling <code><a href="https://www.rdocumentation.org/packages/gganimate/topics/animate">gganimate::animate(p$ggplot, ...)</a></code> with the desired other settings. Unfortunately, the map bounding box set in <code>p</code> may not be what is desired, because when <code>plotdap</code> prints an object it calculates a good bounding box for a map, but that is not stored in the object <code>p</code>. A utility function <code><a href="../reference/bbox_set.html">bbox_set()</a></code> is included which will add a desired bounding box.</p>
+<p><img src="y_wind.gif" alt="y_wind animation"> The frames per second and the total number of frames for an animated <code>plotdap</code> object <code>p</code> can be controlled calling <code><a href="https://rdrr.io/pkg/gganimate/man/animate.html">gganimate::animate(p$ggplot, ...)</a></code> with the desired other settings. Unfortunately, the map bounding box set in <code>p</code> may not be what is desired, because when <code>plotdap</code> prints an object it calculates a good bounding box for a map, but that is not stored in the object <code>p</code>. A utility function <code><a href="../reference/bbox_set.html">bbox_set()</a></code> is included which will add a desired bounding box.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/add_griddap.html">add_griddap</a></span>(</a>
 <a class="sourceLine" id="cb35-2" title="2">  <span class="kw"><a href="../reference/plotdap.html">plotdap</a></span>(<span class="dt">crs =</span> <span class="st">"+proj=robin"</span>), </a>
 <a class="sourceLine" id="cb35-3" title="3">  wind, <span class="op">~</span>y_wind, </a>
@@ -487,8 +489,8 @@
 <a class="sourceLine" id="cb35-5" title="5">  <span class="dt">fill =</span> <span class="st">'velocity'</span>,</a>
 <a class="sourceLine" id="cb35-6" title="6">  <span class="dt">animate =</span> <span class="ot">TRUE</span></a>
 <a class="sourceLine" id="cb35-7" title="7">)</a>
-<a class="sourceLine" id="cb35-8" title="8">  ylim &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">30</span>, <span class="dv">50</span>), </a>
-<a class="sourceLine" id="cb35-9" title="9">  xlim &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="op">-</span><span class="dv">150</span>, <span class="dv">-120</span>)</a>
+<a class="sourceLine" id="cb35-8" title="8">  ylim &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">30</span>, <span class="dv">50</span>), </a>
+<a class="sourceLine" id="cb35-9" title="9">  xlim &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="dv">150</span>, <span class="dv">-120</span>)</a>
 <a class="sourceLine" id="cb35-10" title="10">  p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/bbox_set.html">bbox_set</a></span>(p, xlim, ylim)</a></code></pre></div>
 </div>
 </div>
@@ -502,7 +504,7 @@
 <li>
 <a href="#plotdap">plotdap</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#installation">Installation</a></li>
-      <li><a href="#getting-started-with-plotdap">Getting started with <code><a href="--/reference/plotdap-html">plotdap()</a></code></a></li>
+      <li><a href="#getting-started-with-plotdap">Getting started with <code>plotdap()</code></a></li>
       <li><a href="#adding-tabledap-layers">Adding <code>tabledap()</code> layers</a></li>
       <li><a href="#modifying-tabledap-layers">Modifying <code>tabledap()</code> layers</a></li>
       <li><a href="#adding-griddap-layers">Adding <code>griddap()</code> layers</a></li>
@@ -518,17 +520,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Carson Sievert, Roy Mendelssohn.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
