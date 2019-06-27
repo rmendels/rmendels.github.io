@@ -38,6 +38,15 @@ The source code for the PICES2017 notebooks can be found at the [pices2017 repos
 * [PICES2017 Jupyter Python Notebook](https://rmendels.github.io/pices2017Notebook.html)
 * [PICES2017 Jupyter Matlab Notebook](https://rmendels.github.io/pices2017MNotebook.html)
 
+## Westcoast Warming talk
+
+[pdf](https://rmendels.github.io/WestCoastWarming.pdf)  - Talk showing evidence that the so-called "blob" was due to a coast-wide warming starting late 2011,  combined with an artifact of the methods being used,  due to differential seasonal-shifts and local Ekman dynamics.
+
+
+## Tao Talk
+
+[notebook](https://rmendels.github.ioTaoTalk.Rmd)  `R` notebook showing that when properly analyzed, another "blob", this time in the tropics, was a product of not allowing for shifts in the seasonal.
+
  
 ## Phase Talk
 
