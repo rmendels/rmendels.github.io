@@ -16,7 +16,7 @@ The `xtractomatic` package development version is available at the [xtractomatic
 `rerddapXtracto` is available through the [rerddapXtracto repository](https://github.com/rmendels/rerddapXtracto)
 
 * [rerddapXtracto complete documention via `pkgdown](https://rmendels.github.io/rerddapXtracto_docs)
-* [rerddapXtracto vignette RNotebook](https://rmendels.github.io/UsingrerddapXtracto.nb.html)
+* [rerddapXtracto vignette RNotebook](https://rmendels.github.io/UsingrerddapXtracto.html)
 
 ## `rerddap` links
 
