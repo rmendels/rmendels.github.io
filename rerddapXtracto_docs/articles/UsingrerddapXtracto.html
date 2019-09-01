@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rerddapXtracto</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
       </span>
     </div>
 
@@ -85,7 +85,7 @@
       <h1>Using the rerddapXtracto routines</h1>
                         <h4 class="author">Roy Mendelssohn</h4>
             
-            <h4 class="date">2019-08-06</h4>
+            <h4 class="date">2019-09-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rmendels/rerddapXtracto/blob/master/vignettes/UsingrerddapXtracto.Rmd"><code>vignettes/UsingrerddapXtracto.Rmd</code></a></small>
       <div class="hidden name"><code>UsingrerddapXtracto.Rmd</code></div>
@@ -99,7 +99,7 @@
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p><code>rerddapXtracto</code> is an <span style="color:red">R</span> package developed to subset and extract satellite and other oceanographic related data from any <span style="color:red">ERDDAP</span> server using the <span style="color:red">R</span> package <a href="https://cran.r-project.org/package=rerddap">rerddap</a> developed by Scott Chamberlain and the wonderful people at <a href="https://ropensci.org">rOpenSci</a>. <span style="color:red">ERDDAP</span> is a simple to use yet powerful web data service developed by Bob Simons. <code>rerddapXtracto</code> extends the <code>rerddap</code> package by being able to extract data for a moving point in time along a user-supplied set of longitude, latitude and time points; and also extracting data within a polygon (through time). <code>rerddapXtracto</code> extends the functionality of the <span style="color:red">R</span> package <a href="https://cran.r-project.org/package=xtractomatic">xtractomatic</a> by being able to work with (hopefully) most gridded datasets available from any <span style="color:red">ERDDAP</span> server. The disadvantage compared to <code>xtractomatic</code> is that the user has to do more work to obtain information about the dataset to be accessed, while in <code>xtractomatic</code> that information is built in.</p>
 <p>This version has several major changes. In both <code><a href="../reference/rxtracto.html">rxtracto()</a></code> and <code><a href="../reference/rxtracto_3D.html">rxtracto_3D()</a></code> the zcoord is not limited to be at a set location. That means for <code><a href="../reference/rxtracto_3D.html">rxtracto_3D()</a></code> that if the zCoord needs to be given for any reason, then it must be of length two, and for <code><a href="../reference/rxtracto.html">rxtracto()</a></code> if the zCoord needs to be given for any reason, it must be of the same length as the other coordinates, and can also have a “zlen”“, like”xlen" and “ylen”, that defines a bounding box within which to make the extract. The advantage of this is it allows <code><a href="../reference/rxtracto.html">rxtracto()</a></code> to make extracts moving in (x, y, z, t) space.</p>
-<p>Second there are now two functions, <code><a href="../reference/plotTrack.html">plotTrack()</a></code> for tracks and <code><a href="../reference/plotBBox.html">plotBBox()</a></code> for grids, that produce quick maps of the output using the <span style="color:red">R</span> package <code>plotdap</code>. All of the examples have been changed to use these functions. Bounding box extracts, as in <code><a href="../reference/rxtracto_3D.html">rxtracto_3D()</a></code>, can be done just using <code>rerddap</code>, but the <code>rerddap</code> function <code><a href="https://rdrr.io/pkg/rerddap/man/griddap.html">griddap()</a></code> returns a “melted” version of the data, while <code><a href="../reference/rxtracto_3D.html">rxtracto_3D()</a></code> retains the grid structure. Also, <code><a href="../reference/rxtractogon.html">rxtractogon()</a></code> uses <code><a href="../reference/rxtracto_3D.html">rxtracto_3D()</a></code> and therefore <code><a href="../reference/plotBBox.html">plotBBox()</a></code> can be used to plot the the results from <code><a href="../reference/rxtractogon.html">rxtractogon()</a></code>. These functions should also work with the output from the <span style="color:red">R</span> package <code>xtractomatic</code>. For when more control of plot is desired several examples uses <code>ggplot2</code> directly.</p>
+<p>Second there are now two functions, <code><a href="../reference/plotTrack.html">plotTrack()</a></code> for tracks and <code><a href="../reference/plotBBox.html">plotBBox()</a></code> for grids, that produce quick maps of the output using the <span style="color:red">R</span> package <code>plotdap</code>. All of the examples have been changed to use these functions. Bounding box extracts, as in <code><a href="../reference/rxtracto_3D.html">rxtracto_3D()</a></code>, can be done just using <code>rerddap</code>, but the <code>rerddap</code> function <code><a href="https://docs.ropensci.org/rerddap/reference/griddap.html">griddap()</a></code> returns a “melted” version of the data, while <code><a href="../reference/rxtracto_3D.html">rxtracto_3D()</a></code> retains the grid structure. Also, <code><a href="../reference/rxtractogon.html">rxtractogon()</a></code> uses <code><a href="../reference/rxtracto_3D.html">rxtracto_3D()</a></code> and therefore <code><a href="../reference/plotBBox.html">plotBBox()</a></code> can be used to plot the the results from <code><a href="../reference/rxtractogon.html">rxtractogon()</a></code>. These functions should also work with the output from the <span style="color:red">R</span> package <code>xtractomatic</code>. For when more control of plot is desired several examples uses <code>ggplot2</code> directly.</p>
 <p>Third, it is now possible to make an extract that crosses the dateline for a dataset that is on a (-180, 180) longitude grid. This must be used with care, because some of the built-in checks are disabled for this case, and the requests must have longitudes on a (0, 360) longitude grid else errors will occur. This is particularly important for <code><a href="../reference/rxtracto.html">rxtracto()</a></code> where the observed longitude point may not cross the dateline but the bounding box defined by “xlen” may cross it.</p>
 <p>Finally, the plotting packages now allow for user defined continental outlines (important if crossing the dateline), a user defined crs, as well as animation.</p>
 <div id="the-main-xtractomatic-functions" class="section level3">
@@ -116,9 +116,9 @@
 <li><p><code>plotTrack &lt;- function(resp, xcoord, ycoord, tcoord, plotColor = 'viridis', myFunc = NA, mapData = NULL, crs = NULL, animate = FALSE, cumulative = FALSE, name = NA,  shape = 20, size = .5)</code></p></li>
 <li><p><code>plotBBox &lt;- function(resp, plotColor = 'viridis', time = NA, myFunc = NA, mapData = NULL, crs = NULL, animate = FALSE, cumulative = FALSE, name = NA, maxpixels = 10000)</code></p></li>
 </ul>
-<p>The data extraction functions are similar to but not identical to the functions in <code>xtractomatic</code>. The main differences are having to obtain information about the dataset first using the function <code><a href="https://rdrr.io/pkg/rerddap/man/info.html">rerddap::info()</a></code>, and possibly having to give the names of the coordinate variables, as these can’t be assumed (for example the zcoord could be in sigma coordinates). More specifically:</p>
+<p>The data extraction functions are similar to but not identical to the functions in <code>xtractomatic</code>. The main differences are having to obtain information about the dataset first using the function <code><a href="https://docs.ropensci.org/rerddap/reference/info.html">rerddap::info()</a></code>, and possibly having to give the names of the coordinate variables, as these can’t be assumed (for example the zcoord could be in sigma coordinates). More specifically:</p>
 <ul>
-<li>dataInfo: the return from an <code><a href="https://rdrr.io/pkg/rerddap/man/info.html">rerddap::info()</a></code> call to a dataset on an <span style="color:red">ERDDAP</span> server</li>
+<li>dataInfo: the return from an <code><a href="https://docs.ropensci.org/rerddap/reference/info.html">rerddap::info()</a></code> call to a dataset on an <span style="color:red">ERDDAP</span> server</li>
 <li>parameter: character string containing the name of the parameter to extract</li>
 <li>xName: character string with name of the xcoord in the <span style="color:red">ERDDAP</span> dataset (default “longitude”)</li>
 <li>yName: character string with name of the ycoord in the <span style="color:red">ERDDAP</span> dataset (default “latitude”)</li>
@@ -146,7 +146,7 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"rerddapXtracto"</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>The development version of the <code>rerddapXtracto</code> package is available from <a href="https://github.com/rmendels/rerddapXtracto">Github</a>. To install the development version,</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)</a>
-<a class="sourceLine" id="cb3-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"rmendels/rerddapXtracto"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb3-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"rmendels/rerddapXtracto"</span>)</a></code></pre></div>
 <p>Note that <code>plotdap</code> depends on a number of packages that must be installed. These include the packages <code>ggplot2</code>, <code>raster</code> and <code>sf</code>. To use the animation features, <code>gganimate</code> must be installed.</p>
 <p>If the other <span style="color:red">R</span> libraries have been installed they will be found and do not need to be explicitly loaded.</p>
 <div id="using-the-r-code-examples" class="section level3">
@@ -180,15 +180,15 @@
 <li>the datasetID of the data to be accessed (for example the 1-day composite of chlorophyll from MODIS Aqua has a datasetID of ‘erdMBchla1day’ - see <a href="https://upwell.pfeg.noaa.gov/erddap/griddap/erdMBchla1day.html" class="uri">https://upwell.pfeg.noaa.gov/erddap/griddap/erdMBchla1day.html</a>)</li>
 <li>the parameter name (in this case “chlorophyll”)</li>
 </ul>
-<p>In order for <code>rerddapXtracto</code> to have this information, as well as the coordinate variables and their limits, and the parameter names, a call must be made to the function <code><a href="https://rdrr.io/pkg/rerddap/man/info.html">rerddap::info()</a></code> for the appropriate datasetID and baseURL:</p>
+<p>In order for <code>rerddapXtracto</code> to have this information, as well as the coordinate variables and their limits, and the parameter names, a call must be made to the function <code><a href="https://docs.ropensci.org/rerddap/reference/info.html">rerddap::info()</a></code> for the appropriate datasetID and baseURL:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"rerddap"</span>)</a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="co">## base URL does not need to given because it is the default one</span></a>
-<a class="sourceLine" id="cb6-3" title="3">dataInfo &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/rerddap/man/info.html">info</a></span>(<span class="st">'erdMBchla1day'</span>)</a>
+<a class="sourceLine" id="cb6-3" title="3">dataInfo &lt;-<span class="st"> </span><span class="kw"><a href="https://docs.ropensci.org/rerddap/reference/info.html">info</a></span>(<span class="st">'erdMBchla1day'</span>)</a>
 <a class="sourceLine" id="cb6-4" title="4">dataInfo</a>
 <a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; &lt;ERDDAP info&gt; erdMBchla1day </span></a>
 <a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt;  Base URL: https://upwell.pfeg.noaa.gov/erddap/ </span></a>
 <a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt;  Dimensions (range):  </span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt;      time: (2006-01-01T12:00:00Z, 2019-08-04T12:00:00Z) </span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt;      time: (2006-01-01T12:00:00Z, 2019-08-30T12:00:00Z) </span></a>
 <a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt;      altitude: (0.0, 0.0) </span></a>
 <a class="sourceLine" id="cb6-10" title="10"><span class="co">#&gt;      latitude: (-45.0, 65.0) </span></a>
 <a class="sourceLine" id="cb6-11" title="11"><span class="co">#&gt;      longitude: (120.0, 320.0) </span></a>
@@ -210,12 +210,12 @@
 <a class="sourceLine" id="cb7-9" title="9">ypos &lt;-<span class="st"> </span>tagData<span class="op">$</span>lat</a>
 <a class="sourceLine" id="cb7-10" title="10">tpos &lt;-<span class="st"> </span>tagData<span class="op">$</span>date</a>
 <a class="sourceLine" id="cb7-11" title="11">zpos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">0.</span>, <span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(xpos))</a>
-<a class="sourceLine" id="cb7-12" title="12">swchlInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rerddap/man/info.html">info</a></span>(<span class="st">'erdSWchla8day'</span>)</a>
+<a class="sourceLine" id="cb7-12" title="12">swchlInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rerddap/reference/info.html">info</a></span>(<span class="st">'erdSWchla8day'</span>)</a>
 <a class="sourceLine" id="cb7-13" title="13">swchl1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rxtracto.html">rxtracto</a></span>(swchlInfo, <span class="dt">parameter =</span> <span class="st">'chlorophyll'</span>, <span class="dt">xcoord =</span> xpos, <span class="dt">ycoord =</span> ypos, <span class="dt">tcoord =</span> tpos, <span class="dt">zcoord =</span> zpos, <span class="dt">xlen =</span> <span class="fl">.2</span>, <span class="dt">ylen =</span> <span class="fl">.2</span>)</a></code></pre></div>
 <p>Note the differences from the <code>xtractomatic</code> example.</p>
 <ul>
 <li>the user has to find the datasetID from the given <span style="color:red">ERDDAP</span> server, in this case ‘erdSWchla8day’ (from <a href="https://upwell.pfeg.noaa.gov/erddap/griddap/erdSWchla8day.html" class="uri">https://upwell.pfeg.noaa.gov/erddap/griddap/erdSWchla8day.html</a>)</li>
-<li>the user has to call <code><a href="https://rdrr.io/pkg/rerddap/man/info.html">rerddap::info('erdSWchla8day')</a></code> to obtain information about that dataset</li>
+<li>the user has to call <code><a href="https://docs.ropensci.org/rerddap/reference/info.html">rerddap::info('erdSWchla8day')</a></code> to obtain information about that dataset</li>
 <li>the user has to know the parameter name desired for that datasetID, in this case ‘chlorophyll’</li>
 <li>the zcoord has to be explicitly given, because ‘erdSWchla8day’ is a 4-D dataset (altitude is a dimension).</li>
 </ul>
@@ -254,7 +254,7 @@
 <a class="sourceLine" id="cb10-4" title="4"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"rerddapXtracto"</span>)</a>
 <a class="sourceLine" id="cb10-5" title="5">ylim &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">15</span>, <span class="dv">30</span>)</a>
 <a class="sourceLine" id="cb10-6" title="6">xlim &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="dv">160</span>, <span class="dv">-105</span>)</a>
-<a class="sourceLine" id="cb10-7" title="7">topoInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rerddap/man/info.html">info</a></span>(<span class="st">'etopo360'</span>)</a>
+<a class="sourceLine" id="cb10-7" title="7">topoInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rerddap/reference/info.html">info</a></span>(<span class="st">'etopo360'</span>)</a>
 <a class="sourceLine" id="cb10-8" title="8">topo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rxtracto.html">rxtracto</a></span>(topoInfo, <span class="dt">parameter =</span> <span class="st">'altitude'</span>, <span class="dt">xcoord =</span> xpos, <span class="dt">ycoord =</span> ypos, <span class="dt">xlen =</span> <span class="fl">.1</span>, <span class="dt">ylen =</span> <span class="fl">.1</span>)</a>
 <a class="sourceLine" id="cb10-9" title="9">myFunc =<span class="st"> </span><span class="cf">function</span>(x) <span class="op">-</span>x</a>
 <a class="sourceLine" id="cb10-10" title="10">topoPlot &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plotTrack.html">plotTrack</a></span>(topo, xpos, ypos, <span class="ot">NA</span>, <span class="dt">plotColor =</span> <span class="st">'density'</span>, <span class="dt">name =</span> <span class="st">'Depth'</span>, <span class="dt">myFunc =</span> myFunc)</a>
@@ -263,7 +263,7 @@
 <p>Again, note the differences from the <code>xtractomatic</code> example:</p>
 <ul>
 <li>the user has to find the datasetID from the given <span style="color:red">ERDDAP</span> server, in this case ‘etopo360’ (from <a href="https://upwell.pfeg.noaa.gov/erddap/griddap/etopo360.html" class="uri">https://upwell.pfeg.noaa.gov/erddap/griddap/etopo360.html</a>)</li>
-<li>the user has to call <code><a href="https://rdrr.io/pkg/rerddap/man/info.html">rerddap::info('etopo360')</a></code> to obtain information about that dataset</li>
+<li>the user has to call <code><a href="https://docs.ropensci.org/rerddap/reference/info.html">rerddap::info('etopo360')</a></code> to obtain information about that dataset</li>
 <li>the user has to know the parameter name desired for that datasetID, in this case ‘altitude’</li>
 <li>only the xcoord and ycoord values need to be given, as ‘etopo360’ is a 2-D dataset, and this is handled more gracefully then in <code>xtractomatic</code>.</li>
 </ul>
@@ -275,7 +275,7 @@
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"rerddap"</span>)</a>
 <a class="sourceLine" id="cb11-2" title="2">urlBase &lt;-<span class="st"> "https://erddap.marine.ie/erddap/"</span></a>
 <a class="sourceLine" id="cb11-3" title="3">parameter &lt;-<span class="st"> "Sea_water_temperature"</span></a>
-<a class="sourceLine" id="cb11-4" title="4">dataInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rerddap/man/info.html">info</a></span>(<span class="st">"IMI_CONN_3D"</span>, <span class="dt">url =</span> urlBase)</a>
+<a class="sourceLine" id="cb11-4" title="4">dataInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rerddap/reference/info.html">info</a></span>(<span class="st">"IMI_CONN_3D"</span>, <span class="dt">url =</span> urlBase)</a>
 <a class="sourceLine" id="cb11-5" title="5"><span class="co">#get the actual last 3 times,  and extract from data frame</span></a>
 <a class="sourceLine" id="cb11-6" title="6">dataInfo1 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span>(<span class="st">"https://erddap.marine.ie/erddap/griddap/IMI_CONN_3D.csv0?time[last-2:1:last]"</span>,<span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>, <span class="dt">header =</span> <span class="ot">FALSE</span>, <span class="dt">row.names =</span> <span class="ot">NULL</span>)</a>
 <a class="sourceLine" id="cb11-7" title="7">sstTimes &lt;-<span class="st"> </span>dataInfo1[[<span class="dv">1</span>]]</a>
@@ -289,19 +289,19 @@
 <a class="sourceLine" id="cb11-15" title="15"><span class="co">#&gt;   print.cache_info       hoardr</span></a>
 <a class="sourceLine" id="cb11-16" title="16"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(sstTrack)</a>
 <a class="sourceLine" id="cb11-17" title="17"><span class="co">#&gt; List of 13</span></a>
-<a class="sourceLine" id="cb11-18" title="18"><span class="co">#&gt;  $ mean Sea_water_temperature  : num [1:3] 12.4 13.5 14.9</span></a>
-<a class="sourceLine" id="cb11-19" title="19"><span class="co">#&gt;  $ stdev Sea_water_temperature : num [1:3] 0.713 0.849 0.774</span></a>
+<a class="sourceLine" id="cb11-18" title="18"><span class="co">#&gt;  $ mean Sea_water_temperature  : num [1:3] 12.8 14.3 15</span></a>
+<a class="sourceLine" id="cb11-19" title="19"><span class="co">#&gt;  $ stdev Sea_water_temperature : num [1:3] 0.516 0.456 0.131</span></a>
 <a class="sourceLine" id="cb11-20" title="20"><span class="co">#&gt;  $ n                           : int [1:3] 493 491 484</span></a>
-<a class="sourceLine" id="cb11-21" title="21"><span class="co">#&gt;  $ satellite date              : chr [1:3] "2019-08-08T22:00:00Z" "2019-08-08T23:00:00Z" "2019-08-09T00:00:00Z"</span></a>
+<a class="sourceLine" id="cb11-21" title="21"><span class="co">#&gt;  $ satellite date              : chr [1:3] "2019-09-03T22:00:00Z" "2019-09-03T23:00:00Z" "2019-09-04T00:00:00Z"</span></a>
 <a class="sourceLine" id="cb11-22" title="22"><span class="co">#&gt;  $ requested lon min           : num [1:3] -10.3 -10.3 -10.3</span></a>
 <a class="sourceLine" id="cb11-23" title="23"><span class="co">#&gt;  $ requested lon max           : num [1:3] -10.2 -10.2 -10.2</span></a>
 <a class="sourceLine" id="cb11-24" title="24"><span class="co">#&gt;  $ requested lat min           : num [1:3] 53.5 53.5 53.5</span></a>
 <a class="sourceLine" id="cb11-25" title="25"><span class="co">#&gt;  $ requested lat max           : num [1:3] 53.5 53.5 53.5</span></a>
 <a class="sourceLine" id="cb11-26" title="26"><span class="co">#&gt;  $ requested z min             : num [1:3] 2 6 10</span></a>
 <a class="sourceLine" id="cb11-27" title="27"><span class="co">#&gt;  $ requested z max             : num [1:3] 2 6 10</span></a>
-<a class="sourceLine" id="cb11-28" title="28"><span class="co">#&gt;  $ requested date              : chr [1:3] "2019-08-08T22:00:00Z" "2019-08-08T23:00:00Z" "2019-08-09T00:00:00Z"</span></a>
-<a class="sourceLine" id="cb11-29" title="29"><span class="co">#&gt;  $ median Sea_water_temperature: num [1:3] 12.3 13.4 15</span></a>
-<a class="sourceLine" id="cb11-30" title="30"><span class="co">#&gt;  $ mad Sea_water_temperature   : num [1:3] 0.814 0.948 0.899</span></a>
+<a class="sourceLine" id="cb11-28" title="28"><span class="co">#&gt;  $ requested date              : chr [1:3] "2019-09-03T22:00:00Z" "2019-09-03T23:00:00Z" "2019-09-04T00:00:00Z"</span></a>
+<a class="sourceLine" id="cb11-29" title="29"><span class="co">#&gt;  $ median Sea_water_temperature: num [1:3] 12.7 14.4 15</span></a>
+<a class="sourceLine" id="cb11-30" title="30"><span class="co">#&gt;  $ mad Sea_water_temperature   : num [1:3] 0.498 0.357 0.127</span></a>
 <a class="sourceLine" id="cb11-31" title="31"><span class="co">#&gt;  - attr(*, "row.names")= chr [1:3] "1" "2" "3"</span></a>
 <a class="sourceLine" id="cb11-32" title="32"><span class="co">#&gt;  - attr(*, "class")= chr [1:2] "list" "rxtractoTrack"</span></a></code></pre></div>
 </div>
@@ -309,7 +309,7 @@
 <h3 class="hasAnchor">
 <a href="#crossing-the-dateline" class="anchor"></a>Crossing the dateline</h3>
 <p>The following is an artificial example of a track that crosses the date-line, using the MUR(Multi-scale Ultra-high Resolution) SST analysis:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">dataInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rerddap/man/info.html">info</a></span>(<span class="st">'jplMURSST41mday'</span>)</a>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">dataInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rerddap/reference/info.html">info</a></span>(<span class="st">'jplMURSST41mday'</span>)</a>
 <a class="sourceLine" id="cb12-2" title="2">parameter &lt;-<span class="st"> 'sst'</span></a>
 <a class="sourceLine" id="cb12-3" title="3">xcoord &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">179.7</span>, <span class="fl">179.8</span>, <span class="fl">179.9</span>, <span class="fl">180.</span>, <span class="fl">180.1</span>, <span class="fl">180.2</span>, <span class="fl">180.3</span>, <span class="fl">180.4</span>)</a>
 <a class="sourceLine" id="cb12-4" title="4">ycoord &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">40</span>, <span class="dv">40</span>, <span class="dv">40</span>, <span class="dv">40</span>, <span class="dv">40</span>, <span class="dv">40</span>, <span class="dv">40</span>, <span class="dv">40</span>)</a>
@@ -354,7 +354,7 @@
 <a class="sourceLine" id="cb13-5" title="5">ypos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">39</span>, <span class="dv">36</span>)</a>
 <a class="sourceLine" id="cb13-6" title="6">tpos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"last"</span>, <span class="st">"last"</span>)</a>
 <a class="sourceLine" id="cb13-7" title="7">tpos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2017-04-15"</span>, <span class="st">"2017-04-15"</span>)</a>
-<a class="sourceLine" id="cb13-8" title="8">VIIRSInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rerddap/man/info.html">info</a></span>(<span class="st">'erdVH3chlamday'</span>)</a>
+<a class="sourceLine" id="cb13-8" title="8">VIIRSInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rerddap/reference/info.html">info</a></span>(<span class="st">'erdVH3chlamday'</span>)</a>
 <a class="sourceLine" id="cb13-9" title="9">VIIRS &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rxtracto_3D.html">rxtracto_3D</a></span>(VIIRSInfo, <span class="dt">parameter =</span> <span class="st">'chla'</span>, <span class="dt">xcoord =</span> xpos, <span class="dt">ycoord =</span> ypos, <span class="dt">tcoord =</span> tpos)</a></code></pre></div>
 <p><code>rxtracto_3d()</code> returns a list of the form:</p>
 <ul>
@@ -365,7 +365,7 @@
 <li>VIIRS$altitude : num zcoord of extract</li>
 <li>VIIRS$time : POSIXlt[tcoord] times of extract</li>
 </ul>
-<p>The coordinate names of the structure are based on the names given in the <code>rxtracto_3d()</code> call, so may differ between datasets. A similar call to <code><a href="https://rdrr.io/pkg/rerddap/man/griddap.html">rerddap::griddap()</a></code> will either return the data “pre-melted” (that is long-form) or only get the netcdf file and have the user read in the data. There are trade-offs to having the data “pre-melted”, for consistency we maintain a structure similar to that in <code>xtracto_3D()</code>, plus this works even if the xcoord and ycoord are not longitude and latitude, where the “pre-melting” in <code><a href="https://rdrr.io/pkg/rerddap/man/griddap.html">rerddap::griddap()</a></code> fails.</p>
+<p>The coordinate names of the structure are based on the names given in the <code>rxtracto_3d()</code> call, so may differ between datasets. A similar call to <code><a href="https://docs.ropensci.org/rerddap/reference/griddap.html">rerddap::griddap()</a></code> will either return the data “pre-melted” (that is long-form) or only get the netcdf file and have the user read in the data. There are trade-offs to having the data “pre-melted”, for consistency we maintain a structure similar to that in <code>xtracto_3D()</code>, plus this works even if the xcoord and ycoord are not longitude and latitude, where the “pre-melting” in <code><a href="https://docs.ropensci.org/rerddap/reference/griddap.html">rerddap::griddap()</a></code> fails.</p>
 <p>We can map the data using <code><a href="../reference/plotBBox.html">plotBBox()</a></code>:</p>
 <p><span id="transform"></span></p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"ggplot2"</span>)</a>
@@ -380,7 +380,7 @@
 <h3 class="hasAnchor">
 <a href="#crossing-the-date-line" class="anchor"></a>Crossing the date-line</h3>
 <p>The following is an <code><a href="../reference/rxtracto_3D.html">rxtracto_3D()</a></code> request that again uses the MUR dataset and crosses the date-line:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">dataInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rerddap/man/info.html">info</a></span>(<span class="st">'jplMURSST41mday'</span>)</a>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">dataInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rerddap/reference/info.html">info</a></span>(<span class="st">'jplMURSST41mday'</span>)</a>
 <a class="sourceLine" id="cb15-2" title="2">parameter &lt;-<span class="st"> 'sst'</span></a>
 <a class="sourceLine" id="cb15-3" title="3">xcoord &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">175</span>, <span class="dv">185</span>)</a>
 <a class="sourceLine" id="cb15-4" title="4">ycoord &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">40</span>, <span class="dv">50</span>)</a>
@@ -424,7 +424,7 @@
 </h2>
 <p>The function <code><a href="../reference/rxtractogon.html">rxtractogon()</a></code> extracts a time-series of satellite data that are within a user supplied polygon. We repeat here two of the examples in the <code>xtractomatic</code> vignette. The first gets chlorophyll within the boundary points of the Monterey Bay National Marine Sanctuary, which are available in the <code>mbnms</code> dataset which are loaded with the <code>rerddapXtracto</code> package.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"rerddapXtracto"</span>)</a>
-<a class="sourceLine" id="cb18-2" title="2">dataInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rerddap/man/info.html">info</a></span>(<span class="st">'erdVH3chlamday'</span>)</a>
+<a class="sourceLine" id="cb18-2" title="2">dataInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rerddap/reference/info.html">info</a></span>(<span class="st">'erdVH3chlamday'</span>)</a>
 <a class="sourceLine" id="cb18-3" title="3">parameter =<span class="st"> 'chla'</span></a>
 <a class="sourceLine" id="cb18-4" title="4">tpos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2014-09-01"</span>, <span class="st">"2014-10-01"</span>)</a>
 <a class="sourceLine" id="cb18-5" title="5"><span class="co">#tpos &lt;-as.Date(tpos)</span></a>
@@ -464,7 +464,7 @@
 </div>
 <p>The MBNMS is famous for containing the Monterey Canyon, which reaches depths of up to 3,600 m (11,800 ft) below surface level at its deepest. <code><a href="../reference/rxtractogon.html">rxtractogon()</a></code> can extract the bathymetry data for the MBNMS from the <span style="color:red">ETOPO</span> dataset:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"rerddap"</span>)</a>
-<a class="sourceLine" id="cb21-2" title="2">dataInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rerddap/man/info.html">info</a></span>(<span class="st">'etopo180'</span>)</a>
+<a class="sourceLine" id="cb21-2" title="2">dataInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rerddap/reference/info.html">info</a></span>(<span class="st">'etopo180'</span>)</a>
 <a class="sourceLine" id="cb21-3" title="3">xpos &lt;-<span class="st"> </span>mbnms<span class="op">$</span>Longitude</a>
 <a class="sourceLine" id="cb21-4" title="4">ypos &lt;-<span class="st"> </span>mbnms<span class="op">$</span>Latitude</a>
 <a class="sourceLine" id="cb21-5" title="5">bathy &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rxtractogon.html">rxtractogon</a></span>(dataInfo, <span class="dt">parameter =</span> <span class="st">'altitude'</span>, <span class="dt">xcoord =</span> xpos, <span class="dt">ycoord =</span> ypos)</a>
@@ -481,7 +481,7 @@
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"ggplot2"</span>)</a>
 <a class="sourceLine" id="cb22-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"mapdata"</span>)</a>
 <a class="sourceLine" id="cb22-3" title="3">myFunc =<span class="st"> </span><span class="cf">function</span>(x) <span class="op">-</span>x</a>
-<a class="sourceLine" id="cb22-4" title="4">bathyPlot &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plotBBox.html">plotBBox</a></span>(bathy, <span class="dt">plotColor =</span> <span class="st">'density'</span>, <span class="dt">myFunc =</span> myFunc, <span class="dt">name =</span> <span class="st">'Depth'</span>)</a>
+<a class="sourceLine" id="cb22-4" title="4">bathyPlot &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/message.html">suppressMessages</a></span>((<span class="kw"><a href="../reference/plotBBox.html">plotBBox</a></span>(bathy, <span class="dt">plotColor =</span> <span class="st">'density'</span>, <span class="dt">myFunc =</span> myFunc, <span class="dt">name =</span> <span class="st">'Depth'</span>)))</a>
 <a class="sourceLine" id="cb22-5" title="5">bathyPlot</a></code></pre></div>
 <p><img src="UsingrerddapXtracto_files/figure-html/mbnmsBathyPlot-1.png" width="480" style="display: block; margin: auto;"></p>
 </div>
@@ -490,7 +490,7 @@
 <a href="#temperature-at-70m-in-the-north-pacific-from-the-soda-model-output" class="anchor"></a>Temperature at 70m in the north Pacific from the SODA model output</h2>
 <p>This is an example of an extract from a 4-D dataset (results from the “Simple Ocean Data Assimilation (SODA)” model), and illustrate the case where the z-coordinate does not have the default name “altitude”. Water temperature at 70m depth is extracted for the North Pacific Ocean east of the dateline.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"rerddap"</span>)</a>
-<a class="sourceLine" id="cb23-2" title="2">dataInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rerddap/man/info.html">info</a></span>(<span class="st">'erdSoda331oceanmday'</span>)</a>
+<a class="sourceLine" id="cb23-2" title="2">dataInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rerddap/reference/info.html">info</a></span>(<span class="st">'erdSoda331oceanmday'</span>)</a>
 <a class="sourceLine" id="cb23-3" title="3">xpos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">185.25</span>, <span class="fl">240.25</span>)</a>
 <a class="sourceLine" id="cb23-4" title="4">ypos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">20.25</span>, <span class="fl">60.25</span>)</a>
 <a class="sourceLine" id="cb23-5" title="5">zpos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">76.80285</span>, <span class="fl">76.80285</span>)</a>
@@ -524,7 +524,7 @@
 <a class="sourceLine" id="cb25-4" title="4">sssTimes &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"last"</span>, <span class="st">"last"</span>)</a>
 <a class="sourceLine" id="cb25-5" title="5">sssLats &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">48.00625</span>, <span class="fl">57.50625</span>)</a>
 <a class="sourceLine" id="cb25-6" title="6">sssLons &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="fl">17.99375</span>, <span class="fl">-1.00625</span>)</a>
-<a class="sourceLine" id="cb25-7" title="7">dataInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rerddap/man/info.html">info</a></span>(<span class="st">"IMI_NEATL"</span>, <span class="dt">url =</span> urlBase)</a>
+<a class="sourceLine" id="cb25-7" title="7">dataInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rerddap/reference/info.html">info</a></span>(<span class="st">"IMI_NEATL"</span>, <span class="dt">url =</span> urlBase)</a>
 <a class="sourceLine" id="cb25-8" title="8">NAtlSSS &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rxtracto_3D.html">rxtracto_3D</a></span>(dataInfo, <span class="dt">parameter =</span> parameter, <span class="dt">xcoord =</span> sssLons, <span class="dt">ycoord =</span> sssLats, <span class="dt">tcoord =</span> sssTimes)</a></code></pre></div>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"ggplot2"</span>)</a>
 <a class="sourceLine" id="cb26-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"plotdap"</span>)</a>
@@ -549,12 +549,12 @@
 <a class="sourceLine" id="cb28-5" title="5">ifrLats &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">30.</span>, <span class="fl">50.</span>)</a>
 <a class="sourceLine" id="cb28-6" title="6">ifrLons &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="fl">140.</span>, <span class="fl">-110.</span>)</a>
 <a class="sourceLine" id="cb28-7" title="7">ifrDepth &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">75.</span>, <span class="fl">75.</span>)</a>
-<a class="sourceLine" id="cb28-8" title="8">dataInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rerddap/man/info.html">info</a></span>(<span class="st">"ifremer_tds0_6080_109e_ed80"</span>, <span class="dt">url =</span> urlBase)</a>
+<a class="sourceLine" id="cb28-8" title="8">dataInfo &lt;-<span class="st"> </span>rerddap<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rerddap/reference/info.html">info</a></span>(<span class="st">"NRTOA"</span>, <span class="dt">url =</span> urlBase)</a>
 <a class="sourceLine" id="cb28-9" title="9">ifrPSAL &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rxtracto_3D.html">rxtracto_3D</a></span>(dataInfo, <span class="dt">parameter =</span> parameter, <span class="dt">xcoord =</span> ifrLons, <span class="dt">ycoord =</span> ifrLats, <span class="dt">tcoord =</span> ifrTimes, <span class="dt">zcoord =</span> ifrDepth, <span class="dt">zName =</span> <span class="st">'depth'</span>)</a>
 <a class="sourceLine" id="cb28-10" title="10"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(ifrPSAL)</a>
 <a class="sourceLine" id="cb28-11" title="11"><span class="co">#&gt; List of 6</span></a>
 <a class="sourceLine" id="cb28-12" title="12"><span class="co">#&gt;  $ PSAL       : num [1:61, 1:54, 1, 1] 34.8 34.8 34.8 34.7 34.7 ...</span></a>
-<a class="sourceLine" id="cb28-13" title="13"><span class="co">#&gt;  $ datasetname: chr "ifremer_tds0_6080_109e_ed80"</span></a>
+<a class="sourceLine" id="cb28-13" title="13"><span class="co">#&gt;  $ datasetname: chr "NRTOA"</span></a>
 <a class="sourceLine" id="cb28-14" title="14"><span class="co">#&gt;  $ longitude  : num [1:61(1d)] -140 -140 -139 -138 -138 ...</span></a>
 <a class="sourceLine" id="cb28-15" title="15"><span class="co">#&gt;  $ latitude   : num [1:54(1d)] 30 30.5 30.9 31.3 31.7 ...</span></a>
 <a class="sourceLine" id="cb28-16" title="16"><span class="co">#&gt;  $ depth      : num [1(1d)] 75</span></a>
@@ -564,7 +564,7 @@
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"ggplot2"</span>)</a>
 <a class="sourceLine" id="cb29-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"plotdap"</span>)</a>
 <a class="sourceLine" id="cb29-3" title="3">ifrPSALPlot &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plotBBox.html">plotBBox</a></span>(ifrPSAL, <span class="dt">plotColor =</span> <span class="st">'salinity'</span>, <span class="dt">name =</span> <span class="st">"salinity"</span>, <span class="dt">maxpixels =</span> <span class="dv">30000</span>)</a>
-<a class="sourceLine" id="cb29-4" title="4">ifrPSALPlot</a></code></pre></div>
+<a class="sourceLine" id="cb29-4" title="4"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(ifrPSALPlot)</a></code></pre></div>
 <p><img src="UsingrerddapXtracto_files/figure-html/ifrPSALplot-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -579,7 +579,7 @@
 <a class="sourceLine" id="cb30-4" title="4">longitude[<span class="kw"><a href="https://rdrr.io/r/base/which.min.html">which.min</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(longitude <span class="op">-</span><span class="st"> </span>xpos[<span class="dv">2</span>]))] <span class="co"># maximum longitude</span></a>
 <a class="sourceLine" id="cb30-5" title="5">isotime[<span class="kw"><a href="https://rdrr.io/r/base/which.min.html">which.min</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(time <span class="op">-</span><span class="st"> </span>tpos[<span class="dv">1</span>]))] <span class="co"># minimum time</span></a>
 <a class="sourceLine" id="cb30-6" title="6">isotime[<span class="kw"><a href="https://rdrr.io/r/base/which.min.html">which.min</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(time <span class="op">-</span><span class="st"> </span>tpos[<span class="dv">2</span>]))] <span class="co"># maximum time</span></a></code></pre></div>
-<p>where <code>tpos</code> and <code>time</code> have been converted to an <span style="color:red">R</span> date format so that it is a number rather than a string. For example, the FNMOC 6-hourly Ekman transports are on a 1-degree grid. A request for the data at a longitude of 220.2 and a latitude of 38.7 will return the result at a longitude of 220 and a latitude of 39. These values are then used in a call to <code><a href="https://rdrr.io/pkg/rerddap/man/griddap.html">rerddap::griddap()</a></code>, with <code>parameter</code> being the variable of interest.</p>
+<p>where <code>tpos</code> and <code>time</code> have been converted to an <span style="color:red">R</span> date format so that it is a number rather than a string. For example, the FNMOC 6-hourly Ekman transports are on a 1-degree grid. A request for the data at a longitude of 220.2 and a latitude of 38.7 will return the result at a longitude of 220 and a latitude of 39. These values are then used in a call to <code><a href="https://docs.ropensci.org/rerddap/reference/griddap.html">rerddap::griddap()</a></code>, with <code>parameter</code> being the variable of interest.</p>
 </div>
 <div id="caching" class="section level2">
 <h2 class="hasAnchor">
@@ -589,6 +589,7 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -616,7 +617,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.9900.</p>
 </div>
 
       </footer>

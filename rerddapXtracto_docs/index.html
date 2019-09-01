@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rerddapXtracto</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
       </span>
     </div>
 
@@ -103,7 +103,7 @@
 </ul>
 <p>Also, several of the internal functions have been refactored, making the code in the main functions a little cleaner.</p>
 <p><code>rerddapXtracto</code> is an <span style="color:blue">R</span> package developed to subset and extract satellite and other oceanographic related data from a remote <span style="color:blue">ERDDAP</span> server. The program can extract data for a moving point in time along a user-supplied set of longitude, latitude, time and depth (new in this version) points; in a 3D bounding box; or within a polygon (through time).</p>
-<p>New in this version is that a track can now move in (x, y, z, t) space if appropriate for the dataset being accessed. And two plotting functions have been added, <code><a href="reference/plotTrack.html">plotTrack()</a></code> and <code>plotBox()</code> that make use of the <code>plotdap</code> package. See the new <a href="https://rmendels.github.io/UsingrerddapXtracto.nb.html">rerdapXtracto vignette</a>. A lot of the code has been reworked, in particular the handling of time, and in the formation of the requests to <code>rerddap</code>.</p>
+<p>New in this version is that a track can now move in (x, y, z, t) space if appropriate for the dataset being accessed. And two plotting functions have been added, <code><a href="reference/plotTrack.html">plotTrack()</a></code> and <code>plotBox()</code> that make use of the <code>plotdap</code> package. See the new <a href="https://rmendels.github.io/UsingrerddapXtracto.html">rerdapXtracto vignette</a>. A lot of the code has been reworked, in particular the handling of time, and in the formation of the requests to <code>rerddap</code>.</p>
 <p>There are three main data extraction functions in the <code>rerddapXtracto</code> package:</p>
 <ul>
 <li><p><code>rxtracto &lt;- function(dataInfo, parameter = NULL, xcoord = NULL, ycoord = NULL, zcoord = NULL, tcoord = NULL, xlen = 0., ylen = 0., zlen = 0., xName = 'longitude', yName = 'latitude', zName = 'altitude', tName = 'time', urlbase = 'http://upwell.pfeg.noaa.gov/erddap', verbose = FALSE)</code></p></li>
@@ -161,7 +161,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.9900.</p>
 </div>
 
       </footer>
