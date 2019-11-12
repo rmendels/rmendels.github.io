@@ -62,5 +62,5 @@ The source code for the PICES2017 notebooks can be found at the [pices2017 repos
 
 # *ETOPO* and *SRTM30Plus* Seafloor Depth Gradient Calculations
 
-[notebook](https://rmendels.github.io/seafloor_gradient_docs/seafloor_gradient_doc.html)
+[notebook](https://rmendels.github.io/seafloor_gradient_doc.html)
 
