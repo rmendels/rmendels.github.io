@@ -45,7 +45,7 @@ The source code for the PICES2017 notebooks can be found at the [pices2017 repos
 
 ## Tao Talk
 
-[notebook](https://rmendels.github.ioTaoTalk.Rmd)  `R` notebook showing that when properly analyzed, another "blob", this time in the tropics, was a product of not allowing for shifts in the seasonal.
+[notebook](https://rmendels.github.io/TaoTalk.Rmd)  `R` notebook showing that when properly analyzed, another "blob", this time in the tropics, was a product of not allowing for shifts in the seasonal.
 
  
 ## Phase Talk
