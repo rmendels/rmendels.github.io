@@ -1,0 +1,1156 @@
+---
+title: "R ERDDAP Talk"
+author: "Roy Mendelssohn"
+institute: "ERD"
+date: "2019/12/14 (updated: `r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+mono_accent(
+  base_color = (base_color = "#23395b")
+)
+```
+# Necessary Packages
+
+Note if you don't have these packages and install with dependencies,  a lot of packages may be installed.
+
+```{r install, echo = TRUE, eval = FALSE}
+
+if (!require("plotdap"))install.packages("plotdap", dependencies = TRUE)
+
+if (!require("rerddap"))install.packages("rerddap", dependencies = TRUE)
+
+if (!require("rerddapXtracto"))install.packages("rerddapXtracto", dependencies = TRUE)
+
+```
+
+
+---
+
+# Resources
+
+[My Github webpage](https://rmendels.github.io)
+
+[Coastwatch ERDDAP Tutorial](https://coastwatch.pfeg.noaa.gov/projects/erddap/)
+
+[Coastwatch R/ERDDAP Tutorial](https://coastwatch.pfeg.noaa.gov/projects/r/) - At the moment this is a little out of date.
+
+
+---
+
+# Three Ways to obtain data from ERDDAP Servers in R
+
+--
+
+- Write your own code
+
+- rerddap
+
+- rerddapXtracto
+
+---
+
+# Finding the Data you want in ERDDAP
+
+Each ERDDAP has [regular search](https://coastwatch.pfeg.noaa.gov/erddap/index.html) and [faceted search](https://coastwatch.pfeg.noaa.gov/erddap/search/advanced.html?page=1&itemsPerPage=1000)
+
+You can also [search almost 50 ERDDAPs](http://erddap.com/#search)
+
+---
+
+# Writing your own code
+
+Everything in ERDDAP is defined by a URL.
+
+Key to writing own code is understanding how to form an ERDDAP URL.
+
+[griddap docs](https://upwell.pfeg.noaa.gov/erddap/griddap/documentation.html)
+
+[tabledap docs](https://upwell.pfeg.noaa.gov/erddap/tabledap/documentation.html)
+
+These include information both on data subsetting and downloads,  as well as defining a graphic output
+
+---
+
+# Writing your own code
+
+Gridded Dataset  (griddap)
+
+https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdMWsstd8day.nc?sst[(2019-12-12T00:00:00Z)][(0.0)][(33.0):(51.0)][(225.0):(240.0)]
+
+*Base URL*:  https://coastwatch.pfeg.noaa.gov/erddap
+
+*Data Type*: griddap
+
+*DatasetID*: erdMWsstd8day
+
+*Download Type*: .nc
+
+*Parameter Name*:  sst
+
+*Time Constraint*: [(2019-12-12T00:00:00Z)]
+
+*Altitude Constraint*: [(0.0)]
+
+*Latitude Constraint*: [(33.0):(51.0)]
+
+*Longitude Constraint*: [(225.0):(240.0)]
+
+---
+
+# *percent encoded* URLs from `ERDDAP`
+
+`ERDDAP's` web pages return 'percent encoded' URLs  ([everything you bever wanted to know about percent encoding](https://www.w3schools.com/tags/ref_urlencode.asp))
+
+Some *R* functions need the URL to be percent encode,  some do so on their own.
+Be careful not to percent encode percent encdoings,  will cause an error.
+
+Easier to wirte the URL without percent encoding,  if needed use `URLencode()`
+
+---
+
+# Getting the file
+
+```{r grid_download, comment = '#', echo = TRUE,  eval = FALSE}
+# use download.file with griddap URL
+my_url <- paste0('https://coastwatch.pfeg.noaa.gov/erddap/griddap/',
+'erdMWsstd8day.nc?',
+'sst[(2019-12-12T00:00:00Z)][(0.0)][(33.0):(51.0)][(225.0):(240.0)]')
+
+download_result <- download.file(my_url, 
+                                 'MWsst.nc', mode = 'wb')
+
+```
+
+or for more control and better error diagnostics,  use `httr::GET`
+
+```{r grid_httr, comment = '#', echo = TRUE,  eval = FALSE}
+# use httr::GET to download griddap URL
+
+httr_result <- httr::GET(my_url, httr::write_disk('MWsstd8day.nc'))
+
+```
+
+
+---
+# Graphics URL
+
+Graphs can aslo be defined by an URL,  with many features set in the URL, but unless you are doing this a lot,  better to go to the graphics page and do it there,  or get the data and do yuor own graphics.
+
+The format for the graphics page is:
+
+*Base URL*:  https://coastwatch.pfeg.noaa.gov/erddap
+
+*Data Type*: griddap
+
+*DatasetID*: erdMWsstd8day
+
+*Download Type*: .graph
+
+The URL below takes a subset of erdMWsstd8day a dataset and changes the color bar to be KT_thermal,  the `cmocean` temperature colorbar.
+
+```{r grid_graph_url}
+grid_graph_url <- paste0('https://coastwatch.pfeg.noaa.gov/erddap/griddap/',
+'erdMWsstd8day.png?',
+'sst[(2019-12-12T00:00:00Z)][(0.0)][(33.0):(51.0)][(225.0):(240.0)]',
+'&.draw=surface&.vars=longitude|latitude|sst',
+'&.colorBar=KT_thermal|||&.bgColor=0xffccccff')
+```
+
+---
+
+
+# Writing your own code
+
+Table Datasets (tabledap)
+
+```{r tabledap_url}
+tabledap_url <- paste0('https://upwell.pfeg.noaa.gov/erddap/tabledap/',
+'OSMC_PROFILERS.csv?',
+'longitude,latitude,daily_obs_count, time',
+'&time>=2019-12-11T00:00:00Z&time<=2019-12-13T00:00:00Z',
+'&longitude>=-140&longitude<=-110',
+'&latitude>=33&latitude<=51')
+```
+
+*Base URL*:  https://upwell.pfeg.noaa.gov/erddap
+
+*Data Type*: tabledap
+
+*DatasetID*: OSMC_PROFILERS
+
+*Download Type*: .csv
+
+---
+
+# Writing your own code Table Datasets Contd.
+
+*Parameter Names*:  longitude,latitude,daily_obs_count
+
+*Time Constraints*: time>=2019-12-11T00:00:00Z&time<=2019-12-13T00:00:00Z
+
+*Longitude Constraints*: longitude>=-140&longitude<=-110
+
+*Latitude Constraints*: latitude>=33&latitude<=51
+
+
+---
+
+# Getting tabledap csv files directly using `read.csv()` or `readr::read_csv()`
+
+ERDDAP can produce several different types of csv files:
+
+- .csv  Download a ISO-8859-1 comma-separated text table (line 1: names; line 2: units; ISO 8601 times).
+
+- .csvp  Download a ISO-8859-1 .csv file with line 1: name (units). Times are ISO 8601 strings.
+
+- .csv0  Download a ISO-8859-1 .csv file without column names or units. Times are ISO 8601 strings.
+
+Make certain that the arguments passed to the function match what is returned in the file,  in particular if strings (for example dates) are viewed as factors.
+
+---
+
+# csv file formats
+
+.csv
+
+time,daily_obs_count,latitude,longitude
+UTC,,degrees_north,degrees_east
+2019-12-11T06:50:00Z,995.0,35.480995,-134.936
+2019-12-11T06:50:00Z,995.0,35.480995,-134.936
+
+.csvp
+
+time (UTC),daily_obs_count,latitude (degrees_north),longitude (degrees_east)
+2019-12-11T06:50:00Z,995.0,35.480995,-134.936
+2019-12-11T06:50:00Z,995.0,35.480995,-134.936
+
+.csv0
+
+2019-12-11T06:50:00Z,995.0,35.480995,-134.936
+2019-12-11T06:50:00Z,995.0,35.480995,-134.936
+
+---
+
+#  Getting the `tabledap` data
+
+```{r tabledap_down, comment = '#', echo = TRUE,  eval = FALSE}
+# read.csv does not properly encode these URLs
+table_url <- paste0('https://upwell.pfeg.noaa.gov/erddap/tabledap/',
+    'OSMC_PROFILERS.csv0?',
+    'longitude,latitude,daily_obs_count,time',
+    '&time>=2019-12-11T00:00:00Z&time<=2019-12-13T00:00:00Z',
+    '&longitude>=-140&longitude<=-110',
+    '&latitude>=33&latitude<=51')
+
+OSMC_data <- read.csv(URLencode(table_url), stringsAsFactors = FALSE, header = FALSE )
+
+```
+
+
+---
+# Table Data Graphics
+
+```{r table_graphics_url, eval = FALSE, echo = TRUE}
+graphics_url <- paste0(
+'https://upwell.pfeg.noaa.gov/erddap/tabledap/OSMC_PROFILERS.png?',
+'longitude,latitude,daily_obs_count',
+'&longitude>=-140&longitude<=-110',
+'&latitude>=33&latitude<=51',
+'&time>=2019-12-11T00:00:00Z&time<=2020-01-11T00:00:00Z',
+'&.draw=markers&.marker=5|5&.color=0x000000&.',
+'colorBar=|||||&.bgColor=0xffccccff')
+```
+
+---
+
+#  `R` Packages
+
+[`rerddap`](https://CRAN.R-project.org/package=rerddap)
+
+[`rerddapXtracto`](https://CRAN.R-project.org/package=rerddapXtracto)
+
+---
+# Which package to use
+
+`rerddap` should work with any `ERDDAP`,  grid or table
+
+`rerddap` either 'melts' the data or stores a file
+
+`rerddapXtracto` uses `reddap`,  only handles grids
+
+`rerddapXtracto` can extract data along a 'track'
+
+`rerddapXtracto` can extract data in a polygon  (through time)
+
+`rerddapXtracto` maintains an array structure for 3-D data
+
+`rerddapXtracto` can cross the dateline when longitudes are (-180,  180)
+
+---
+
+# `rerddap`
+
+`rerddap` has three basic functions:
+
+- `info()` - to obtain information about the dataset
+
+- `griddap()` - to extract gridded data
+
+- `tabledap()` - to extract table data
+
+---
+
+# `rerddap::info()` Definition
+
+info(datasetid, url = eurl(), ...)
+
+Datasetid:	 Dataset id
+
+url: A URL for an ERDDAP server. Default: https://upwell.pfeg.noaa.gov/erddap/. See eurl() for more information
+
+...:	Further args passed on to crul::HttpClient (must be a named parameter)
+
+---
+
+# `rerddap::info()` Example
+
+```{r info_grid, echo = TRUE, eval = TRUE}
+sst_info <- rerddap::info('erdVHsstaWS3day')
+sst_info
+```
+
+When just printed as above you only get a summary of the information that has been returned.
+
+To see the (longish) info that is returned run the following:
+
+
+```{r info_grid2, echo = TRUE,  eval = FALSE}
+str(sst_info)
+
+```
+
+
+
+---
+# `rerddap::griddap()`
+
+griddap(x, ..., fields = "all", stride = 1, fmt = "nc",
+  url = eurl(), store = disk(), read = TRUE, callopts = list())
+
+x: Anything coercable to an object of class info. So the output of a call to info, or a datasetid, which will internally be passed through info
+
+...: Dimension arguments. See examples. Can be any 1 or more of the dimensions for the particular dataset - and the dimensions vary by dataset. For each dimension, pass in a vector of length two, with min and max value desired.
+
+fields: (character) Fields to return, in a character vector.
+
+stride: (integer) How many values to get. 1 = get every value, 2 = get every other value, etc. Default: 1 (i.e., get every value)
+
+---
+
+# `rerddap::griddap()` - Contd.
+
+fmt: (character) One of csv or nc (for netcdf). Default: nc
+
+url:	A URL for an ERDDAP server. Default: https://upwell.pfeg.noaa.gov/erddap/. See eurl() for more information
+
+store:	One of disk (default) or memory. You can pass options to disk. Beware: if you choose fmt="nc", we force store=disk() because nc files have to be written to disk.
+
+read: (logical) Read data into memory or not. Does not apply when store parameter is set to memory (which reads data into memory). For large csv, or especially netcdf files, you may want to set this to FALSE, which simply returns a summary of the dataset - and you can read in data piecemeal later. Default: TRUE
+
+callopts: Curl options passed on to HttpClient
+
+---
+
+# `rerddap::griddap()` Example
+
+```{r griddap_ex, echo = TRUE,  eval = FALSE}
+sst_info <- rerddap::info('erdVHsstaWS3day')
+viirs_SST <- rerddap::griddap(
+             sst_info, 
+             latitude = c(41., 31.), 
+             longitude = c(-128., -115), 
+             time = c('2019-12-20T12:00:00Z','2019-12-22T12:00:00Z'), 
+             fields = 'sst')
+
+str(viirs_SST)
+```
+
+---
+
+# `rerddap::griddap()` Example - I want the latest
+
+```{r griddap_ex_last, echo = TRUE,  eval = FALSE}
+sst_info <- rerddap::info('erdVHsstaWS3day')
+viirs_SST_last <- rerddap::griddap(sst_info, 
+                             latitude = c(41., 31.), 
+                             longitude = c(-128., -115), 
+                             time = c('last','last'), 
+                             fields = 'sst')
+
+# has the data as well as a lot of the metadata
+str(viirs_SST)
+# just the melted data
+str(viirs_SST$data)
+```
+
+But if you use "last",  beware of cacheing
+
+---
+
+`rerddap::griddap()` - Saving the File Part 1
+
+By default the return in viirsSST has 'melted' the data into a tibble.
+But the downloaded data file is hidden in the cache.
+If you want to save that file,  you can find out its name and location:
+
+```{r grid_cache_location, echo = TRUE,  eval = FALSE}
+source_file <- viirs_SST$summary$filename
+source_file
+dest_file <- 'my_copy_file.nc'
+file.copy(source_file, dest_file)
+```
+
+---
+
+`rerddap::griddap()` - Saving the File Part 2 - Don't melt
+
+```{r griddap_nomelt_ex, echo = TRUE,  eval = FALSE}
+sst_info <- rerddap::info('erdVHsstaWS3day')
+viirs_SST_ex <- rerddap::griddap(
+                sst_info, 
+                latitude = c(41., 31.), 
+                longitude = c(-128., -115), 
+                time = c('2019-12-20T12:00:00Z','2019-12-22T12:00:00Z'), 
+                fields = 'sst',
+                read = FALSE,
+                store = disk('my_temp.nc', overwrite = FALSE ))
+
+str(viirs_SST_ex)
+```
+
+
+---
+`rerddap::griddap()` - Multiple Fields
+
+```{r griddap_mult_fields_ex, echo = TRUE,  eval = FALSE}
+sst_info <- rerddap::info('erdVHsstaWS3day')
+viirs_SST_nobs <- rerddap::griddap(
+                     sst_info, 
+                     latitude = c(41., 31.), 
+                     longitude = c(-128., -115), 
+                     time = c('2019-12-20T12:00:00Z','2019-12-22T12:00:00Z'), 
+                     fields = c('sst', 'nobs')
+                     )
+
+str(viirs_SST_nobs)
+```
+
+
+---
+
+`rerddap::griddap()` - Debugging
+
+```{r griddap_ex_verbose, echo = TRUE,  eval = FALSE}
+sst_info <- rerddap::info('erdVHsstaWS3day')
+viirs_SST_last <- rerddap::griddap(sst_info, 
+                             latitude = c(41., 31.), 
+                             longitude = c(-128., -115), 
+                             time = c('last','last'), 
+                             fields = 'sst',
+                             callopts = list(verbose = TRUE))
+```
+
+---
+
+# `plotdap` - Plotting the data
+
+`plotdap` designed to quickly and easily give pretty good plots
+from `rerddap` results
+
+Plots can be modified somewhat
+
+Works with both base graphics and `ggplot2` graphics
+
+For finer control learn one of the many mapping packages,  including `ggplot2`
+
+
+---
+
+# `plotdap` - create the map base `plotdap()`
+
+plotdap(method = c("ggplot2", "base"), mapData = maps::map("world",
+  plot = FALSE, fill = TRUE), crs = NULL, datum = sf::st_crs(4326),
+  mapTitle = NULL, mapFill = "gray80", mapColor = "gray90", ...)
+  
+Arguments
+method:	the plotting method. Currently ggplot2 and base plotting are supported.
+
+mapData:	an object coercable to an sf object via st_as_sf().
+
+crs:	a coordinate reference system: integer with the epsg code, or character with proj4string.
+
+datum:	crs that provides datum to use when generating graticules. Set to NULL to hide the graticule.
+
+---
+
+# `plotdap` - Contd.
+
+mapTitle:	a title for the map.
+
+mapFill:	fill used for the map.
+
+mapColor:	color used to draw boundaries of the map.
+
+...	arguments passed along to geom_sf() (if method='ggplot2', otherwise ignored).
+
+---
+
+# `plotdap` - create the base map
+
+```{r plotdap_base, echo = TRUE, eval = FALSE }
+plotdap()
+```
+
+---
+
+# `add_griddap()` - adding a `griddap` extract
+
+add_griddap(plot, grid, var, fill = "viridis", maxpixels = 10000,
+  time = mean, animate = FALSE, cumulative = FALSE, ...)
+
+Arguments
+
+plot:	a plotdap object.
+
+grid:	a griddap object.
+
+var:	a formula defining a variable, or function of variables to visualize.
+
+fill:	either a character string of length 1 matching a name in \link[rerddap]colors or a vector of color codes. This defines the colorscale used to encode values of var.
+
+---
+
+# `add_griddap()` - Contd.
+
+maxpixels:	integer > 0. Maximum number of cells to use for the plot. If    maxpixels < ncell(x), sampleRegular is used before plotting. If gridded=TRUE maxpixels may be ignored to get a larger sample
+
+time:	how to resolve multiple time frames. Choose one of the following:
+
+   A function to apply to each observation at a particular location (mean is the    default).
+
+   A character string (of length 1) matching a time value.
+
+animate:	whether to animate over the time variable (if it exists). Currently only implemented for method='ggplot2' and requires the gganimate package.
+
+cumulative:	- if animation should be cumulative -default FALSE
+
+...	arguments passed along to geom_sf() (if method='ggplot2')
+
+---
+
+#`add_griddap()` - simple example
+
+```{r add_griddap_ex_last, echo = TRUE,  eval = FALSE}
+sst_info <- rerddap::info('erdVHsstaWS3day')
+viirs_SST_last <- rerddap::griddap(sst_info, 
+                             latitude = c(41., 31.), 
+                             longitude = c(-128., -115), 
+                             time = c('last','last'), 
+                             fields = 'sst')
+
+add_griddap(
+    plotdap(),
+    viirs_SST_last,
+    ~sst
+    )
+
+
+```
+---
+
+# `plotdap` supports pipes
+
+```{r add_griddap_pipe, echo = TRUE, eval = FALSE}
+plotdap() %>%
+    add_griddap(
+        viirs_SST_last,
+        ~sst
+        )
+ 
+```
+---
+
+# `plotdap` - land over grid
+```{r add_griddap_landmask, echo = TRUE, eval = FALSE}
+plotdap() %>%
+    add_griddap(
+        viirs_SST_last,
+        ~sst
+        ) %>%
+     print(landmask = TRUE)
+ 
+```
+
+---
+
+
+# `plotdap` - using cmocean colors
+
+```{r add_griddap_cmocean, echo = TRUE, eval = FALSE}
+plotdap() %>%
+    add_griddap(
+        viirs_SST_last,
+        ~sst,
+        fill = 'thermal'
+        ) %>%
+    print(landmask = TRUE)
+ 
+```
+
+
+---
+
+# `plotdap` - changing resolution
+
+```{r add_griddap_maxpix, echo = TRUE, eval = FALSE}
+plotdap() %>%
+    add_griddap(
+        viirs_SST_last,
+        ~sst,
+        fill = 'thermal',
+        maxpixels = 50000
+        ) %>%
+    print(landmask = TRUE)
+ 
+```
+
+
+---
+
+# `plotdap` - changing continental outline
+
+```{r add_griddap_outline, echo = TRUE, eval = FALSE}
+w <- map("worldHires", xlim = c(-130., -114), ylim = c(30., 42.), 
+         fill = TRUE, plot = FALSE)
+
+plotdap(mapData = w) %>%
+    add_griddap(
+        viirs_SST_last,
+        ~sst,
+        fill = 'thermal',
+        maxpixels = 50000
+        ) %>%
+    print(landmask = TRUE)
+ 
+```
+
+---
+
+# `plotdap` - adding a title
+
+```{r add_griddap_title, echo = TRUE, eval = FALSE}
+w <- map("worldHires", xlim = c(-130., -114), ylim = c(30., 42.), 
+         fill = TRUE, plot = FALSE)
+
+plotdap(mapData = w, mapTitle = 'My Masterpiece') %>%
+    add_griddap(
+        viirs_SST_last,
+        ~sst,
+        fill = 'thermal',
+        maxpixels = 50000
+        ) %>%
+    print(landmask = TRUE)
+ 
+```
+
+
+
+---
+
+#  `add_ggplot()` - modifying a `plotdap` object
+
+```{r add_griddap_modify, echo = TRUE, eval = FALSE}
+w <- map("worldHires", xlim = c(-130., -114), ylim = c(30., 42.), 
+         fill = TRUE, plot = FALSE)
+
+p <- plotdap(mapData = w, mapTitle = 'My Masterpiece') %>%
+    add_griddap(
+        viirs_SST_last,
+        ~sst,
+        fill = 'thermal',
+        maxpixels = 50000
+        )
+
+add_ggplot(p,
+           ggplot2::labs(caption = 'Put it in MOMA'),
+           ggplot2::theme_bw()
+           ) %>%
+print(landmask = TRUE)
+ 
+```
+
+---
+
+# `add_griddap()` - What to do about time
+
+`rerddap::griddap()` extracts can have multiple time-periods
+
+How to plot if that object is passed to `add_griddap()`?
+
+Default method is to do a function of time,  default function is `mean(x, na.rm = TRUE)`
+
+Can pass your own function
+
+Can animate over time
+
+---
+
+# `add_griddap()` -  functions of time
+
+```{r time_funcs, echo = TRUE, eval = FALSE}
+plotdap(mapData = w, mapTitle = 'Mean SST') %>%
+    add_griddap(
+        viirs_SST,
+        ~sst,
+        fill = 'thermal',
+        maxpixels = 50000
+        ) %>%
+    print(landmask = TRUE)
+
+my_func <- function(x) var(x, na.rm = TRUE)
+plotdap(mapData = w, mapTitle = 'Var SST') %>%
+    add_griddap(
+        viirs_SST,
+        ~sst,
+        fill = 'thermal',
+        time = my_func,
+        maxpixels = 50000
+        ) %>%
+    print(landmask = TRUE)
+
+```
+
+---
+
+# `add_griddap()` -  plotting just one time period
+
+`add_griddap()` uses the `raster::calc()` function to calculate the function of time, so it it easy to pull out just one time period to plot. Here the second time in viirs_SST is plotted:
+
+```{r plot_one_time, echo = TRUE, eval = FALSE}
+my_func <- function(x) (x[2])
+plotdap(mapData = w, mapTitle = 'Viirs SST Period 2') %>%
+    add_griddap(
+        viirs_SST,
+        ~sst,
+        fill = 'thermal',
+        time = my_func,
+        maxpixels = 50000
+        ) %>%
+    print(landmask = TRUE)
+```
+
+
+---
+
+# `add_griddap()` -  animate
+
+```{r grid_animate, echo = TRUE, eval = FALSE}
+
+add_griddap(
+  plotdap(mapData = w, mapTitle = 'Viirs SST'), 
+  viirs_SST, ~sst, 
+  time = identity, 
+  fill = 'thermal',
+  animate = TRUE,
+  maxpixels = 50000
+  )
+
+
+```
+---
+  
+# `rerddap::tabledap()`
+
+tabledap(x, ..., fields = NULL, distinct = FALSE, orderby = NULL,
+  orderbymax = NULL, orderbymin = NULL, orderbyminmax = NULL,
+  units = NULL, url = eurl(), store = disk(), callopts = list())
+
+Arguments
+
+x: 	Anything coercable to an object of class info. So the output of a call to info(), or a datasetid, which will internally be passed through info()
+
+...:  Any number of key-value pairs in quotes as query constraints. See Details & examples
+
+fields:	Columns to return, as a character vector
+
+distinct:	If TRUE ERDDAP will sort all of the rows in the results table (starting with the first requested variable, then using the second requested variable if the first variable has a tie, ...), then remove all non-unique rows of data. In many situations, ERDDAP can return distinct values quickly and efficiently. But in some cases, ERDDAP must look through all rows of the source dataset.
+
+---
+
+# `rerddap::tabledap()` - Contd.
+
+orderby:	If used, ERDDAP will sort all of the rows in the results table (starting with the first variable, then using the second variable if the first variable has a tie, ...). Normally, the rows of data in the response table are in the order they arrived from the data source. orderBy allows you to request that the results table be sorted in a specific way. For example, use orderby=c("stationID,time") to get the results sorted by stationID, then time. The orderby variables MUST be included in the list of requested variables in the fields parameter.
+
+orderbymax:	Give a vector of one or more fields, that must be included in the fields parameter as well. Gives back data given constraints. ERDDAP will sort all of the rows in the results table (starting with the first variable, then using the second variable if the first variable has a tie, ...) and then just keeps the rows where the value of the last sort variable is highest (for each combination of other values).
+
+orderbymin:	Same as orderbymax parameter, except returns minimum value.
+
+orderbyminmax:	Same as orderbymax parameter, except returns two rows for every combination of the n-1 variables: one row with the minimum value, and one row with the maximum value.
+
+---
+
+# `rerddap::tabledap()` - Contd.
+
+units:	One of 'udunits' (units will be described via the UDUNITS standard (e.g.,degrees_C)) or 'ucum' (units will be described via the UCUM standard (e.g., Cel)).
+
+url:	A URL for an ERDDAP server. Default: https://upwell.pfeg.noaa.gov/erddap/. See eurl() for more information
+
+store:	One of disk (default) or memory. You can pass options to disk
+
+callopts:	Curl options passed on to crul::HttpClient (must be named parameters)
+
+---
+
+# `tabledap()` - CalCOFI Hydro
+
+```{r calCOFI_Hydro, echo = TRUE, eval = FALSE}
+base_url <- 'https://coastwatch.pfeg.noaa.gov/erddap/'
+hydroInfo <- info('siocalcofiHydroCasts', url = base_url)
+calcofi.df <- tabledap(hydroInfo, 
+                       fields = c('cst_cnt',  'date', 'year', 'month',
+                                  'julian_date', 'julian_day', 'rpt_line',
+                                  'rpt_sta', 'cruz_num', 'intchl',
+                                  'intc14', 'time'), 
+                       'time>=1984-01-01T00:00:00Z',
+                       'time<=2014-04-17T05:35:00Z',
+                       url = base_url
+                       )
+
+head(calcofi.df)
+```
+
+---
+
+# `tabledap()` -CPS Trawl Survey
+
+```{r sardines, echo = TRUE, eval = FALSE}
+my_url <- "https://coastwatch.pfeg.noaa.gov/erddap/"
+CPSinfo <- info('FRDCPSTrawlLHHaulCatch', url = my_url)
+sardines <- tabledap(CPSinfo, 
+            fields = c('latitude',  'longitude', 'time',
+                       'scientific_name', 'subsample_count'),
+            'time>=2010-01-01', 'time<=2012-01-01',
+            'scientific_name="Sardinops sagax"',
+            url = my_url
+            )
+
+```
+
+
+---
+
+# `tabledap()` - NDBC Buoys
+
+```{r buoys, eval = FALSE, echo = TRUE}
+BuoysInfo <- info('cwwcNDBCMet')
+locationBuoys <- tabledap(BuoysInfo, 
+                          distinct = TRUE, 
+                          fields = c("station", "longitude", "latitude"),
+                          "longitude>=-124", "longitude<=-121",
+                          "latitude>=37", "latitude<=47"
+                          )
+
+```
+
+
+---
+
+# `tabledap()`  warning
+
+Values are often returned as character strings
+
+```{r lat_char, eval = FALSE, echo = TRUE}
+# lats are strings
+locationBuoys$latitude[1:3]
+# convert lats to numbers
+locationBuoys$longitude <- as.numeric(locationBuoys$longitude)
+```
+
+---
+
+# `add_tabledap()` - plotting table data
+
+add_tabledap(plot, table, var, color = c("#132B43", "#56B1F7"),
+  size = 1.5, shape = 19, animate = FALSE, cumulative = FALSE, ...)
+  
+Arguments
+
+plot:	a plotdap object.
+
+table:	a tabledap object.
+
+var:	a formula defining a variable, or function of variables to visualize.
+
+color:	either a character string of length 1 matching a name in colors or a vector of color codes. This defines the colorscale used to encode values of var.
+
+size:	the size of the symbol.
+
+shape:	the shape of the symbol. For valid options, see the 'pch' values section on points. plot(0:25, 0:25, pch = 0:25) also gives a quick visual of the majority of possibilities.
+
+---
+
+#  `add_tabledap()` - Contd.
+
+animate:	whether to animate over the time variable (if it exists). Currently only implemented for method='ggplot2' and requires the gganimate package.
+
+cumulative:	- if animation should be cumulative -default FALSE
+
+...:	arguments passed along to geom_sf() (if method='ggplot2', otherwise ignored).
+
+
+---
+
+# `add_tabledap()` - Examples
+
+```{r add_table_ex1, echo = TRUE, eval = FALSE}
+
+p1 <- add_tabledap(
+  plotdap(crs = "+proj=robin",  mapTitle = "subsample count"), 
+  sardines, 
+  ~subsample_count
+)
+p2 <- plotdap(crs = "+proj=robin",
+              mapTitle = "Log subsample count") %>% 
+      add_tabledap(sardines, ~log2(subsample_count)
+) 
+
+```
+
+---
+
+# `add_tabledap()` - Modifying plot
+
+```{r add_table_mod, echo = TRUE, eval = FALSE}
+p1 <- add_tabledap(
+  plotdap(crs = "+proj=robin", 
+          mapTitle = "Sardines - change color"), 
+  sardines, 
+  ~subsample_count, 
+  color = "dense"
+)
+p2  <- add_tabledap(
+  plotdap(crs = "+proj=robin",
+          mapTitle = "Sardines - change shape and size"), 
+  sardines, 
+  ~subsample_count, 
+  shape = 4,
+  size = 1.
+)
+
+```
+
+---
+
+# `add_tabledap()` - Animating an extract
+
+```{r table_anim, echo = TRUE, eval = FALSE}
+add_tabledap(
+  plotdap(crs = "+proj=robin"), 
+  sardines, 
+  ~subsample_count, 
+  color = "dense", 
+  shape = 4, 
+  animate = TRUE
+)
+
+```
+
+---
+
+# `plotdap` - Combining grid and table
+
+```{r combo_plot, echo = TRUE,  eval = FALSE}
+plotdap("base") %>%
+  add_griddap(
+    viirs_SST, 
+    ~sst,
+    fill = 'thermal',
+    maxpixels = 50000
+    ) %>%
+  add_tabledap(
+    sardines, 
+    ~subsample_count,
+    size = .75
+    ) 
+```
+
+---
+
+#`rerddapXtracto`
+
+There are three main data extraction functions in the rerddapXtracto package:
+
+`rxtracto <- function(dataInfo, parameter = NULL, xcoord = NULL, ycoord = NULL, zcoord = NULL, tcoord = NULL, xlen = 0., ylen = 0., zlen = 0., xName = 'longitude', yName = 'latitude', zName = 'altitude', tName = 'time', verbose = FALSE)`
+
+`rxtracto_3D <- function(dataInfo, parameter = NULL, xcoord = NULL, ycoord = NULL, zcoord = NULL, tcoord = NULL, xName = 'longitude', yName = 'latitude', zName = 'altitude', tName = 'time', verbose = FALSE, cache_remove = TRUE)`
+
+`rxtractogon <- function(dataInfo, parameter, xcoord = NULL, ycoord = NULL, zcoord = NULL, tcoord = NULL, xName = 'longitude', yName = 'latitude', zName = 'altitude', tName = 'time', verbose = FALSE)`
+
+
+---
+
+#`rerddapXtracto` -Plotting functions (using `plotdap`)
+
+Two functions for producing maps:
+
+`plotTrack <- function(resp, xcoord, ycoord, tcoord, plotColor = 'viridis', myFunc = NA, mapData = NULL, crs = NULL, animate = FALSE, cumulative = FALSE, name = NA,  shape = 20, size = .5)`
+
+`plotBBox <- function(resp, plotColor = 'viridis', time = NA, myFunc = NA, mapData = NULL, crs = NULL, animate = FALSE, cumulative = FALSE, name = NA, maxpixels = 10000)`
+
+---
+
+# `rxtracto()` - Extract along a track
+
+```{r marlin_track, echo = TRUE, eval = FALSE}
+tagData <- Marlintag38606
+xpos <- tagData$lon
+ypos <- tagData$lat
+tpos <- tagData$date
+zpos <- rep(0., length(xpos))
+swchlInfo <- rerddap::info('erdSWchla8day')
+swchl1 <- rxtracto(swchlInfo, parameter = 'chlorophyll', 
+          xcoord = xpos, ycoord = ypos, tcoord = tpos, zcoord = zpos,
+          xlen = .2, ylen = .2)
+```
+
+---
+
+# `plotTrack()`  - Plot the track
+
+```{r marlin_plot, echo = TRUE, eval = FALSE}
+plotTrack(swchl1, xpos, ypos, tpos, 
+                    plotColor = 'algae')
+
+```
+
+---
+
+# `plotTrack()`  - Animate the track
+
+```{r marlin_anim, echo = TRUE, eval = FALSE}
+plotTrack(swchl1, xpos, ypos, tpos, plotColor = 'algae',
+                    animate = TRUE, cumulative = TRUE)
+
+```
+
+---
+
+# `rxtracto()` - Moving in (x, y, z, t) space
+
+```{r 4D_track, echo = TRUE, eval = FALSE}
+urlBase <- "https://erddap.marine.ie/erddap/"
+parameter <- "Sea_water_temperature"
+dataInfo <- rerddap::info("IMI_CONN_3D", url = urlBase)
+#get the actual last 3 times,  and extract from data frame
+dataInfo1 <- read.csv("https://erddap.marine.ie/erddap/griddap/IMI_CONN_3D.csv0?time[last-2:1:last]", 
+            stringsAsFactors = FALSE, header = FALSE, row.names = NULL)
+sstTimes <- dataInfo1[[1]]
+sstLats <- c(53.505758092414446, 53.509303546859805, 53.51284900130517)
+sstLons <- c(-10.25975390624996, -10.247847656249961, -10.23594140624996)
+sstDepths <- c(2, 6, 10)
+sstTrack <- rxtracto(dataInfo, parameter = parameter,
+                     xcoord = sstLons, ycoord = sstLats,
+                     tcoord = sstTimes, zcoord = sstDepths,
+                     xlen = .05, ylen = .05, zlen = 0.,
+                     zName = 'altitude')
+
+```
+
+---
+
+# `rxtraxto_3D()` - Example
+
+```{r 3d_extract, echo = TRUE, eval = FALSE}
+xpos <- c(-125, -120) 
+ypos <- c(39, 36)
+tpos <- c("last", "last")
+tpos <- c("2017-04-15", "2017-04-15")
+VIIRSInfo <- rerddap::info('erdVH3chlamday')
+VIIRS <- rxtracto_3D(VIIRSInfo, parameter = 'chla', 
+                     xcoord = xpos, ycoord = ypos, tcoord = tpos)
+```
+
+
+---
+
+# `plotBBox()` - Plotting a 3D extract
+
+```{r 3d_plot, echo = TRUE, eval = FALSE}
+myFunc <- function(x) log(x)
+plotBBox(VIIRS, plotColor = 'algae',
+         myFunc = myFunc)
+
+```
+
+---
+
+# `rxtractogon()` - Extract within a polygon
+
+```{r polygon, echo = TRUE, eval = FALSE}
+dataInfo <- rerddap::info('erdVH3chlamday')
+parameter = 'chla'
+tpos <- c("2014-09-01", "2014-10-01")
+xpos <- mbnms$Longitude
+ypos <- mbnms$Latitude
+sanctchl <- rxtractogon(dataInfo, parameter = parameter,
+                       xcoord = xpos, ycoord = ypos,  tcoord = tpos)
+
+```
+
+---
+
+# `plotBBox()` - Plot the polygon extract
+
+```{r polygon_plot, echo = TRUE,  eval = FALSE}
+myFunc <- function(x) log(x)
+sanctchl1 <- sanctchl
+sanctchl1$chla <- sanctchl1$chla[, , 2]
+sanctchl1$time <- sanctchl1$time[2]
+sanctchlPlot <- plotBBox(
+                        sanctchl1, 
+                        plotColor = 'algae',
+                        myFunc = myFunc
+                        )
+
+```
+
+---
+
+# `plotBBox()` - Animate the extract
+
+```{r polygon_anim, echo = TRUE, eval = FALSE}
+myFunc <- function(x) log(x)
+plotBBox(
+  sanctchl, 
+  plotColor = 'algae',
+  myFunc = myFunc,
+  time = identity, 
+  animate = TRUE
+  )
+```
+
+---
