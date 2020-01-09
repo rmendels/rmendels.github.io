@@ -8,11 +8,13 @@
 
 <title>Add rerddap::tabledap data to a plotdap map — add_tabledap • plotdap</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -32,11 +34,12 @@
 
 
 
-<meta property="og:title" content="Add rerddap::tabledap data to a plotdap map — add_tabledap" />
 
+<meta property="og:title" content="Add rerddap::tabledap data to a plotdap map — add_tabledap" />
 <meta property="og:description" content="add_tabledap adds the data from an 'rerddap::tabledap()' call to
 a 'plotdap' map" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -67,7 +70,7 @@ a 'plotdap' map" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotdap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
       </span>
     </div>
 
@@ -98,7 +101,6 @@ a 'plotdap' map" />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ropensci/plotdap">
@@ -125,21 +127,28 @@ a 'plotdap' map" />
     </div>
 
     <div class="ref-description">
-    
     <p><code>add_tabledap</code> adds the data from an 'rerddap::tabledap()' call to
 a 'plotdap' map</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>add_tabledap</span>(<span class='no'>plot</span>, <span class='no'>table</span>, <span class='no'>var</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#132B43"</span>, <span class='st'>"#56B1F7"</span>),
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1.5</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>19</span>, <span class='kw'>animate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>cumulative</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>add_tabledap</span>(
+  <span class='no'>plot</span>,
+  <span class='no'>table</span>,
+  <span class='no'>var</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#132B43"</span>, <span class='st'>"#56B1F7"</span>),
+  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1.5</span>,
+  <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>19</span>,
+  <span class='kw'>animate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>cumulative</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>plot</th>
-      <td><p>a <a href='plotdap.html'>plotdap</a> object.</p></td>
+      <td><p>a plotdap object.</p></td>
     </tr>
     <tr>
       <th>table</th>
@@ -151,7 +160,7 @@ a 'plotdap' map</p>
     </tr>
     <tr>
       <th>color</th>
-      <td><p>either a character string of length 1 matching a name in <a href='https://rdrr.io/pkg/rerddap/man/colors.html'>colors</a>
+      <td><p>either a character string of length 1 matching a name in <code>cmocean</code>
 or a vector of color codes. This defines the colorscale used to encode values
 of <code>var</code>.</p></td>
     </tr>
@@ -180,31 +189,35 @@ gganimate package.</p></td>
       <td><p>arguments passed along to <code>geom_sf()</code> (if <code>method='ggplot2'</code>, otherwise ignored).</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A plotdap object</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-# base plotting tends to be faster,
-# but is less extensible plotdap("base")
+<span class='co'># base plotting tends to be faster,</span>
+<span class='co'># but is less extensible plotdap("base")</span>
 
-# test datasets in data folder to meet execution timings
-# code given to extract the data
+<span class='co'># test datasets in data folder to meet execution timings</span>
+<span class='co'># code given to extract the data</span>
 
-</div><div class='input'><span class='no'>sardines</span> <span class='kw'>&lt;-</span> <span class='fu'>tabledap</span>(
+<span class='co'># \donttest{</span>
+<span class='no'>sardines</span> <span class='kw'>&lt;-</span> <span class='fu'>tabledap</span>(
  <span class='st'>'FRDCPSTrawlLHHaulCatch'</span>,
  <span class='kw'>fields</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'latitude'</span>,  <span class='st'>'longitude'</span>, <span class='st'>'time'</span>, <span class='st'>'scientific_name'</span>, <span class='st'>'subsample_count'</span>),
   <span class='st'>'time&gt;=2010-01-01'</span>, <span class='st'>'time&lt;=2012-01-01'</span>,
   <span class='kw'>scientific_name</span><span class='kw'>=</span><span class='st'>"Sardinops sagax"</span>
-  )</div><div class='output co'>#&gt; <span class='error'>Error: Query error: No operator found in constraint="Sardinops sagax".type Status reportmessage Query error: No operator found in constraint="Sardinops sagax".description The server encountered an internal error that prevented it from fulfilling this request.Apache Tomcat/8.5.11</span></div><div class='input'>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plotdap.html'>plotdap</a></span>()</div><div class='output co'>#&gt; <span class='error'>Error in require_packages(c("sf", "maps", "lazyeval")): could not find function "require_packages"</span></div><div class='input'><span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'>add_tabledap</span>(<span class='no'>p</span>, <span class='no'>sardines</span>, ~<span class='no'>subsample_count</span>)</div><div class='output co'>#&gt; <span class='error'>Error: The `table` argument must be a `tabledap()` object</span></div><div class='input'><span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'>add_tabledap</span>(<span class='no'>p</span>, <span class='no'>sardines</span>, ~<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log2</a></span>(<span class='no'>subsample_count</span>))</div><div class='output co'>#&gt; <span class='error'>Error: The `table` argument must be a `tabledap()` object</span></div><div class='input'>
+  )</div><div class='output co'>#&gt; <span class='error'>Error in tabledap("FRDCPSTrawlLHHaulCatch", fields = c("latitude", "longitude",     "time", "scientific_name", "subsample_count"), "time&gt;=2010-01-01",     "time&lt;=2012-01-01", scientific_name = "Sardinops sagax"): could not find function "tabledap"</span></div><div class='input'><span class='co'># }</span>
+
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotdap</span>()
+<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'>add_tabledap</span>(<span class='no'>p</span>, <span class='no'>sardines</span>, ~<span class='no'>subsample_count</span>)</div><div class='output co'>#&gt; <span class='message'>Date in ISO8601 format; converting timezone from UTC to "GMT".</span></div><div class='input'><span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'>add_tabledap</span>(<span class='no'>p</span>, <span class='no'>sardines</span>, ~<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log2</a></span>(<span class='no'>subsample_count</span>))</div><div class='output co'>#&gt; <span class='message'>Date in ISO8601 format; converting timezone from UTC to "GMT".</span></div><div class='input'>
 <span class='co'># using base R plotting</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plotdap.html'>plotdap</a></span>(<span class='st'>"base"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in require_packages(c("sf", "maps", "lazyeval")): could not find function "require_packages"</span></div><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>add_tabledap</span>(<span class='no'>p</span>, <span class='no'>sardines</span>, ~<span class='no'>subsample_count</span>)</div><div class='output co'>#&gt; <span class='error'>Error: The `table` argument must be a `tabledap()` object</span></div><div class='input'>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotdap</span>(<span class='st'>"base"</span>)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>add_tabledap</span>(<span class='no'>p</span>, <span class='no'>sardines</span>, ~<span class='no'>subsample_count</span>)</div><div class='output co'>#&gt; <span class='message'>Date in ISO8601 format; converting timezone from UTC to "GMT".</span></div><div class='input'>
 <span class='co'># robinson projection</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plotdap.html'>plotdap</a></span>(<span class='kw'>crs</span> <span class='kw'>=</span> <span class='st'>"+proj=robin"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in require_packages(c("sf", "maps", "lazyeval")): could not find function "require_packages"</span></div><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>add_tabledap</span>(<span class='no'>p</span>, <span class='no'>sardines</span>, ~<span class='no'>subsample_count</span>)</div><div class='output co'>#&gt; <span class='error'>Error: The `table` argument must be a `tabledap()` object</span></div><div class='input'>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotdap</span>(<span class='kw'>crs</span> <span class='kw'>=</span> <span class='st'>"+proj=robin"</span>)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>add_tabledap</span>(<span class='no'>p</span>, <span class='no'>sardines</span>, ~<span class='no'>subsample_count</span>)</div><div class='output co'>#&gt; <span class='message'>Date in ISO8601 format; converting timezone from UTC to "GMT".</span></div><div class='input'>
 
 </div></pre>
   </div>
@@ -212,9 +225,7 @@ gganimate package.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -228,7 +239,7 @@ gganimate package.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

@@ -8,11 +8,13 @@
 
 <title>Add rerddap::griddap() data to a plotdap map — add_griddap • plotdap</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -32,11 +34,12 @@
 
 
 
-<meta property="og:title" content="Add rerddap::griddap() data to a plotdap map — add_griddap" />
 
+<meta property="og:title" content="Add rerddap::griddap() data to a plotdap map — add_griddap" />
 <meta property="og:description" content="add_griddap adds the data from an 'rerddap::griddap() call to
 a 'plotdap' map" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -67,7 +70,7 @@ a 'plotdap' map" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotdap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
       </span>
     </div>
 
@@ -98,7 +101,6 @@ a 'plotdap' map" />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ropensci/plotdap">
@@ -125,21 +127,28 @@ a 'plotdap' map" />
     </div>
 
     <div class="ref-description">
-    
     <p><code>add_griddap</code> adds the data from an 'rerddap::griddap() call to
 a 'plotdap' map</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>add_griddap</span>(<span class='no'>plot</span>, <span class='no'>grid</span>, <span class='no'>var</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"viridis"</span>, <span class='kw'>maxpixels</span> <span class='kw'>=</span> <span class='fl'>10000</span>,
-  <span class='kw'>time</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='kw'>animate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>cumulative</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>add_griddap</span>(
+  <span class='no'>plot</span>,
+  <span class='no'>grid</span>,
+  <span class='no'>var</span>,
+  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"viridis"</span>,
+  <span class='kw'>maxpixels</span> <span class='kw'>=</span> <span class='fl'>10000</span>,
+  <span class='kw'>time</span> <span class='kw'>=</span> <span class='no'>mean</span>,
+  <span class='kw'>animate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>cumulative</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>plot</th>
-      <td><p>a <a href='plotdap.html'>plotdap</a> object.</p></td>
+      <td><p>a plotdap object.</p></td>
     </tr>
     <tr>
       <th>grid</th>
@@ -151,8 +160,9 @@ a 'plotdap' map</p>
     </tr>
     <tr>
       <th>fill</th>
-      <td><p>either a character string of length 1 matching a name in \link[rerddap]colors
-or a vector of color codes. This defines the colorscale used to encode values
+      <td><p>either a character string of length 1 matching a name in the
+package <code>cmocean</code> or a vector of color codes.
+This defines the colorscale used to encode values
 of <code>var</code>.</p></td>
     </tr>
     <tr>
@@ -185,54 +195,49 @@ gganimate package.</p></td>
 (if <code>method='ggplot2'</code>, otherwise ignored).</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A plotdap object</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-# base plotting tends to be faster,
-# but is less extensible plotdap("base")
+<span class='co'># base plotting tends to be faster,</span>
+<span class='co'># but is less extensible plotdap("base")</span>
 
-# actual datasets in data folder to meet execution timings
+<span class='co'># actual datasets in data folder to meet execution timings</span>
 
-</div><div class='input'> <span class='no'>murSST</span> <span class='kw'>&lt;-</span> <span class='fu'>griddap</span>(
+<span class='co'># \donttest{</span>
+ <span class='no'>murSST</span> <span class='kw'>&lt;-</span> <span class='fu'>griddap</span>(
    <span class='st'>'jplMURSST41'</span>, <span class='kw'>latitude</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>35</span>, <span class='fl'>40</span>), <span class='kw'>longitude</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>125</span>, -<span class='fl'>1205</span>),
    <span class='kw'>time</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'last'</span>, <span class='st'>'last'</span>), <span class='kw'>fields</span> <span class='kw'>=</span> <span class='st'>'analysed_sst'</span>
-  )</div><div class='output co'>#&gt; <span class='error'>Error: One or both longitude values (-1205, -125) outside data range (-179.99, 180)</span></div><div class='input'>
+  )</div><div class='output co'>#&gt; <span class='error'>Error in griddap("jplMURSST41", latitude = c(35, 40), longitude = c(-125,     -1205), time = c("last", "last"), fields = "analysed_sst"): could not find function "griddap"</span></div><div class='input'>
  <span class='no'>QMwind</span> <span class='kw'>&lt;-</span> <span class='fu'>griddap</span>(
    <span class='st'>'erdQMwindmday'</span>, <span class='kw'>time</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'2016-11-16'</span>, <span class='st'>'2017-01-16'</span>),
    <span class='kw'>latitude</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>30</span>, <span class='fl'>50</span>), <span class='kw'>longitude</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>210</span>, <span class='fl'>240</span>),
    <span class='kw'>fields</span> <span class='kw'>=</span> <span class='st'>'x_wind'</span>
- )
-
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plotdap.html'>plotdap</a></span>(<span class='kw'>crs</span> <span class='kw'>=</span> <span class='st'>"+proj=robin"</span>)
+ )</div><div class='output co'>#&gt; <span class='error'>Error in griddap("erdQMwindmday", time = c("2016-11-16", "2017-01-16"),     latitude = c(30, 50), longitude = c(210, 240), fields = "x_wind"): could not find function "griddap"</span></div><div class='input'>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotdap</span>(<span class='kw'>crs</span> <span class='kw'>=</span> <span class='st'>"+proj=robin"</span>)
 <span class='fu'>add_griddap</span>(<span class='no'>p</span>, <span class='no'>murSST</span>, ~<span class='no'>analysed_sst</span>)</div><div class='output co'>#&gt; <span class='message'>grid object contains more than 10000 pixels</span></div><div class='output co'>#&gt; <span class='message'>increase `maxpixels` for a finer resolution</span></div><div class='img'><img src='add_griddap-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plotdap.html'>plotdap</a></span>(<span class='kw'>mapTitle</span> <span class='kw'>=</span> <span class='st'>"Average wind over time"</span>)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotdap</span>(<span class='kw'>mapTitle</span> <span class='kw'>=</span> <span class='st'>"Average wind over time"</span>)
 <span class='fu'>add_griddap</span>(<span class='no'>p</span>, <span class='no'>QMwind</span>, ~<span class='no'>x_wind</span>)</div><div class='img'><img src='add_griddap-2.png' alt='' width='700' height='433' /></div><div class='input'>
-</div><div class='input'>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plotdap.html'>plotdap</a></span>(<span class='st'>"base"</span>, <span class='kw'>crs</span> <span class='kw'>=</span> <span class='st'>"+proj=robin"</span>)
+<span class='co'># }</span>
+
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotdap</span>(<span class='st'>"base"</span>, <span class='kw'>crs</span> <span class='kw'>=</span> <span class='st'>"+proj=robin"</span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>add_griddap</span>(<span class='no'>p</span>, <span class='no'>murSST</span>, ~<span class='no'>analysed_sst</span>)</div><div class='output co'>#&gt; <span class='message'>grid object contains more than 10000 pixels</span></div><div class='output co'>#&gt; <span class='message'>increase `maxpixels` for a finer resolution</span></div><div class='input'>
 <span class='co'># layer tables on top of grids</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>magrittr</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: magrittr</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘magrittr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:testthat’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    equals, is_less_than, not</span></div><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plotdap.html'>plotdap</a></span>(<span class='st'>"base"</span>) <span class='kw'>%&gt;%</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>magrittr</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: magrittr</span></div><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotdap</span>(<span class='st'>"base"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>add_griddap</span>(<span class='no'>murSST</span>, ~<span class='no'>analysed_sst</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='add_tabledap.html'>add_tabledap</a></span>(<span class='no'>sardines</span>, ~<span class='no'>subsample_count</span>)</div><div class='output co'>#&gt; <span class='message'>grid object contains more than 10000 pixels</span></div><div class='output co'>#&gt; <span class='message'>increase `maxpixels` for a finer resolution</span></div><div class='output co'>#&gt; <span class='message'>Date in ISO8601 format; converting timezone from UTC to "GMT".</span></div><div class='input'>
 <span class='co'># multiple time periods</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plotdap.html'>plotdap</a></span>(<span class='st'>"base"</span>, <span class='kw'>mapTitle</span> <span class='kw'>=</span> <span class='st'>"Average wind over time"</span>)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotdap</span>(<span class='st'>"base"</span>, <span class='kw'>mapTitle</span> <span class='kw'>=</span> <span class='st'>"Average wind over time"</span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>add_griddap</span>(<span class='no'>p</span>, <span class='no'>QMwind</span>, ~<span class='no'>x_wind</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -246,7 +251,7 @@ gganimate package.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

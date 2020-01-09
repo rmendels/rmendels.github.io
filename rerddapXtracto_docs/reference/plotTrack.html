@@ -70,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rerddapXtracto</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.6</span>
       </span>
     </div>
 
@@ -131,9 +131,21 @@
 'rxtracto()'</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plotTrack</span>(<span class='no'>resp</span>, <span class='no'>xcoord</span>, <span class='no'>ycoord</span>, <span class='no'>tcoord</span>, <span class='kw'>plotColor</span> <span class='kw'>=</span> <span class='st'>"viridis"</span>,
-  <span class='kw'>myFunc</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>mapData</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>crs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>animate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>cumulative</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</pre>
+    <pre class="usage"><span class='fu'>plotTrack</span>(
+  <span class='no'>resp</span>,
+  <span class='no'>xcoord</span>,
+  <span class='no'>ycoord</span>,
+  <span class='no'>tcoord</span>,
+  <span class='kw'>plotColor</span> <span class='kw'>=</span> <span class='st'>"viridis"</span>,
+  <span class='kw'>myFunc</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>mapData</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>crs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>animate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>cumulative</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>name</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>20</span>,
+  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,7 +168,7 @@
     </tr>
     <tr>
       <th>plotColor</th>
-      <td><p>the color to use in plot from 'rerddap'</p></td>
+      <td><p>the color to use in plot from 'cmocean'</p></td>
     </tr>
     <tr>
       <th>myFunc</th>
@@ -208,7 +220,7 @@
 <span class='no'>swchl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rxtracto.html'>rxtracto</a></span>(<span class='no'>swchlInfo</span>, <span class='kw'>parameter</span> <span class='kw'>=</span> <span class='st'>'chlorophyll'</span>, <span class='kw'>xcoord</span> <span class='kw'>=</span> <span class='no'>xpos</span>,
         <span class='kw'>ycoord</span> <span class='kw'>=</span> <span class='no'>ypos</span>, <span class='kw'>tcoord</span> <span class='kw'>=</span> <span class='no'>tpos</span>, <span class='kw'>zcoord</span> <span class='kw'>=</span> <span class='no'>zpos</span>, <span class='kw'>xlen</span> <span class='kw'>=</span> <span class='fl'>.2</span>, <span class='kw'>ylen</span> <span class='kw'>=</span> <span class='fl'>.2</span>)
 <span class='co'># }</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotTrack</span>(<span class='no'>swchl</span>, <span class='no'>xpos</span>, <span class='no'>ypos</span>, <span class='no'>tpos</span>, <span class='kw'>plotColor</span> <span class='kw'>=</span> <span class='st'>'chlorophyll'</span>)</div></pre>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotTrack</span>(<span class='no'>swchl</span>, <span class='no'>xpos</span>, <span class='no'>ypos</span>, <span class='no'>tpos</span>, <span class='kw'>plotColor</span> <span class='kw'>=</span> <span class='st'>'algae'</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
