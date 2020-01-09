@@ -68,6 +68,6 @@ The source code for the PICES2017 notebooks can be found at the [pices2017 repos
 
 [slides](https://rmendels.github.io/R_erddap_talk/r_erddap_talk.html)
 
-[Rmd]((https://rmendels.github.io/R_erddap_talk/r_erddap_talk.Rmd)
+[Rmd](https://rmendels.github.io/R_erddap_talk/r_erddap_talk.Rmd)
 
 
