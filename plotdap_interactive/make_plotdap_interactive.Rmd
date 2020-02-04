@@ -1,0 +1,79 @@
+---
+title: "Making 'plotdap', 'plotTrack' and plotBBox' Interactive Using 'plotly'"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r initialize}
+library(ggplot2)
+library(mapdata)
+library(plotdap)
+library(plotly)
+library(rerddap)
+library(rerddapXtracto)
+```
+
+I was asked at my seminar on using 'R' to extract data from ERDDAP servers if it was possible to make the 'plotdap' related maps interactve.  It turns out it can be done readily using the 'plotly' package without having to add anything to 'plotdap', by understanding the structure of a 'plotdap' object, and if needed using the bbox_set() function in 'plotdap',  and a trick I will show on how to switch the order of layers in a ggplot object.
+
+Be warned that the 'plotly' rendering can be quite slow.
+
+Let's look at one of the examples in the 'plotdap' vignette.
+
+```{r plotdap_ex, warning = FALSE, message = FALSE}
+sstInfo <- rerddap::info('erdVHsstaWS3day')
+# get latest 3-day composite sst
+viirsSST <- rerddap::griddap(sstInfo, 
+                             latitude = c(41., 31.), 
+                             longitude = c(-128., -115), 
+                             time = c('last','last'), 
+                             fields = 'sst')
+ 
+w <- map("worldHires", xlim = c(-140., -114), ylim = c(30., 42.), fill = TRUE, plot = FALSE)
+my_plot <- add_griddap(plotdap(mapData = w), viirsSST, ~sst, fill = "thermal" )
+
+my_plot 
+```
+
+Part of a 'plotdap' object is a 'ggplot2' object as well as information on bounds and projections.  For now we will finesse the question of projections.
+
+The 'plotly' package has a function 'ggplotly()' that can workj directly with a 'ggplot2' object to produce an interactive graphic.  It will work with the plot we just made,  but perhaps with an unexpected result.
+
+```{r viirs_plotly1, warning = FALSE, message = FALSE}
+ggplotly(my_plot$ggplot)
+
+```
+The resulting plot is interactive but the bounding box is off.  This is because 'plotdap' has it's own print method that calculates a good bounding box before displaying the map.  But the function `bbox_set()` in 'plotdap' will set the bounding box in the ggplot object.  
+
+```{r viirs_plotly2, warning = FALSE, message = FALSE}
+my_plot1 <- bbox_set(my_plot, c(-128., -115), c(31, 41.))
+ggplotly(my_plot1$ggplot)
+```
+
+Now the bounding box is correct.  the 'plotdap' print method is also what is used to have the land overlay the data grid,  rather than vice-versa.  But the code from that method cna be extracted and used here for the same purpose.
+
+```{r landmask}
+my_plot2 <- my_plot1
+gg <- my_plot2$ggplot
+gg$layers <- rev(gg$layers)
+my_plot2$ggplot <- gg
+ggplotly(my_plot2$ggplot)
+```
+
+The same can be done with output from the 'rerddapXtracto' functions `plotTrack()` and `plotBBox()`, as they just produce 'plotdap' objects. Here it is done for the Marlin track example,  including setting a good bounding box.
+
+```{r track, warning = FALSE, message = FALSE}
+tagData <- Marlintag38606
+xpos <- tagData$lon
+ypos <- tagData$lat
+tpos <- tagData$date
+zpos <- rep(0., length(xpos))
+swchlInfo <- rerddap::info('erdSWchla8day')
+swchl1 <- rxtracto(swchlInfo, parameter = 'chlorophyll', xcoord = xpos, ycoord = ypos, tcoord = tpos, zcoord = zpos, xlen = .2, ylen = .2)
+#
+myPlot <- plotTrack(swchl1, xpos, ypos, tpos, plotColor = 'algae')
+myPlot <- bbox_set(myPlot, c(min(xpos - 360), max(xpos - 360)), c(min(ypos), max(ypos)))
+ggplotly(myPlot$ggplot)
+
+```
+
