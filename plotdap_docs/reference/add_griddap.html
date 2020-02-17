@@ -70,7 +70,7 @@ a 'plotdap' map" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotdap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -148,7 +148,7 @@ a 'plotdap' map</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>plot</th>
-      <td><p>a plotdap object.</p></td>
+      <td><p>a <a href='plotdap.html'>plotdap</a> object.</p></td>
     </tr>
     <tr>
       <th>grid</th>
@@ -217,20 +217,20 @@ gganimate package.</p></td>
    <span class='kw'>latitude</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>30</span>, <span class='fl'>50</span>), <span class='kw'>longitude</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>210</span>, <span class='fl'>240</span>),
    <span class='kw'>fields</span> <span class='kw'>=</span> <span class='st'>'x_wind'</span>
  )</div><div class='output co'>#&gt; <span class='error'>Error in griddap("erdQMwindmday", time = c("2016-11-16", "2017-01-16"),     latitude = c(30, 50), longitude = c(210, 240), fields = "x_wind"): could not find function "griddap"</span></div><div class='input'>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotdap</span>(<span class='kw'>crs</span> <span class='kw'>=</span> <span class='st'>"+proj=robin"</span>)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plotdap.html'>plotdap</a></span>(<span class='kw'>crs</span> <span class='kw'>=</span> <span class='st'>"+proj=robin"</span>)
 <span class='fu'>add_griddap</span>(<span class='no'>p</span>, <span class='no'>murSST</span>, ~<span class='no'>analysed_sst</span>)</div><div class='output co'>#&gt; <span class='message'>grid object contains more than 10000 pixels</span></div><div class='output co'>#&gt; <span class='message'>increase `maxpixels` for a finer resolution</span></div><div class='img'><img src='add_griddap-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotdap</span>(<span class='kw'>mapTitle</span> <span class='kw'>=</span> <span class='st'>"Average wind over time"</span>)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plotdap.html'>plotdap</a></span>(<span class='kw'>mapTitle</span> <span class='kw'>=</span> <span class='st'>"Average wind over time"</span>)
 <span class='fu'>add_griddap</span>(<span class='no'>p</span>, <span class='no'>QMwind</span>, ~<span class='no'>x_wind</span>)</div><div class='img'><img src='add_griddap-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># }</span>
 
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotdap</span>(<span class='st'>"base"</span>, <span class='kw'>crs</span> <span class='kw'>=</span> <span class='st'>"+proj=robin"</span>)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plotdap.html'>plotdap</a></span>(<span class='st'>"base"</span>, <span class='kw'>crs</span> <span class='kw'>=</span> <span class='st'>"+proj=robin"</span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>add_griddap</span>(<span class='no'>p</span>, <span class='no'>murSST</span>, ~<span class='no'>analysed_sst</span>)</div><div class='output co'>#&gt; <span class='message'>grid object contains more than 10000 pixels</span></div><div class='output co'>#&gt; <span class='message'>increase `maxpixels` for a finer resolution</span></div><div class='input'>
 <span class='co'># layer tables on top of grids</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>magrittr</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: magrittr</span></div><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotdap</span>(<span class='st'>"base"</span>) <span class='kw'>%&gt;%</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>magrittr</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: magrittr</span></div><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plotdap.html'>plotdap</a></span>(<span class='st'>"base"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>add_griddap</span>(<span class='no'>murSST</span>, ~<span class='no'>analysed_sst</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='add_tabledap.html'>add_tabledap</a></span>(<span class='no'>sardines</span>, ~<span class='no'>subsample_count</span>)</div><div class='output co'>#&gt; <span class='message'>grid object contains more than 10000 pixels</span></div><div class='output co'>#&gt; <span class='message'>increase `maxpixels` for a finer resolution</span></div><div class='output co'>#&gt; <span class='message'>Date in ISO8601 format; converting timezone from UTC to "GMT".</span></div><div class='input'>
 <span class='co'># multiple time periods</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotdap</span>(<span class='st'>"base"</span>, <span class='kw'>mapTitle</span> <span class='kw'>=</span> <span class='st'>"Average wind over time"</span>)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plotdap.html'>plotdap</a></span>(<span class='st'>"base"</span>, <span class='kw'>mapTitle</span> <span class='kw'>=</span> <span class='st'>"Average wind over time"</span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>add_griddap</span>(<span class='no'>p</span>, <span class='no'>QMwind</span>, ~<span class='no'>x_wind</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

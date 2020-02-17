@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rerddapXtracto</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.7</span>
       </span>
     </div>
 
@@ -89,10 +89,12 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="rerddapxtracto-version-044" class="section level1">
+<div id="rerddapxtracto-version-047" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#rerddapxtracto-version-044" class="anchor"></a>rerddapXtracto (Version 0.4.4)</h1></div>
+<a href="#rerddapxtracto-version-047" class="anchor"></a>rerddapXtracto (Version 0.4.7)</h1></div>
 <p>rerddapXtracto - R package for accessing environmental data using rerddap</p>
+<hr>
+<p><code><a href="reference/rxtracto.html">rxtracto()</a></code> now can display a progress bar ******</p>
 <hr>
 <p>This version is updated to work with <code>rerddap</code> Version 0.6.0, earlier versions can fail. This version is now on CRAN, as is <code>plotdap</code>. ******</p>
 <p>The big change with this version is the ability to cross the dateline for datasets that are on a (-180, 180) longitude grid. Some caveats when trying to make an extract that crosses the dateline:</p>
@@ -106,7 +108,7 @@
 <p>New in this version is that a track can now move in (x, y, z, t) space if appropriate for the dataset being accessed. And two plotting functions have been added, <code><a href="reference/plotTrack.html">plotTrack()</a></code> and <code>plotBox()</code> that make use of the <code>plotdap</code> package. See the new <a href="https://rmendels.github.io/UsingrerddapXtracto.html">rerdapXtracto vignette</a>. A lot of the code has been reworked, in particular the handling of time, and in the formation of the requests to <code>rerddap</code>.</p>
 <p>There are three main data extraction functions in the <code>rerddapXtracto</code> package:</p>
 <ul>
-<li><p><code>rxtracto &lt;- function(dataInfo, parameter = NULL, xcoord = NULL, ycoord = NULL, zcoord = NULL, tcoord = NULL, xlen = 0., ylen = 0., zlen = 0., xName = 'longitude', yName = 'latitude', zName = 'altitude', tName = 'time', urlbase = 'http://upwell.pfeg.noaa.gov/erddap', verbose = FALSE)</code></p></li>
+<li><p><code>rxtracto &lt;- function(dataInfo, parameter = NULL, xcoord = NULL, ycoord = NULL, zcoord = NULL, tcoord = NULL, xlen = 0., ylen = 0., zlen = 0., xName = 'longitude', yName = 'latitude', zName = 'altitude', tName = 'time', urlbase = 'http://upwell.pfeg.noaa.gov/erddap', verbose = FALSE, progress_bar = FALSE)</code></p></li>
 <li><p><code>rxtracto_3D &lt;- function(dataInfo, parameter = NULL, xcoord = NULL, ycoord = NULL, zcoord = NULL, tcoord = NULL, xName = 'longitude', yName = 'latitude', zName = 'altitude', tName = 'time', urlbase = 'http://upwell.pfeg.noaa.gov/erddap', verbose = FALSE)</code></p></li>
 <li><p><code>rxtractogon &lt;- function(dataInfo, parameter, xcoord = NULL, ycoord = NULL, zcoord = NULL, tcoord = NULL, xName = 'longitude', yName = 'latitude', zName = 'altitude', tName = 'time', urlbase = 'http://upwell.pfeg.noaa.gov/erddap', verbose = FALSE)</code></p></li>
 </ul>

@@ -70,7 +70,7 @@ a 'plotdap' map" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotdap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -148,7 +148,7 @@ a 'plotdap' map</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>plot</th>
-      <td><p>a plotdap object.</p></td>
+      <td><p>a <a href='plotdap.html'>plotdap</a> object.</p></td>
     </tr>
     <tr>
       <th>table</th>
@@ -210,13 +210,13 @@ gganimate package.</p></td>
   <span class='kw'>scientific_name</span><span class='kw'>=</span><span class='st'>"Sardinops sagax"</span>
   )</div><div class='output co'>#&gt; <span class='error'>Error in tabledap("FRDCPSTrawlLHHaulCatch", fields = c("latitude", "longitude",     "time", "scientific_name", "subsample_count"), "time&gt;=2010-01-01",     "time&lt;=2012-01-01", scientific_name = "Sardinops sagax"): could not find function "tabledap"</span></div><div class='input'><span class='co'># }</span>
 
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotdap</span>()
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plotdap.html'>plotdap</a></span>()
 <span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'>add_tabledap</span>(<span class='no'>p</span>, <span class='no'>sardines</span>, ~<span class='no'>subsample_count</span>)</div><div class='output co'>#&gt; <span class='message'>Date in ISO8601 format; converting timezone from UTC to "GMT".</span></div><div class='input'><span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'>add_tabledap</span>(<span class='no'>p</span>, <span class='no'>sardines</span>, ~<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log2</a></span>(<span class='no'>subsample_count</span>))</div><div class='output co'>#&gt; <span class='message'>Date in ISO8601 format; converting timezone from UTC to "GMT".</span></div><div class='input'>
 <span class='co'># using base R plotting</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotdap</span>(<span class='st'>"base"</span>)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plotdap.html'>plotdap</a></span>(<span class='st'>"base"</span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>add_tabledap</span>(<span class='no'>p</span>, <span class='no'>sardines</span>, ~<span class='no'>subsample_count</span>)</div><div class='output co'>#&gt; <span class='message'>Date in ISO8601 format; converting timezone from UTC to "GMT".</span></div><div class='input'>
 <span class='co'># robinson projection</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plotdap</span>(<span class='kw'>crs</span> <span class='kw'>=</span> <span class='st'>"+proj=robin"</span>)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plotdap.html'>plotdap</a></span>(<span class='kw'>crs</span> <span class='kw'>=</span> <span class='st'>"+proj=robin"</span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>add_tabledap</span>(<span class='no'>p</span>, <span class='no'>sardines</span>, ~<span class='no'>subsample_count</span>)</div><div class='output co'>#&gt; <span class='message'>Date in ISO8601 format; converting timezone from UTC to "GMT".</span></div><div class='input'>
 
 </div></pre>
