@@ -69,7 +69,7 @@ The source code for the PICES2017 notebooks can be found at the [pices2017 repos
 
 [notebook](https://rmendels.github.io/seafloor_gradient_doc.html)
 
-# Accessing ERDDDAP Data in R
+# Accessing ERDDDAP Data in `R`
 
 [slides](https://rmendels.github.io/R_erddap_talk/r_erddap_talk.html)
 
