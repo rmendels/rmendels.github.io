@@ -6,10 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Extracts Environmental Data from ERDDAP Web Services • rerddapXtracto</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Extracts Environmental Data from ERDDAP Web Services">
 <meta property="og:description" content='Contains three functions that access
     environmental data from any ERDDAP data web service. The rxtracto() function extracts
@@ -19,13 +20,12 @@
     to extract the data, and should work with any ERDDAP server.
     There are also two functions, plotBBox() and plotTrack() that use the plotdap
     package to simplify the creation of maps of the data.'>
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rerddapXtracto</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -71,7 +71,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/rmendels/rerddapXtracto">
+  <a href="https://github.com/rmendels/rerddapXtracto/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -89,23 +89,14 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="rerddapxtracto-version-047" class="section level1">
+<div id="rerddapxtracto-version-100" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#rerddapxtracto-version-047" class="anchor"></a>rerddapXtracto (Version 0.4.7)</h1></div>
-<p>rerddapXtracto - R package for accessing environmental data using rerddap</p>
+<a href="#rerddapxtracto-version-100" class="anchor"></a>rerddapXtracto (Version 1.0.0)</h1></div>
+<p>rerddapXtracto - R package for accessing environmental data using ‘rerddap’</p>
 <hr>
-<p><code><a href="reference/rxtracto.html">rxtracto()</a></code> now can display a progress bar ******</p>
-<hr>
-<p>This version is updated to work with <code>rerddap</code> Version 0.6.0, earlier versions can fail. This version is now on CRAN, as is <code>plotdap</code>. ******</p>
-<p>The big change with this version is the ability to cross the dateline for datasets that are on a (-180, 180) longitude grid. Some caveats when trying to make an extract that crosses the dateline:</p>
-<ul>
-<li>Request must be on a (0, 360) longitude grid</li>
-<li>Several of the checks that the request makes sense are disabled if the request cross the dateline and the dataset is on a (-180, 180) longitude grid.</li>
-<li>User therefore has more responsibility to check that the request makes sense for the dataset being accessed.</li>
-</ul>
-<p>Also, several of the internal functions have been refactored, making the code in the main functions a little cleaner.</p>
-<p><code>rerddapXtracto</code> is an <span style="color:blue">R</span> package developed to subset and extract satellite and other oceanographic related data from a remote <span style="color:blue">ERDDAP</span> server. The program can extract data for a moving point in time along a user-supplied set of longitude, latitude, time and depth (new in this version) points; in a 3D bounding box; or within a polygon (through time).</p>
-<p>New in this version is that a track can now move in (x, y, z, t) space if appropriate for the dataset being accessed. And two plotting functions have been added, <code><a href="reference/plotTrack.html">plotTrack()</a></code> and <code>plotBox()</code> that make use of the <code>plotdap</code> package. See the new <a href="https://rmendels.github.io/UsingrerddapXtracto.html">rerdapXtracto vignette</a>. A lot of the code has been reworked, in particular the handling of time, and in the formation of the requests to <code>rerddap</code>.</p>
+<p><code><a href="reference/rxtracto.html">rxtracto()</a></code> major rewrite of this function to reduce the number of requests made to the ERDDAP server, and to improve overall speed. ******</p>
+<p><code>rerddapXtracto</code> is an <span style="color:blue">R</span> package developed to subset and extract satellite and other oceanographic related data from a remote <span style="color:blue">ERDDAP</span> server. The program can extract data for a moving point in time along a user-supplied set of longitude, latitude, time and depth points; in a 3D bounding box; or within a polygon (through time).</p>
+<p>There are also two plotting functions, <code><a href="reference/plotTrack.html">plotTrack()</a></code> and <code>plotBox()</code> that make use of the <code>plotdap</code> package. See the new <a href="https://rmendels.github.io/UsingrerddapXtracto.html">rerdapXtracto vignette</a>.</p>
 <p>There are three main data extraction functions in the <code>rerddapXtracto</code> package:</p>
 <ul>
 <li><p><code>rxtracto &lt;- function(dataInfo, parameter = NULL, xcoord = NULL, ycoord = NULL, zcoord = NULL, tcoord = NULL, xlen = 0., ylen = 0., zlen = 0., xName = 'longitude', yName = 'latitude', zName = 'altitude', tName = 'time', urlbase = 'http://upwell.pfeg.noaa.gov/erddap', verbose = FALSE, progress_bar = FALSE)</code></p></li>
@@ -114,8 +105,14 @@
 </ul>
 <p>and two functions for producing maps:</p>
 <ul>
-<li><p><code>plotTrack &lt;- function(resp, xcoord, ycoord, tcoord, plotColor = 'viridis', myFunc = NA,                     mapData = NULL, crs = NULL,                     animate = FALSE, cumulative = FALSE,                     name = NA,  shape = 20, size = .5)</code></p></li>
-<li><p><code>plotBBox &lt;- function(resp, plotColor = 'viridis', time = NA, myFunc = NA,               mapData = NULL, crs = NULL,               animate = FALSE, cumulative = FALSE, name = NA,               maxpixels = 10000)</code></p></li>
+<li><p><code>plotTrack &lt;- function(resp, xcoord, ycoord, tcoord, plotColor = 'viridis', myFunc = NA,                       mapData = NULL, crs = NULL,                       animate = FALSE, cumulative = FALSE,                       name = NA,  shape = 20, size = .5)</code></p></li>
+<li><p><code>plotBBox &lt;- function(resp, plotColor = 'viridis', time = NA, myFunc = NA,                 mapData = NULL, crs = NULL,                 animate = FALSE, cumulative = FALSE, name = NA,                 maxpixels = 10000)</code></p></li>
+</ul>
+<p>For data requests that cross the dateline for datasets that are on a (-180, 180) longitude grid, there are some important caveats:</p>
+<ul>
+<li>Request must be on a (0, 360) longitude grid</li>
+<li>Several of the checks that the request makes sense are disabled if the request cross the dateline and the dataset is on a (-180, 180) longitude grid.</li>
+<li>User therefore has more responsibility to check that the request makes sense for the dataset being accessed.</li>
 </ul>
 <p><code>rerddapXtracto</code> uses the <code>rerddap</code>, <code>ncdf4</code> , <code>parsedate</code>, <code>plotdap</code> and <code>sp</code> packages , and these packages (and the packages imported by these packages) must be installed first or <code>rerddapXtracto</code> will fail to install.</p>
 <p><code>{r install,eval=FALSE} install.packages("ncdf4")  install.packages("parsedate")  install.packages("plotdap")  install.packages("rerddap")  install.packages("sp")</code></p>
@@ -129,13 +126,13 @@
 
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=rerddapXtracto">https://​cloud.r-project.org/​package=rerddapXtracto</a>
 </li>
-<li>Browse source code at <br><a href="https://github.com/rmendels/rerddapXtracto">https://​github.com/​rmendels/​rerddapXtracto</a>
+<li>Browse source code at <br><a href="https://github.com/rmendels/rerddapXtracto/">https://​github.com/​rmendels/​rerddapXtracto/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/rmendels/rerddapXtracto/issues">https://​github.com/​rmendels/​rerddapXtracto/​issues</a>
 </li>
@@ -163,7 +160,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
