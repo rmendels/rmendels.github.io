@@ -73,7 +73,7 @@ data from an 'ERDDAP' server along a (x,y,z, time) trajectory." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rerddapXtracto</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -81,7 +81,7 @@ data from an 'ERDDAP' server along a (x,y,z, time) trajectory." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -107,7 +107,7 @@ data from an 'ERDDAP' server along a (x,y,z, time) trajectory." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rmendels/rerddapXtracto/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -134,23 +134,24 @@ data from an 'ERDDAP' server along a (x,y,z, time) trajectory." />
 data from an 'ERDDAP' server along a (x,y,z, time) trajectory.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rxtracto</span>(
-  <span class='no'>dataInfo</span>,
-  <span class='kw'>parameter</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>xcoord</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ycoord</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>zcoord</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>tcoord</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>xlen</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>ylen</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>zlen</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>xName</span> <span class='kw'>=</span> <span class='st'>"longitude"</span>,
-  <span class='kw'>yName</span> <span class='kw'>=</span> <span class='st'>"latitude"</span>,
-  <span class='kw'>zName</span> <span class='kw'>=</span> <span class='st'>"altitude"</span>,
-  <span class='kw'>tName</span> <span class='kw'>=</span> <span class='st'>"time"</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>rxtracto</span><span class='op'>(</span>
+  <span class='va'>dataInfo</span>,
+  parameter <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xcoord <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ycoord <span class='op'>=</span> <span class='cn'>NULL</span>,
+  zcoord <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tcoord <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xlen <span class='op'>=</span> <span class='fl'>0</span>,
+  ylen <span class='op'>=</span> <span class='fl'>0</span>,
+  zlen <span class='op'>=</span> <span class='fl'>0</span>,
+  xName <span class='op'>=</span> <span class='st'>"longitude"</span>,
+  yName <span class='op'>=</span> <span class='st'>"latitude"</span>,
+  zName <span class='op'>=</span> <span class='st'>"altitude"</span>,
+  tName <span class='op'>=</span> <span class='st'>"time"</span>,
+  interp <span class='op'>=</span> <span class='cn'>NULL</span>,
+  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  progress_bar <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -210,6 +211,13 @@ decimal degrees N; -90 to 90)</p></td>
       <td><p>- character string with name of the tcoord in the 'ERDDAP' dataset (default "time")</p></td>
     </tr>
     <tr>
+      <th>interp</th>
+      <td><p>- array (size 2) of character strings - c(interpolation type, neighborhood)
+Uses the new ERDDAP interpoation option to get values
+See Vignette for details
+Default is Null, do not use the interpolation option</p></td>
+    </tr>
+    <tr>
       <th>verbose</th>
       <td><p>- logical variable (default FALSE)
 if the the URL request should be verbose</p></td>
@@ -242,24 +250,26 @@ should a progress bar be displayed</p></td>
     <pre class="examples"><div class='input'><span class='co'># toy example to show use</span>
 <span class='co'># but keep execution time down</span>
 <span class='co'># \donttest{</span>
-<span class='no'>dataInfo</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rerddap</span><span class='kw ns'>::</span><span class='fu'><a href='https://docs.ropensci.org/rerddap/reference/info.html'>info</a></span>(<span class='st'>'erdHadISST'</span>)
+<span class='va'>dataInfo</span> <span class='op'>&lt;-</span> <span class='fu'>rerddap</span><span class='fu'>::</span><span class='fu'><a href='https://docs.ropensci.org/rerddap/reference/info.html'>info</a></span><span class='op'>(</span><span class='st'>'erdHadISST'</span><span class='op'>)</span>
 <span class='co'># }</span>
-<span class='no'>parameter</span> <span class='kw'>&lt;-</span> <span class='st'>'sst'</span>
-<span class='no'>xcoord</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>130.5</span>)
-<span class='no'>ycoord</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>40.5</span>)
-<span class='no'>tcoord</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'2006-01-16'</span>)
-<span class='no'>xlen</span> <span class='kw'>&lt;-</span> <span class='fl'>0.01</span>
-<span class='no'>ylen</span> <span class='kw'>&lt;-</span> <span class='fl'>0.01</span>
-<span class='no'>extract</span> <span class='kw'>&lt;-</span> <span class='fu'>rxtracto</span>(<span class='no'>dataInfo</span>, <span class='kw'>parameter</span> <span class='kw'>=</span> <span class='no'>parameter</span>, <span class='kw'>xcoord</span> <span class='kw'>=</span> <span class='no'>xcoord</span>,
-                    <span class='kw'>ycoord</span> <span class='kw'>=</span> <span class='no'>ycoord</span>, <span class='kw'>tcoord</span><span class='kw'>=</span> <span class='no'>tcoord</span>,
-                    <span class='kw'>xlen</span> <span class='kw'>=</span> <span class='no'>xlen</span>, <span class='kw'>ylen</span> <span class='kw'>=</span> <span class='no'>ylen</span>)
+<span class='va'>parameter</span> <span class='op'>&lt;-</span> <span class='st'>'sst'</span>
+<span class='va'>xcoord</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>130.5</span><span class='op'>)</span>
+<span class='va'>ycoord</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>40.5</span><span class='op'>)</span>
+<span class='va'>tcoord</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'2006-01-16'</span><span class='op'>)</span>
+<span class='va'>xlen</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span>
+<span class='va'>ylen</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span>
+<span class='va'>extract</span> <span class='op'>&lt;-</span> <span class='fu'>rxtracto</span><span class='op'>(</span><span class='va'>dataInfo</span>, parameter <span class='op'>=</span> <span class='va'>parameter</span>, xcoord <span class='op'>=</span> <span class='va'>xcoord</span>,
+                    ycoord <span class='op'>=</span> <span class='va'>ycoord</span>, tcoord<span class='op'>=</span> <span class='va'>tcoord</span>,
+                    xlen <span class='op'>=</span> <span class='va'>xlen</span>, ylen <span class='op'>=</span> <span class='va'>ylen</span><span class='op'>)</span>
 <span class='co'># \donttest{</span>
 <span class='co'># 2-D example getting bathymetry</span>
-<span class='no'>dataInfo</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rerddap</span><span class='kw ns'>::</span><span class='fu'><a href='https://docs.ropensci.org/rerddap/reference/info.html'>info</a></span>(<span class='st'>'etopo360'</span>)
-<span class='no'>parameter</span> <span class='kw'>&lt;-</span> <span class='st'>'altitude'</span>
-<span class='no'>extract</span> <span class='kw'>&lt;-</span> <span class='fu'>rxtracto</span>(<span class='no'>dataInfo</span>, <span class='no'>parameter</span>, <span class='kw'>xcoord</span> <span class='kw'>=</span> <span class='no'>xcoord</span>, <span class='kw'>ycoord</span> <span class='kw'>=</span> <span class='no'>ycoord</span>,
-                    <span class='kw'>xlen</span> <span class='kw'>=</span> <span class='no'>xlen</span>, <span class='kw'>ylen</span> <span class='kw'>=</span> <span class='no'>ylen</span>)
-<span class='co'># }</span></div></pre>
+<span class='va'>dataInfo</span> <span class='op'>&lt;-</span> <span class='fu'>rerddap</span><span class='fu'>::</span><span class='fu'><a href='https://docs.ropensci.org/rerddap/reference/info.html'>info</a></span><span class='op'>(</span><span class='st'>'etopo360'</span><span class='op'>)</span>
+<span class='va'>parameter</span> <span class='op'>&lt;-</span> <span class='st'>'altitude'</span>
+<span class='va'>extract</span> <span class='op'>&lt;-</span> <span class='fu'>rxtracto</span><span class='op'>(</span><span class='va'>dataInfo</span>, <span class='va'>parameter</span>, xcoord <span class='op'>=</span> <span class='va'>xcoord</span>, ycoord <span class='op'>=</span> <span class='va'>ycoord</span>,
+                    xlen <span class='op'>=</span> <span class='va'>xlen</span>, ylen <span class='op'>=</span> <span class='va'>ylen</span><span class='op'>)</span>
+<span class='co'># }</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -275,7 +285,7 @@ should a progress bar be displayed</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

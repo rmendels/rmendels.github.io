@@ -73,7 +73,7 @@ from an 'ERDDAP' server in a polygon through time." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rerddapXtracto</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -81,7 +81,7 @@ from an 'ERDDAP' server in a polygon through time." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -107,7 +107,7 @@ from an 'ERDDAP' server in a polygon through time." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rmendels/rerddapXtracto/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -134,20 +134,20 @@ from an 'ERDDAP' server in a polygon through time." />
 from an 'ERDDAP' server in a polygon through time.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rxtractogon</span>(
-  <span class='no'>dataInfo</span>,
-  <span class='no'>parameter</span>,
-  <span class='kw'>xcoord</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ycoord</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>zcoord</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>tcoord</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>xName</span> <span class='kw'>=</span> <span class='st'>"longitude"</span>,
-  <span class='kw'>yName</span> <span class='kw'>=</span> <span class='st'>"latitude"</span>,
-  <span class='kw'>zName</span> <span class='kw'>=</span> <span class='st'>"altitude"</span>,
-  <span class='kw'>tName</span> <span class='kw'>=</span> <span class='st'>"time"</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>cache_remove</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>rxtractogon</span><span class='op'>(</span>
+  <span class='va'>dataInfo</span>,
+  <span class='va'>parameter</span>,
+  xcoord <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ycoord <span class='op'>=</span> <span class='cn'>NULL</span>,
+  zcoord <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tcoord <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xName <span class='op'>=</span> <span class='st'>"longitude"</span>,
+  yName <span class='op'>=</span> <span class='st'>"latitude"</span>,
+  zName <span class='op'>=</span> <span class='st'>"altitude"</span>,
+  tName <span class='op'>=</span> <span class='st'>"time"</span>,
+  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  cache_remove <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -229,24 +229,25 @@ degrees N; -90 to 90)of polygon</p></td>
     <pre class="examples"><div class='input'><span class='co'># toy example to show use</span>
 <span class='co'># and keep execution time low</span>
 <span class='co'># \donttest{</span>
-<span class='no'>dataInfo</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rerddap</span><span class='kw ns'>::</span><span class='fu'><a href='https://docs.ropensci.org/rerddap/reference/info.html'>info</a></span>(<span class='st'>'erdHadISST'</span>)
+<span class='va'>dataInfo</span> <span class='op'>&lt;-</span> <span class='fu'>rerddap</span><span class='fu'>::</span><span class='fu'><a href='https://docs.ropensci.org/rerddap/reference/info.html'>info</a></span><span class='op'>(</span><span class='st'>'erdHadISST'</span><span class='op'>)</span>
 <span class='co'># }</span>
-<span class='no'>parameter</span> <span class='kw'>&lt;-</span> <span class='st'>'sst'</span>
-<span class='no'>tcoord</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2016-06-15"</span>)
-<span class='no'>xcoord</span> <span class='kw'>&lt;-</span> <span class='no'>mbnms</span>$<span class='no'>Longitude</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]
-<span class='no'>ycoord</span> <span class='kw'>&lt;-</span> <span class='no'>mbnms</span>$<span class='no'>Latitude</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]
-<span class='no'>sanctSST</span> <span class='kw'>&lt;-</span> <span class='fu'>rxtractogon</span> (<span class='no'>dataInfo</span>, <span class='kw'>parameter</span><span class='kw'>=</span><span class='no'>parameter</span>, <span class='kw'>xcoord</span> <span class='kw'>=</span> <span class='no'>xcoord</span>,
-                         <span class='kw'>ycoord</span> <span class='kw'>=</span> <span class='no'>ycoord</span>,  <span class='kw'>tcoord</span><span class='kw'>=</span> <span class='no'>tcoord</span>)
+<span class='va'>parameter</span> <span class='op'>&lt;-</span> <span class='st'>'sst'</span>
+<span class='va'>tcoord</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"2016-06-15"</span><span class='op'>)</span>
+<span class='va'>xcoord</span> <span class='op'>&lt;-</span> <span class='va'>mbnms</span><span class='op'>$</span><span class='va'>Longitude</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span>
+<span class='va'>ycoord</span> <span class='op'>&lt;-</span> <span class='va'>mbnms</span><span class='op'>$</span><span class='va'>Latitude</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span>
+<span class='va'>sanctSST</span> <span class='op'>&lt;-</span> <span class='fu'>rxtractogon</span> <span class='op'>(</span><span class='va'>dataInfo</span>, parameter<span class='op'>=</span><span class='va'>parameter</span>, xcoord <span class='op'>=</span> <span class='va'>xcoord</span>,
+                         ycoord <span class='op'>=</span> <span class='va'>ycoord</span>,  tcoord<span class='op'>=</span> <span class='va'>tcoord</span><span class='op'>)</span>
 <span class='co'># \donttest{</span>
-<span class='no'>xcoord</span> <span class='kw'>&lt;-</span> <span class='no'>mbnms</span>$<span class='no'>Longitude</span>
-<span class='no'>ycoord</span> <span class='kw'>&lt;-</span> <span class='no'>mbnms</span>$<span class='no'>Latitude</span>
-<span class='no'>dataInfo</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rerddap</span><span class='kw ns'>::</span><span class='fu'><a href='https://docs.ropensci.org/rerddap/reference/info.html'>info</a></span>(<span class='st'>'etopo180'</span>)
-<span class='no'>parameter</span> <span class='kw'>=</span> <span class='st'>'altitude'</span>
-<span class='no'>xName</span> <span class='kw'>&lt;-</span> <span class='st'>'longitude'</span>
-<span class='no'>yName</span> <span class='kw'>&lt;-</span> <span class='st'>'latitude'</span>
-<span class='no'>bathy</span> <span class='kw'>&lt;-</span> <span class='fu'>rxtractogon</span> (<span class='no'>dataInfo</span>, <span class='kw'>parameter</span> <span class='kw'>=</span> <span class='no'>parameter</span>, <span class='kw'>xcoord</span> <span class='kw'>=</span> <span class='no'>xcoord</span>,
-                      <span class='kw'>ycoord</span> <span class='kw'>=</span> <span class='no'>ycoord</span>)
-<span class='co'># }</span></div></pre>
+<span class='va'>xcoord</span> <span class='op'>&lt;-</span> <span class='va'>mbnms</span><span class='op'>$</span><span class='va'>Longitude</span>
+<span class='va'>ycoord</span> <span class='op'>&lt;-</span> <span class='va'>mbnms</span><span class='op'>$</span><span class='va'>Latitude</span>
+<span class='va'>dataInfo</span> <span class='op'>&lt;-</span> <span class='fu'>rerddap</span><span class='fu'>::</span><span class='fu'><a href='https://docs.ropensci.org/rerddap/reference/info.html'>info</a></span><span class='op'>(</span><span class='st'>'etopo180'</span><span class='op'>)</span>
+<span class='va'>parameter</span> <span class='op'>=</span> <span class='st'>'altitude'</span>
+<span class='va'>xName</span> <span class='op'>&lt;-</span> <span class='st'>'longitude'</span>
+<span class='va'>yName</span> <span class='op'>&lt;-</span> <span class='st'>'latitude'</span>
+<span class='va'>bathy</span> <span class='op'>&lt;-</span> <span class='fu'>rxtractogon</span> <span class='op'>(</span><span class='va'>dataInfo</span>, parameter <span class='op'>=</span> <span class='va'>parameter</span>, xcoord <span class='op'>=</span> <span class='va'>xcoord</span>,
+                      ycoord <span class='op'>=</span> <span class='va'>ycoord</span><span class='op'>)</span>
+<span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -262,7 +263,7 @@ degrees N; -90 to 90)of polygon</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

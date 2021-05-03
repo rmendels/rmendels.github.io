@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rerddapXtracto</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -72,7 +72,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rmendels/rerddapXtracto/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -89,19 +89,21 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="rerddapxtracto-version-100" class="section level1">
+<div id="rerddapxtracto-version-110" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#rerddapxtracto-version-100" class="anchor"></a>rerddapXtracto (Version 1.0.0)</h1></div>
+<a href="#rerddapxtracto-version-110" class="anchor"></a>rerddapXtracto (Version 1.1.0)</h1></div>
 <p>rerddapXtracto - R package for accessing environmental data using ‘rerddap’</p>
+<hr>
+<p><code><a href="reference/rxtracto.html">rxtracto()</a></code>option to use the ERDDAP “Interpolate service”, which can greatly speed up extracts for large tracks. ******</p>
 <hr>
 <p><code><a href="reference/rxtracto.html">rxtracto()</a></code> major rewrite of this function to reduce the number of requests made to the ERDDAP server, and to improve overall speed. ******</p>
 <p><code>rerddapXtracto</code> is an <span style="color:blue">R</span> package developed to subset and extract satellite and other oceanographic related data from a remote <span style="color:blue">ERDDAP</span> server. The program can extract data for a moving point in time along a user-supplied set of longitude, latitude, time and depth points; in a 3D bounding box; or within a polygon (through time).</p>
 <p>There are also two plotting functions, <code><a href="reference/plotTrack.html">plotTrack()</a></code> and <code>plotBox()</code> that make use of the <code>plotdap</code> package. See the new <a href="https://rmendels.github.io/UsingrerddapXtracto.html">rerdapXtracto vignette</a>.</p>
 <p>There are three main data extraction functions in the <code>rerddapXtracto</code> package:</p>
 <ul>
-<li><p><code>rxtracto &lt;- function(dataInfo, parameter = NULL, xcoord = NULL, ycoord = NULL, zcoord = NULL, tcoord = NULL, xlen = 0., ylen = 0., zlen = 0., xName = 'longitude', yName = 'latitude', zName = 'altitude', tName = 'time', urlbase = 'http://upwell.pfeg.noaa.gov/erddap', verbose = FALSE, progress_bar = FALSE)</code></p></li>
-<li><p><code>rxtracto_3D &lt;- function(dataInfo, parameter = NULL, xcoord = NULL, ycoord = NULL, zcoord = NULL, tcoord = NULL, xName = 'longitude', yName = 'latitude', zName = 'altitude', tName = 'time', urlbase = 'http://upwell.pfeg.noaa.gov/erddap', verbose = FALSE)</code></p></li>
-<li><p><code>rxtractogon &lt;- function(dataInfo, parameter, xcoord = NULL, ycoord = NULL, zcoord = NULL, tcoord = NULL, xName = 'longitude', yName = 'latitude', zName = 'altitude', tName = 'time', urlbase = 'http://upwell.pfeg.noaa.gov/erddap', verbose = FALSE)</code></p></li>
+<li><p><code>rxtracto &lt;- function(dataInfo, parameter = NULL, xcoord = NULL, ycoord = NULL, zcoord = NULL, tcoord = NULL, xlen = 0., ylen = 0., zlen = 0., xName = 'longitude', yName = 'latitude', zName = 'altitude', tName = 'time', interp = NULL, verbose = FALSE, progress_bar = FALSE)</code></p></li>
+<li><p><code>rxtracto_3D &lt;- function(dataInfo, parameter = NULL, xcoord = NULL, ycoord = NULL, zcoord = NULL, tcoord = NULL, xName = 'longitude', yName = 'latitude', zName = 'altitude', tName = 'time',  verbose = FALSE)</code></p></li>
+<li><p><code>rxtractogon &lt;- function(dataInfo, parameter, xcoord = NULL, ycoord = NULL, zcoord = NULL, tcoord = NULL, xName = 'longitude', yName = 'latitude', zName = 'altitude', tName = 'time',  verbose = FALSE)</code></p></li>
 </ul>
 <p>and two functions for producing maps:</p>
 <ul>
@@ -160,7 +162,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
