@@ -22,7 +22,7 @@ The `xtractomatic` package development version is available at the [xtractomatic
 
 `rerddap` is available through CRAN,  or the development version at the [rerddap repository](https://github.com/ropensci/rerddap)
 
-* [rerddap (new) vignette RNotebook](https://rmendels.github.io/Using_rerddap.nb.html)
+* [rerddap (new) vignette RNotebook](https://rmendels.github.io/Using_rerddap.html)
 
 ## `plotdap`  links
 
