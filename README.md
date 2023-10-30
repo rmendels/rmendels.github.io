@@ -1,22 +1,11 @@
 # rmendels.github.io
 Github Web Page:
 
-## `xtractomatic` links
-
-The `xtractomatic` package is available through CRAN, or the up-to-date version at the [xtractomatic repository](https://github.com/rmendels/xtractomatic)
-The `xtractomatic` package development version is available at the [xtractomatic development repository](https://github.com/rmendels/xtractomatic/tree/development)
-
-* [xtractomatic version 3.3.2 vignette RNotebook](https://rmendels.github.io/Usingxtractomatic.nb.html)
-* [xtractomatic version 3.4.0 vignette RNotebook](https://rmendels.github.io/Usingxtractomatic_3.4.0.nb.html)
-* [xtractomatic development version vignette RNotebook](https://rmendels.github.io/Usingxtractomatic_Dev.nb.html)
-* [xtractomatic complete documention via `pkgdown](https://rmendels.github.io/xtractomatic_docs/index.html)
 
 ## `rerddapXtracto` links
 
-`rerddapXtracto` is available through the [rerddapXtracto repository](https://github.com/rmendels/rerddapXtracto)
 
 * [rerddapXtracto complete documention via `pkgdown](https://rmendels.github.io/rerddapXtracto_docs)
-* [rerddapXtracto vignette RNotebook](https://rmendels.github.io/rerddapXtracto_docs/articles/UsingrerddapXtracto.html)
 
 ## `rerddap` links
 
@@ -27,7 +16,6 @@ The `xtractomatic` package development version is available at the [xtractomatic
 ## `plotdap`  links
 
 * [plotdap complete documention via `pkgdown](https://rmendels.github.io/plotdap_docs)
-* [plotdap vignette](https://rmendels.github.io/plotdap_docs/articles/using_plotdap.html)
 
 ## `plotdap_interactive` links
 
