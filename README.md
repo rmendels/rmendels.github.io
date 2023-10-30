@@ -11,7 +11,7 @@ Github Web Page:
 
 `rerddap` is available through CRAN,  or the development version at the [rerddap repository](https://github.com/ropensci/rerddap)
 
-* [rerddap (new) vignette RNotebook](https://rmendels.github.io/Using_rerddap.html)
+* [rerddap complete documention via `pkgdown](https://rmendels.github.io/rerddap_docs)
 
 ## `plotdap`  links
 
