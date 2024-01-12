@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rerddapXtracto</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
                         <h4 data-toc-skip class="author">Roy
 Mendelssohn</h4>
             
-            <h4 data-toc-skip class="date">2023-10-30</h4>
+            <h4 data-toc-skip class="date">2024-01-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rmendels/rerddapXtracto/blob/HEAD/vignettes/UsingrerddapXtracto.Rmd" class="external-link"><code>vignettes/UsingrerddapXtracto.Rmd</code></a></small>
       <div class="hidden name"><code>UsingrerddapXtracto.Rmd</code></div>
@@ -134,7 +134,8 @@ of the data, including animated maps; the ability to cross the dateline
 in a request when the ERDDAP dataset has longitudes in the range (-180,
 180); an optional progress bar in <code><a href="../reference/rxtracto.html">rxtracto()</a></code>; and the
 return in <code><a href="../reference/rxtracto.html">rxtracto()</a></code> of values extracted so far should the
-extract fail partway through the extract.</p>
+extract fail partway through the extract; <code><a href="../reference/rxtracto.html">rxtracto()</a></code> ow
+works with projected datasets and an example is given below .</p>
 <p>Since the z-coordinate is not limited to be at a set location, for
 <code><a href="../reference/rxtracto_3D.html">rxtracto_3D()</a></code> this means that if the z-coordinate needs to
 be given, then it must be of length two. For <code><a href="../reference/rxtracto.html">rxtracto()</a></code> if
@@ -332,7 +333,7 @@ for the appropriate datasetID and baseURL:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="sc">&lt;</span>ERDDAP info<span class="sc">&gt;</span> erdMBchla1day </span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a> Base URL<span class="sc">:</span> https<span class="sc">:</span><span class="er">//</span>upwell.pfeg.noaa.gov<span class="sc">/</span>erddap<span class="sc">/</span> </span>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a> <span class="fu">Dimensions</span> (range)<span class="sc">:</span>  </span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>     time<span class="sc">:</span> (<span class="dv">2006-01</span><span class="sc">-</span>01T12<span class="sc">:</span><span class="dv">00</span><span class="sc">:</span>00Z, <span class="dv">2020-10</span><span class="sc">-</span>27T12<span class="sc">:</span><span class="dv">00</span><span class="sc">:</span>00Z) </span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>     time<span class="sc">:</span> (<span class="dv">2006-01-01</span>T12<span class="sc">:</span><span class="dv">00</span><span class="sc">:</span><span class="dv">00</span>Z, <span class="dv">2020-10-27</span>T12<span class="sc">:</span><span class="dv">00</span><span class="sc">:</span><span class="dv">00</span>Z) </span>
 <span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>     altitude<span class="sc">:</span> (<span class="fl">0.0</span>, <span class="fl">0.0</span>) </span>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>     latitude<span class="sc">:</span> (<span class="sc">-</span><span class="fl">45.0</span>, <span class="fl">65.0</span>) </span>
 <span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>     longitude<span class="sc">:</span> (<span class="fl">120.0</span>, <span class="fl">320.0</span>) </span>
@@ -374,7 +375,6 @@ using <code><a href="../reference/plotTrack.html">plotTrack()</a></code>. Positi
 but no <code>chlorophyll</code> values are also shown. This example
 shows the use of the “plotColor” parameter to use the
 <code>cmocean</code> “algae” color palette.</p>
-<p><span id="colorPalette"></span></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rmendels/plotdap" class="external-link">"plotdap"</a></span><span class="op">)</span></span>
@@ -387,7 +387,6 @@ shows the use of the “plotColor” parameter to use the
 <h3 id="animating-the-track">Animating the track<a class="anchor" aria-label="anchor" href="#animating-the-track"></a>
 </h3>
 <p>To make a cumulative animation of the track:</p>
-<p><span id="animateTrack"></span></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">myPlot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotTrack.html">plotTrack</a></span><span class="op">(</span><span class="va">swchl1</span>, <span class="va">xpos</span>, <span class="va">ypos</span>, <span class="va">tpos</span>, plotColor <span class="op">=</span> <span class="st">'algae'</span>,</span>
 <span>                    animate <span class="op">=</span> <span class="cn">TRUE</span>, cumulative <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -409,7 +408,6 @@ to wit:</p>
 change the name shown on the colorbar, and how to call
 <code><a href="../reference/plotTrack.html">plotTrack()</a></code> if the dataset does not have a time
 coordinate.</p>
-<p><span id="name"></span></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rmendels/plotdap" class="external-link">"plotdap"</a></span><span class="op">)</span></span>
@@ -507,7 +505,7 @@ analysis:</p>
 which takes a table of coordinate values from a gridded dataset, up to
 100 entries at a time, and will interpolate the value at each point
 based on quite a large list of different interpolation methods, as well
-as the number of neighbors to use in the interpolation (see <a href="https://coastwatch.pfeg.noaa.gov/erddap/convert/interpolate.html" class="external-link">https://coastwatch.pfeg.noaa.gov/erddap/convert/interpolate.html</a>.
+as the number of neighbors to use in the interpolation (see <a href="https://coastwatch.pfeg.noaa.gov/erddap/convert/interpolate.html" class="external-link uri">https://coastwatch.pfeg.noaa.gov/erddap/convert/interpolate.html</a>.
 As the “Interpolate” service includes the mean, median and standard
 deviation of the neighboring points, the service can return similar
 results as does the usual <code><a href="../reference/rxtracto.html">rxtracto()</a></code> but much more quickly,
@@ -519,10 +517,10 @@ datasets even the largest number of neighbors provided by the service
 may not be large enough to capture the uncertainty in the actual
 location of an observation in the track.</p>
 <p>The “Interpolate” service requires that the <span style="color:red">ERDDAP</span> server being accessed is at least
-version 2.10. As of this writing, the default <span style="color:red">ERDDAP</span> in <code>rerddap</code> is at <a href="https://upwell.pfeg.noaa.gov/erddap" class="external-link">https://upwell.pfeg.noaa.gov/erddap</a>,
-which is not. Therefore, as in the example below, you need to make
-certain of the version of <span style="color:red">ERDDAP</span> used in
-the call to <code>rerddap:info()</code>.</p>
+version 2.10. As of this writing, the default <span style="color:red">ERDDAP</span> in <code>rerddap</code> is at <a href="https://upwell.pfeg.noaa.gov/erddap" class="external-link uri">https://upwell.pfeg.noaa.gov/erddap</a>, which is not.
+Therefore, as in the example below, you need to make certain of the
+version of <span style="color:red">ERDDAP</span> used in the call to
+<code>rerddap:info()</code>.</p>
 <p>The “interpolate” option is implemented in a new, optional argument
 to <code><a href="../reference/rxtracto.html">rxtracto()</a></code>, “interp = NULL”. Since the argument is
 optional, and has a default value of “NULL”, existing calls to
@@ -550,6 +548,121 @@ the “interp” option in the first Marlin example, the call would be:</p>
 <span>                   xcoord <span class="op">=</span> <span class="va">xpos</span>, ycoord <span class="op">=</span> <span class="va">ypos</span>, tcoord <span class="op">=</span> <span class="va">tpos</span>, zcoord <span class="op">=</span> <span class="va">zpos</span>,</span>
 <span>                   interp <span class="op">=</span> <span class="va">my_interp</span>, progress_bar <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
+<div class="section level3">
+<h3 id="tracks-along-projected-data-and-polar-bears">Tracks along projected data and Polar Bears<a class="anchor" aria-label="anchor" href="#tracks-along-projected-data-and-polar-bears"></a>
+</h3>
+<p><code><a href="../reference/rxtracto.html">rxtracto()</a></code> can now extract tracks from projected <span style="color:red">ERDDAP</span> datasets if the proper data
+transformations are done first. Here we cover one possible way of
+transforming the data in order to work with <code><a href="../reference/rxtracto.html">rxtracto()</a></code> by
+extracting sea ice concentration along a polar bear track. The polar
+bear track is in the included ‘PB_Argos’ dataset, which is described in
+the paper “Auger-Méthé, M., Newman, K., Cole, D., Empacher, F., Gryba,
+R., King, A. A., Leos-Barajas, V., Mills Flemming, J., Nielsen, A.,
+Petris, G., and Thomas, L.. 2021. A guide to state–space modeling of
+ecological time series. Ecological Monographs 91(4):e01470.
+10.1002/ecm.1470” and is used by permission of the authors. The dataset
+was obtained from <a href="https://datadryad.org/stash/dataset/doi:10.5061/dryad.4qrfj6q96" class="external-link uri">https://datadryad.org/stash/dataset/doi:10.5061/dryad.4qrfj6q96</a>.</p>
+<p>One caveat is that while the vector parameters “xlen”, “ylen” and
+“zlen” can still be used with projected data, to be sensible these
+values must also be in projected units, and for many projections in
+order to have a consistent box the values will have to vary with each
+latitude-longitude pair. With the present version of
+<code><a href="../reference/rxtracto.html">rxtracto()</a></code> it is up to the user to make this calculation,
+though the steps below should provide some idea of how to do so. In the
+example, “xlen”, “ylen” are zero.</p>
+<p>Given a “track” with latitude and longitude values and a projected
+dataset, the following steps are necessary:</p>
+<ul>
+<li><p>Determine the projection used in the <span style="color:red">ERDDAP</span> dataset.</p></li>
+<li><p>Transform the latitudes and longitudes into this
+projection.</p></li>
+<li><p>Make the extract</p></li>
+<li><p>If desired, transform the projected coordinates back into
+latitude and longitude.</p></li>
+</ul>
+<p>The dataset to be used is sea ice concentration from the
+NOAA/National Snow and Ice Data Center availabe from the Polarwatch
+<span style="color:red">ERDDAP</span> at <a href="https://polarwatch.noaa.gov/erddap/griddap/nsidcG02202v4nh1day.html" class="external-link uri">https://polarwatch.noaa.gov/erddap/griddap/nsidcG02202v4nh1day.html</a>
+.</p>
+<p>The first step is to extract the first 100 datapoints from the
+PB_Argos dataset.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>PB_Argos_subset <span class="ot">&lt;-</span> PB_Argos[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, ]</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="co"># datetime is not in format for ERDDAP</span></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>PB_Argos_subset<span class="sc">$</span>DateTime <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">as_datetime</span>(PB_Argos_subset<span class="sc">$</span>DateTime)</span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="fu">head</span>(PB_Argos_subset, <span class="dv">4</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="co"># A tibble: 4 × 4</span></span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>  DateTime            QualClass   Lat   Lon</span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>  <span class="sc">&lt;</span>dttm<span class="sc">&gt;</span>              <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>dbl<span class="sc">&gt;</span> <span class="er">&lt;</span>dbl<span class="sc">&gt;</span></span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a><span class="dv">1</span> <span class="dv">2009-04-20</span> <span class="dv">17</span><span class="sc">:</span><span class="dv">01</span><span class="sc">:</span><span class="dv">39</span> B          <span class="fl">70.4</span> <span class="sc">-</span><span class="fl">132.</span></span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a><span class="dv">2</span> <span class="dv">2009-04-20</span> <span class="dv">17</span><span class="sc">:</span><span class="dv">23</span><span class="sc">:</span><span class="dv">00</span> A          <span class="fl">71.0</span> <span class="sc">-</span><span class="fl">131.</span></span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="dv">3</span> <span class="dv">2009-04-20</span> <span class="dv">18</span><span class="sc">:</span><span class="dv">12</span><span class="sc">:</span><span class="dv">15</span> A          <span class="fl">71.0</span> <span class="sc">-</span><span class="fl">131.</span></span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a><span class="dv">4</span> <span class="dv">2009-04-20</span> <span class="dv">20</span><span class="sc">:</span><span class="dv">43</span><span class="sc">:</span><span class="dv">17</span> A          <span class="fl">70.9</span> <span class="sc">-</span><span class="fl">131.</span></span></code></pre></div>
+<p>The dataset info can be used to find the dataset projection (note
+this uses EPSG codes for the CRS, which can be found at <a href="https://spatialreference.org/ref/epsg/" class="external-link uri">https://spatialreference.org/ref/epsg/</a>):</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>url<span class="ot">=</span>  <span class="st">'https://polarwatch.noaa.gov/erddap/'</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>datasetid <span class="ot">=</span> <span class="st">'nsidcG02202v4nh1day'</span></span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>dataInfo <span class="ot">&lt;-</span> rerddap<span class="sc">::</span><span class="fu">info</span>(datasetid, url)</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>proj_crs_code_index <span class="ot">&lt;-</span> <span class="fu">which</span>(dataInfo<span class="sc">$</span>alldata<span class="sc">$</span>NC_GLOBAL<span class="sc">$</span>attribute_name <span class="sc">==</span> <span class="st">"proj_crs_code"</span> )</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>proj_crs_code <span class="ot">&lt;-</span> dataInfo<span class="sc">$</span>alldata<span class="sc">$</span>NC_GLOBAL<span class="sc">$</span>value[proj_crs_code_index]</span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>proj_crs_code</span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"EPSG:3411"</span></span></code></pre></div>
+<p>Next we will create a temporary dataframe with the latitude and
+longitude values, convert that dataframe to an ‘sf’ object, and then
+transform the coordinates:</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">temp_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Lat <span class="op">=</span> <span class="va">PB_Argos_subset</span><span class="op">$</span><span class="va">Lat</span>, Lon <span class="op">=</span> <span class="va">PB_Argos_subset</span><span class="op">$</span><span class="va">Lon</span><span class="op">)</span></span>
+<span><span class="co"># transform PB_Argos_subset to sf object</span></span>
+<span><span class="co"># EPSG:4326 is basic lat-lon coordinates</span></span>
+<span><span class="va">temp_df</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">temp_df</span>, coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Lon"</span>, <span class="st">"Lat"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></span>
+<span><span class="co"># project data </span></span>
+<span><span class="va">temp_df</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="va">temp_df</span>, crs <span class="op">=</span> <span class="fl">3411</span><span class="op">)</span></span>
+<span><span class="co"># get projection coordinates</span></span>
+<span><span class="va">coordinates</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_coordinates.html" class="external-link">st_coordinates</a></span><span class="op">(</span><span class="va">temp_df</span><span class="op">)</span></span></code></pre></div>
+<p>Now things are set to perform the extract:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>xcoord <span class="ot">&lt;-</span> coordinates[, <span class="dv">1</span>]</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>ycoord <span class="ot">&lt;-</span> coordinates[, <span class="dv">2</span>]</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="co"># R datetimes are passed as number,  require ISO character string</span></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>tcoord <span class="ot">&lt;-</span> <span class="fu">as.character</span>(PB_Argos_subset<span class="sc">$</span>DateTime)</span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>parameter <span class="ot">&lt;-</span> <span class="st">'cdr_seaice_conc'</span></span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>extract <span class="ot">&lt;-</span> <span class="fu">rxtracto</span>(dataInfo,</span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a>                    <span class="at">xName=</span><span class="st">"xgrid"</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>                    <span class="at">yName=</span><span class="st">"ygrid"</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>                    <span class="at">tName=</span><span class="st">"time"</span>,</span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a>                    <span class="at">parameter=</span>parameter,</span>
+<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a>                    <span class="at">xcoord =</span> xcoord,</span>
+<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a>                    <span class="at">ycoord =</span> ycoord,</span>
+<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a>                    <span class="at">tcoord =</span> tcoord</span>
+<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a>                    )</span>
+<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a><span class="fu">str</span>(extract)</span>
+<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a>List of <span class="dv">13</span></span>
+<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a> <span class="sc">$</span> mean cdr_seaice_conc  <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>] <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> ...</span>
+<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a> <span class="sc">$</span> stdev cdr_seaice_conc <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>] <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> ...</span>
+<span id="cb23-19"><a href="#cb23-19" tabindex="-1"></a> <span class="sc">$</span> n                     <span class="sc">:</span> int [<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>] <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> ...</span>
+<span id="cb23-20"><a href="#cb23-20" tabindex="-1"></a> <span class="sc">$</span> satellite date        <span class="sc">:</span> chr [<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>] <span class="st">"2009-04-21T00:00:00Z"</span> <span class="st">"2009-04-21T00:00:00Z"</span> <span class="st">"2009-04-21T00:00:00Z"</span> <span class="st">"2009-04-21T00:00:00Z"</span> ...</span>
+<span id="cb23-21"><a href="#cb23-21" tabindex="-1"></a> <span class="sc">$</span> requested x min       <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>] <span class="sc">-</span><span class="dv">2143958</span> <span class="sc">-</span><span class="dv">2077605</span> <span class="sc">-</span><span class="dv">2077124</span> <span class="sc">-</span><span class="dv">2082576</span> <span class="sc">-</span><span class="dv">2036149</span> ...</span>
+<span id="cb23-22"><a href="#cb23-22" tabindex="-1"></a> <span class="sc">$</span> requested x max       <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>] <span class="sc">-</span><span class="dv">2143958</span> <span class="sc">-</span><span class="dv">2077605</span> <span class="sc">-</span><span class="dv">2077124</span> <span class="sc">-</span><span class="dv">2082576</span> <span class="sc">-</span><span class="dv">2036149</span> ...</span>
+<span id="cb23-23"><a href="#cb23-23" tabindex="-1"></a> <span class="sc">$</span> requested y min       <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>] <span class="sc">-</span><span class="dv">118477</span> <span class="sc">-</span><span class="dv">131404</span> <span class="sc">-</span><span class="dv">131955</span> <span class="sc">-</span><span class="dv">130368</span> <span class="sc">-</span><span class="dv">120720</span> ...</span>
+<span id="cb23-24"><a href="#cb23-24" tabindex="-1"></a> <span class="sc">$</span> requested y max       <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>] <span class="sc">-</span><span class="dv">118477</span> <span class="sc">-</span><span class="dv">131404</span> <span class="sc">-</span><span class="dv">131955</span> <span class="sc">-</span><span class="dv">130368</span> <span class="sc">-</span><span class="dv">120720</span> ...</span>
+<span id="cb23-25"><a href="#cb23-25" tabindex="-1"></a> <span class="sc">$</span> requested z min       <span class="sc">:</span> logi [<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>] <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> ...</span>
+<span id="cb23-26"><a href="#cb23-26" tabindex="-1"></a> <span class="sc">$</span> requested z max       <span class="sc">:</span> logi [<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>] <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> ...</span>
+<span id="cb23-27"><a href="#cb23-27" tabindex="-1"></a> <span class="sc">$</span> requested date        <span class="sc">:</span> chr [<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>] <span class="st">"2009-04-20 17:01:39"</span> <span class="st">"2009-04-20 17:23:00"</span> <span class="st">"2009-04-20 18:12:15"</span> <span class="st">"2009-04-20 20:43:17"</span> ...</span>
+<span id="cb23-28"><a href="#cb23-28" tabindex="-1"></a> <span class="sc">$</span> median cdr_seaice_conc<span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>] <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> ...</span>
+<span id="cb23-29"><a href="#cb23-29" tabindex="-1"></a> <span class="sc">$</span> mad cdr_seaice_conc   <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>] <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> ...</span>
+<span id="cb23-30"><a href="#cb23-30" tabindex="-1"></a> <span class="sc">-</span> <span class="fu">attr</span>(<span class="sc">*</span>, <span class="st">"row.names"</span>)<span class="ot">=</span> chr [<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>] <span class="st">"1"</span> <span class="st">"2"</span> <span class="st">"3"</span> <span class="st">"4"</span> ...</span>
+<span id="cb23-31"><a href="#cb23-31" tabindex="-1"></a> <span class="sc">-</span> <span class="fu">attr</span>(<span class="sc">*</span>, <span class="st">"class"</span>)<span class="ot">=</span> chr [<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="st">"list"</span> <span class="st">"rxtractoTrack"</span></span></code></pre></div>
+<p>Since a given location may not fall on a gridpoint of the dataset and
+extracts are performed at the nearest grid point, the locations of the
+extract in terms of latitude and longitude can be obtained by reversing
+the steps above:</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">xgrid</span> <span class="op">&lt;-</span> <span class="st">'requested x min'</span></span>
+<span><span class="va">ygrid</span> <span class="op">&lt;-</span> <span class="st">'requested y min'</span></span>
+<span><span class="va">temp_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>xgrid <span class="op">=</span> <span class="va">extract</span><span class="op">[[</span><span class="va">xgrid</span><span class="op">]</span><span class="op">]</span>, ygrid <span class="op">=</span> <span class="va">extract</span><span class="op">[[</span><span class="va">ygrid</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">temp_df</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">temp_df</span>, coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xgrid"</span>, <span class="st">"ygrid"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="fl">3411</span><span class="op">)</span></span>
+<span><span class="va">temp_df</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="va">temp_df</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></span>
+<span><span class="va">coordinates</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_coordinates.html" class="external-link">st_coordinates</a></span><span class="op">(</span><span class="va">temp_df</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="using-rxtracto_3d">Using <code>rxtracto_3D</code><a class="anchor" aria-label="anchor" href="#using-rxtracto_3d"></a>
@@ -568,7 +681,7 @@ request.</p>
 </h3>
 <p>We examine VIIRS chlorophyll for the “latest” data as of when the
 vignette was generated:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://docs.ropensci.org/rerddap/" class="external-link">"rerddap"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rmendels/rerddapXtracto" class="external-link">"rerddapXtracto"</a></span><span class="op">)</span></span>
 <span></span>
@@ -590,8 +703,7 @@ vignette was generated:</p>
 <p>The coordinate names of the structure are based on the names given in
 the <code>rxtracto_3d()</code> call, so may differ between datasets.</p>
 <p>The extracted data can be mapped using <code><a href="../reference/plotBBox.html">plotBBox()</a></code>:</p>
-<p><span id="transform"></span></p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rmendels/plotdap" class="external-link">"plotdap"</a></span><span class="op">)</span></span>
 <span><span class="va">myFunc</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -599,21 +711,21 @@ the <code>rxtracto_3d()</code> call, so may differ between datasets.</p>
 <span><span class="va">chlalogPlot</span></span></code></pre></div>
 <p><img src="VIIRS_chl.png"></p>
 <p>To convert the output to “tidy” long-form:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">VIIRS_tidy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tidy_grid.html">tidy_grid</a></span><span class="op">(</span><span class="va">VIIRS</span><span class="op">)</span></span></code></pre></div>
 <p>produces the structure:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="st">'data.frame'</span><span class="sc">:</span>   <span class="dv">8833</span> obs. of  <span class="dv">4</span> variables<span class="sc">:</span></span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a> <span class="er">$</span> time     <span class="sc">:</span> POSIXlt, format<span class="sc">:</span> <span class="st">"2017-04-15"</span> <span class="st">"2017-04-15"</span> ...</span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a> <span class="sc">$</span> latitude <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">8833</span>(1d)] <span class="dv">36</span> <span class="fl">36.1</span> <span class="fl">36.1</span> <span class="fl">36.1</span> <span class="fl">36.2</span> ...</span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a> <span class="sc">$</span> longitude<span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">8833</span>(1d)] <span class="sc">-</span><span class="dv">125</span> <span class="sc">-</span><span class="dv">125</span> <span class="sc">-</span><span class="dv">125</span> <span class="sc">-</span><span class="dv">125</span> <span class="sc">-</span><span class="dv">125</span> ...</span>
-<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a> <span class="sc">$</span> chla     <span class="sc">:</span> num  <span class="fl">0.194</span> <span class="fl">0.193</span> <span class="fl">0.186</span> <span class="fl">0.18</span> <span class="fl">0.163</span> ...</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="st">'data.frame'</span><span class="sc">:</span>   <span class="dv">8833</span> obs. of  <span class="dv">4</span> variables<span class="sc">:</span></span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a> <span class="er">$</span> time     <span class="sc">:</span> POSIXlt, format<span class="sc">:</span> <span class="st">"2017-04-15"</span> <span class="st">"2017-04-15"</span> ...</span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a> <span class="sc">$</span> latitude <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">8833</span>(<span class="dv">1</span>d)] <span class="dv">36</span> <span class="fl">36.1</span> <span class="fl">36.1</span> <span class="fl">36.1</span> <span class="fl">36.2</span> ...</span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a> <span class="sc">$</span> longitude<span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">8833</span>(<span class="dv">1</span>d)] <span class="sc">-</span><span class="dv">125</span> <span class="sc">-</span><span class="dv">125</span> <span class="sc">-</span><span class="dv">125</span> <span class="sc">-</span><span class="dv">125</span> <span class="sc">-</span><span class="dv">125</span> ...</span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a> <span class="sc">$</span> chla     <span class="sc">:</span> num  <span class="fl">0.194</span> <span class="fl">0.193</span> <span class="fl">0.186</span> <span class="fl">0.18</span> <span class="fl">0.163</span> ...</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="crossing-the-date-line">Crossing the date-line<a class="anchor" aria-label="anchor" href="#crossing-the-date-line"></a>
 </h3>
 <p>The following is an <code><a href="../reference/rxtracto_3D.html">rxtracto_3D()</a></code> request that again
 uses the MUR dataset and crosses the date-line:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dataInfo</span> <span class="op">&lt;-</span> <span class="fu">rerddap</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rerddap/reference/info.html" class="external-link">info</a></span><span class="op">(</span><span class="st">'jplMURSST41mday'</span><span class="op">)</span></span>
 <span><span class="va">parameter</span> <span class="op">&lt;-</span> <span class="st">'sst'</span></span>
 <span><span class="va">xcoord</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">175</span>, <span class="fl">185</span><span class="op">)</span></span>
@@ -630,7 +742,7 @@ uses the MUR dataset and crosses the date-line:</p>
 outlines rather than the default. Due to some problems with that
 dataset, some regions must be removed in order to not get artificial
 lines.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">xlim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">170</span>, <span class="fl">190</span><span class="op">)</span></span>
 <span><span class="va">ylim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">55</span><span class="op">)</span></span>
 <span><span class="va">remove</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UK:Great Britain"</span>, <span class="st">"France"</span>, <span class="st">"Spain"</span>, <span class="st">"Algeria"</span>, <span class="st">"Mali"</span>, <span class="st">"Burkina Faso"</span>, <span class="st">"Ghana"</span>, <span class="st">"Togo"</span><span class="op">)</span></span>
@@ -641,7 +753,7 @@ labels can be incorrect. The data can be plotted using
 <code>ggplot2</code>. A function <code>mapFrame()</code> is defined to
 help melt the data into a dataframe suitable for <code>ggplot2</code>,
 and then plotted using the outline defined above.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mapFrame</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">longitude</span>, <span class="va">latitude</span>, <span class="va">my_data</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">my_data_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">my_data</span><span class="op">)</span></span>
 <span>  <span class="va">temp_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/drop.html" class="external-link">drop</a></span><span class="op">(</span><span class="va">my_data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
@@ -670,7 +782,7 @@ given. The first extracts chlorophyll within the boundary points of the
 Monterey Bay National Marine Sanctuary, available in the
 <code>mbnms</code> dataset which is loaded with the
 <code>rerddapXtracto</code> package.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rmendels/rerddapXtracto" class="external-link">"rerddapXtracto"</a></span><span class="op">)</span></span>
 <span><span class="va">dataInfo</span> <span class="op">&lt;-</span> <span class="fu">rerddap</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rerddap/reference/info.html" class="external-link">info</a></span><span class="op">(</span><span class="st">'erdVH3chlamday'</span><span class="op">)</span></span>
 <span><span class="va">parameter</span> <span class="op">=</span> <span class="st">'chla'</span></span>
@@ -681,20 +793,19 @@ Monterey Bay National Marine Sanctuary, available in the
 <span><span class="va">sanctchl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rxtractogon.html">rxtractogon</a></span><span class="op">(</span><span class="va">dataInfo</span>, parameter <span class="op">=</span> <span class="va">parameter</span>, xcoord <span class="op">=</span> <span class="va">xpos</span>, ycoord <span class="op">=</span> <span class="va">ypos</span>,  tcoord <span class="op">=</span> <span class="va">tpos</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">sanctchl</span><span class="op">)</span></span></code></pre></div>
 <p>The returned structure is:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>List of <span class="dv">6</span></span>
-<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a> <span class="sc">$</span> chla       <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">57</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> ...</span>
-<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a> <span class="sc">$</span> datasetname<span class="sc">:</span> chr <span class="st">"erdVH3chlamday"</span></span>
-<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a> <span class="sc">$</span> longitude  <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>(1d)] <span class="sc">-</span><span class="dv">123</span> <span class="sc">-</span><span class="dv">123</span> <span class="sc">-</span><span class="dv">123</span> <span class="sc">-</span><span class="dv">123</span> <span class="sc">-</span><span class="dv">123</span> ...</span>
-<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a> <span class="sc">$</span> latitude   <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">57</span>(1d)] <span class="fl">35.6</span> <span class="fl">35.6</span> <span class="fl">35.6</span> <span class="fl">35.7</span> <span class="fl">35.7</span> ...</span>
-<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a> <span class="sc">$</span> altitude   <span class="sc">:</span> logi <span class="cn">NA</span></span>
-<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a> <span class="sc">$</span> time       <span class="sc">:</span> POSIXlt[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], format<span class="sc">:</span> <span class="st">"2014-09-15"</span> <span class="st">"2014-10-15"</span></span>
-<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a> <span class="sc">-</span> <span class="fu">attr</span>(<span class="sc">*</span>, <span class="st">"class"</span>)<span class="ot">=</span> chr [<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="st">"list"</span> <span class="st">"rxtracto3D"</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>List of <span class="dv">6</span></span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a> <span class="sc">$</span> chla       <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">57</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> ...</span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a> <span class="sc">$</span> datasetname<span class="sc">:</span> chr <span class="st">"erdVH3chlamday"</span></span>
+<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a> <span class="sc">$</span> longitude  <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>(<span class="dv">1</span>d)] <span class="sc">-</span><span class="dv">123</span> <span class="sc">-</span><span class="dv">123</span> <span class="sc">-</span><span class="dv">123</span> <span class="sc">-</span><span class="dv">123</span> <span class="sc">-</span><span class="dv">123</span> ...</span>
+<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a> <span class="sc">$</span> latitude   <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">57</span>(<span class="dv">1</span>d)] <span class="fl">35.6</span> <span class="fl">35.6</span> <span class="fl">35.6</span> <span class="fl">35.7</span> <span class="fl">35.7</span> ...</span>
+<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a> <span class="sc">$</span> altitude   <span class="sc">:</span> logi <span class="cn">NA</span></span>
+<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a> <span class="sc">$</span> time       <span class="sc">:</span> POSIXlt[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], format<span class="sc">:</span> <span class="st">"2014-09-15"</span> <span class="st">"2014-10-15"</span></span>
+<span id="cb33-8"><a href="#cb33-8" tabindex="-1"></a> <span class="sc">-</span> <span class="fu">attr</span>(<span class="sc">*</span>, <span class="st">"class"</span>)<span class="ot">=</span> chr [<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="st">"list"</span> <span class="st">"rxtracto3D"</span></span></code></pre></div>
 <p>The extract (see <code>str(sanctchl)</code>) contains two time
 periods of <span style="color:blue">chlorophyll</span> masked for data
 only in the sanctuary boundaries. This example shows how to pull out
 only a single time period to be used in <code><a href="../reference/plotBBox.html">plotBBox()</a></code>.</p>
-<p><span id="plot1"></span></p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rmendels/plotdap" class="external-link">"plotdap"</a></span><span class="op">)</span></span>
 <span><span class="va">myFunc</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -705,8 +816,7 @@ only a single time period to be used in <code><a href="../reference/plotBBox.htm
 <span><span class="va">sanctchlPlot</span></span></code></pre></div>
 <p><img src="sanctchlPlot.png"></p>
 <p>The map of the extract can also be animated through time:</p>
-<p><span id="animateGrid"></span></p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://gganimate.com" class="external-link">"gganimate"</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: gganimate</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span></span>
@@ -720,7 +830,7 @@ only a single time period to be used in <code><a href="../reference/plotBBox.htm
 depths of up to 3,600 m (11,800 ft) below surface level at its deepest.
 <code><a href="../reference/rxtractogon.html">rxtractogon()</a></code> can extract the bathymetry data for the MBNMS
 from the <span style="color:red">ETOPO</span> dataset:</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://docs.ropensci.org/rerddap/" class="external-link">"rerddap"</a></span><span class="op">)</span></span>
 <span><span class="va">dataInfo</span> <span class="op">&lt;-</span> <span class="fu">rerddap</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rerddap/reference/info.html" class="external-link">info</a></span><span class="op">(</span><span class="st">'etopo180'</span><span class="op">)</span></span>
 <span><span class="va">xpos</span> <span class="op">&lt;-</span> <span class="va">mbnms</span><span class="op">$</span><span class="va">Longitude</span></span>
@@ -728,16 +838,16 @@ from the <span style="color:red">ETOPO</span> dataset:</p>
 <span><span class="va">bathy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rxtractogon.html">rxtractogon</a></span><span class="op">(</span><span class="va">dataInfo</span>, parameter <span class="op">=</span> <span class="st">'altitude'</span>, xcoord <span class="op">=</span> <span class="va">xpos</span>, ycoord <span class="op">=</span> <span class="va">ypos</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">bathy</span><span class="op">)</span></span></code></pre></div>
 <p>The returned structure is:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>List of <span class="dv">6</span></span>
-<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a> <span class="sc">$</span> depth      <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">123</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">141</span>, <span class="dv">1</span>] <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> ...</span>
-<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a> <span class="sc">$</span> datasetname<span class="sc">:</span> chr <span class="st">"etopo180"</span></span>
-<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a> <span class="sc">$</span> longitude  <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">123</span>(1d)] <span class="sc">-</span><span class="dv">123</span> <span class="sc">-</span><span class="dv">123</span> <span class="sc">-</span><span class="dv">123</span> <span class="sc">-</span><span class="dv">123</span> <span class="sc">-</span><span class="dv">123</span> ...</span>
-<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a> <span class="sc">$</span> latitude   <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">141</span>(1d)] <span class="fl">35.5</span> <span class="fl">35.6</span> <span class="fl">35.6</span> <span class="fl">35.6</span> <span class="fl">35.6</span> ...</span>
-<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a> <span class="sc">$</span> altitude   <span class="sc">:</span> logi <span class="cn">NA</span></span>
-<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a> <span class="sc">$</span> time       <span class="sc">:</span> logi <span class="cn">NA</span></span>
-<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a> <span class="sc">-</span> <span class="fu">attr</span>(<span class="sc">*</span>, <span class="st">"class"</span>)<span class="ot">=</span> chr [<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="st">"list"</span> <span class="st">"rxtracto3D"</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>List of <span class="dv">6</span></span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a> <span class="sc">$</span> depth      <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">123</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">141</span>, <span class="dv">1</span>] <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> ...</span>
+<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a> <span class="sc">$</span> datasetname<span class="sc">:</span> chr <span class="st">"etopo180"</span></span>
+<span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a> <span class="sc">$</span> longitude  <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">123</span>(<span class="dv">1</span>d)] <span class="sc">-</span><span class="dv">123</span> <span class="sc">-</span><span class="dv">123</span> <span class="sc">-</span><span class="dv">123</span> <span class="sc">-</span><span class="dv">123</span> <span class="sc">-</span><span class="dv">123</span> ...</span>
+<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a> <span class="sc">$</span> latitude   <span class="sc">:</span> num [<span class="dv">1</span><span class="sc">:</span><span class="dv">141</span>(<span class="dv">1</span>d)] <span class="fl">35.5</span> <span class="fl">35.6</span> <span class="fl">35.6</span> <span class="fl">35.6</span> <span class="fl">35.6</span> ...</span>
+<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a> <span class="sc">$</span> altitude   <span class="sc">:</span> logi <span class="cn">NA</span></span>
+<span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a> <span class="sc">$</span> time       <span class="sc">:</span> logi <span class="cn">NA</span></span>
+<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a> <span class="sc">-</span> <span class="fu">attr</span>(<span class="sc">*</span>, <span class="st">"class"</span>)<span class="ot">=</span> chr [<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="st">"list"</span> <span class="st">"rxtracto3D"</span></span></code></pre></div>
 <p>Mapping the data to show the canyon:</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st">"mapdata"</span><span class="op">)</span></span>
 <span><span class="va">myFunc</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span><span class="va">x</span></span>
@@ -754,7 +864,7 @@ output<a class="anchor" aria-label="anchor" href="#temperature-at-70m-in-the-nor
 where the z-coordinate does not have the default name “altitude”. Water
 temperature at 70m depth is extracted for the North Pacific Ocean east
 of the dateline.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://docs.ropensci.org/rerddap/" class="external-link">"rerddap"</a></span><span class="op">)</span></span>
 <span><span class="va">dataInfo</span> <span class="op">&lt;-</span> <span class="fu">rerddap</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rerddap/reference/info.html" class="external-link">info</a></span><span class="op">(</span><span class="st">'erdSoda331oceanmday'</span><span class="op">)</span></span>
 <span><span class="va">xpos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">185.25</span>, <span class="fl">240.25</span><span class="op">)</span></span>
@@ -762,7 +872,7 @@ of the dateline.</p>
 <span><span class="va">zpos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">76.80285</span>, <span class="fl">76.80285</span><span class="op">)</span></span>
 <span><span class="va">tpos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010-12-15'</span>, <span class="st">'2010-12-15'</span><span class="op">)</span></span>
 <span><span class="va">soda70</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rxtracto_3D.html">rxtracto_3D</a></span><span class="op">(</span><span class="va">dataInfo</span>, parameter <span class="op">=</span> <span class="st">'temp'</span>, xcoord <span class="op">=</span> <span class="va">xpos</span>, ycoord <span class="op">=</span> <span class="va">ypos</span>, tcoord <span class="op">=</span> <span class="va">tpos</span>, zcoord <span class="op">=</span> <span class="va">zpos</span>, zName <span class="op">=</span> <span class="st">'depth'</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rmendels/plotdap" class="external-link">"plotdap"</a></span><span class="op">)</span></span>
 <span><span class="va">sodaPlot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotBBox.html">plotBBox</a></span><span class="op">(</span><span class="va">soda70</span>, plotColor <span class="op">=</span> <span class="st">'thermal'</span>, name <span class="op">=</span> <span class="st">'temp_at_70m'</span>, maxpixels <span class="op">=</span> <span class="fl">30000</span><span class="op">)</span></span>
@@ -780,7 +890,7 @@ there is hourly output from a model of the North Atlantic ocean, with a
 variety of ocean related parameters, see <a href="https://erddap.marine.ie/erddap/griddap/IMI_NEATL.html" class="external-link uri">https://erddap.marine.ie/erddap/griddap/IMI_NEATL.html</a>.
 To obtain sea surface salinity at latest time available for the domain
 of the model:</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://docs.ropensci.org/rerddap/" class="external-link">"rerddap"</a></span><span class="op">)</span></span>
 <span><span class="va">urlBase</span> <span class="op">&lt;-</span> <span class="st">"https://erddap.marine.ie/erddap/"</span></span>
 <span><span class="va">parameter</span> <span class="op">&lt;-</span> <span class="st">"sea_surface_salinity"</span></span>
@@ -789,7 +899,7 @@ of the model:</p>
 <span><span class="va">sssLons</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">17.99375</span>, <span class="op">-</span><span class="fl">1.00625</span><span class="op">)</span></span>
 <span><span class="va">dataInfo</span> <span class="op">&lt;-</span> <span class="fu">rerddap</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rerddap/reference/info.html" class="external-link">info</a></span><span class="op">(</span><span class="st">"IMI_NEATL"</span>, url <span class="op">=</span> <span class="va">urlBase</span><span class="op">)</span></span>
 <span><span class="va">NAtlSSS</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rxtracto_3D.html">rxtracto_3D</a></span><span class="op">(</span><span class="va">dataInfo</span>, parameter <span class="op">=</span> <span class="va">parameter</span>, xcoord <span class="op">=</span> <span class="va">sssLons</span>, ycoord <span class="op">=</span> <span class="va">sssLats</span>, tcoord <span class="op">=</span> <span class="va">sssTimes</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rmendels/plotdap" class="external-link">"plotdap"</a></span><span class="op">)</span></span>
 <span><span class="va">NAtlSSSPlot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotBBox.html">plotBBox</a></span><span class="op">(</span><span class="va">NAtlSSS</span>, plotColor <span class="op">=</span> <span class="st">'haline'</span>, name <span class="op">=</span> <span class="st">"salinity"</span>, maxpixels <span class="op">=</span> <span class="fl">30000</span><span class="op">)</span></span>
@@ -800,8 +910,7 @@ because there are some low salinity values right close to shore. The
 plot can be modified using the <code>plotdap</code> function
 <code><a href="https://rdrr.io/pkg/plotdap/man/add_ggplot.html" class="external-link">add_ggplot()</a></code> so that only values between (32, 36) are
 plotted, and to change the colorbar to reflect this.</p>
-<p><span id="modify"></span></p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rmendels/plotdap" class="external-link">"plotdap"</a></span><span class="op">)</span></span>
 <span><span class="va">haline</span> <span class="op">=</span> <span class="fu">cmocean</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cmocean/man/cmocean.html" class="external-link">cmocean</a></span><span class="op">(</span><span class="st">'haline'</span><span class="op">)</span><span class="op">(</span><span class="fl">256</span><span class="op">)</span></span>
@@ -823,7 +932,7 @@ then the local dataset.</p>
 the <span style="color:red">ERDDAP</span> request is based on the
 nearest grid point of the <span style="color:red">ERDDAP</span>
 dataset:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">latitude</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html" class="external-link">which.min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">latitude</span> <span class="op">-</span> <span class="va">ypos</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>  <span class="co"># minimum latitude</span></span>
 <span><span class="va">latitude</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html" class="external-link">which.min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">latitude</span> <span class="op">-</span> <span class="va">ypos</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>  <span class="co"># maximum latitude</span></span>
 <span><span class="va">longitude</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html" class="external-link">which.min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">longitude</span><span class="op">-</span> <span class="va">xpos</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">]</span> <span class="co"># minimum longitude</span></span>
