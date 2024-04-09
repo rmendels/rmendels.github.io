@@ -49,15 +49,28 @@ The source code for the PICES2017 notebooks can be found at the [pices2017 repos
 
 [slides](https://rmendels.github.io/repro_talk/Repro_talk.html)
 
-## *MUR* SST Frontal Edges Calculations
+## *MUR* SST Frontal Edges Calculations - West Coast
 
 [notebook](https://rmendels.github.io/canny_doc.html)
 
-# *ETOPO* and *SRTM30Plus* Seafloor Depth Gradient Calculations
+## *MUR* SST Frontal Edges Calculations - East Coast
+
+[notebook](https://github.com/rmendels/fronts_atlantic/blob/main/fronts_atlantic.ipynb)
+
+
+## *ETOPO* and *SRTM30Plus* Seafloor Depth Gradient Calculations
 
 [notebook](https://rmendels.github.io/seafloor_gradient_doc.html)
 
-# Accessing ERDDDAP Data in `R`
+## *ETOPO_22_* Seafloor Depth Gradient Calculations - West Coast
+
+[notebook](https://github.com/rmendels/seafloor_gradient_new/blob/main/etopo_22_seafloor_gradient.ipynb)
+
+## *ETOPO_22_* Seafloor Depth Gradient Calculations - West Coast
+
+[notebook](https://github.com/rmendels/seafloor_gradient_atlantic/blob/main/seafloor_gradient_atlantic.ipynb)
+
+## Accessing ERDDDAP Data in `R`
 
 [slides](https://rmendels.github.io/R_erddap_talk/r_erddap_talk.html)
 
