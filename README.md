@@ -5,7 +5,7 @@ Github Web Page:
 
 ## *MUR* SST Frontal Edges Calculations - West Coast
 
-[notebook](https://rmendels.github.io/canny_doc.html)
+[notebook](https://github.com/rmendels/fronts_pacific/blob/main/fronts_pacific.ipynb)
 
 ## *MUR* SST Frontal Edges Calculations - East Coast
 
