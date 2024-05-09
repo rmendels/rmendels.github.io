@@ -20,7 +20,10 @@ Github Web Page:
 
 [notebook](https://github.com/rmendels/seafloor_gradient_new/blob/main/etopo_22_seafloor_gradient.ipynb)
 
-## *ETOPO_22_* Seafloor Depth Gradient Calculations - West Coast
+## *ETOPO_22_* Seafloor Depth Gradient Calculations - Atlantic
+
+[notebook](https://github.com/rmendels/seafloor_gradient_atlantic/blob/main/etopo_22_seafloor_gradient_atlantic.ipynb)
+
 
 # Software
 
