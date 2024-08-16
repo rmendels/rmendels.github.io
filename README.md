@@ -42,7 +42,7 @@ Github Web Page:
 ## `xtractoMatlab`  links
 
 * [xtractoMatlab code](https://github.com/rmendels/xtractoMatlab)
-* [xtractoMatlab vignette](https://github.com/rmendels/xtractoMatlab/vignette.html)
+* [xtractoMatlab vignette](https://github.com/rmendels//rmendels.github.io/xtractoMatlab_vignette.pdfl)
 
 
 ## `plotdap`  links
