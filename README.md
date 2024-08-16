@@ -39,6 +39,12 @@ Github Web Page:
 
 * [rerddap complete documention via `pkgdown`](https://rmendels.github.io/rerddap_docs)
 
+## `xtractoMatlab`  links
+
+* [xtractoMatlab code](https://github.com/rmendels/xtractoMatlab)
+* [xtractoMatlab vignette](https://github.com/rmendels/xtractoMatlab/vignette.pdf)
+
+
 ## `plotdap`  links
 
 * [plotdap complete documention via `pkgdown`](https://rmendels.github.io/plotdap_docs)
