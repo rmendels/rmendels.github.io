@@ -31,13 +31,18 @@ Github Web Page:
 ## `rerddapXtracto` links
 
 
-* [rerddapXtracto complete documention via `pkgdown`](https://rmendels.github.io/rerddapXtracto_docs)
+* [rerddapXtracto  documentation via `pkgdown`](https://rmendels.github.io/rerddapXtracto_docs)
 
 ## `rerddap` links
 
 `rerddap` is available through CRAN,  or the development version at the [rerddap repository](https://github.com/ropensci/rerddap)
 
-* [rerddap complete documention via `pkgdown`](https://rmendels.github.io/rerddap_docs)
+* [rerddap documentation via `pkgdown`](https://rmendels.github.io/rerddap_docs)
+
+## `rerddapUtils`  links
+
+* [rerddapUtils code](https://github.com/rmendels/rerddapUtils)
+* [rerddapUtils documentation via `pkgdown`](https://rmendels.github.io/rerddapUtils_docs)
 
 ## `xtractoMatlab`  links
 
@@ -47,7 +52,7 @@ Github Web Page:
 
 ## `plotdap`  links
 
-* [plotdap complete documention via `pkgdown`](https://rmendels.github.io/plotdap_docs)
+* [plotdap documentation via `pkgdown`](https://rmendels.github.io/plotdap_docs)
 
 ## `plotdap_interactive` links
 

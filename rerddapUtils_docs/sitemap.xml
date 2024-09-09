@@ -1,0 +1,13 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/using-rerddapUtils.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/griddap_season.html</loc></url>
+<url><loc>/reference/griddap_split.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/latlon_to_xy.html</loc></url>
+<url><loc>/reference/xy_to_latlon.html</loc></url>
+</urlset>
+
