@@ -1,39 +1,72 @@
 # rmendels.github.io
 Github Web Page:
 
-## `xtractomatic` links
+# Datasets
 
-The `xtractomatic` package is available through CRAN, or the up-to-date version at the [xtractomatic repository](https://github.com/rmendels/xtractomatic)
-The `xtractomatic` package development version is available at the [xtractomatic development repository](https://github.com/rmendels/xtractomatic/tree/development)
+## *MUR* SST Frontal Edges Calculations - West Coast
 
-* [xtractomatic version 3.3.2 vignette RNotebook](https://rmendels.github.io/Usingxtractomatic.nb.html)
-* [xtractomatic version 3.4.0 vignette RNotebook](https://rmendels.github.io/Usingxtractomatic_3.4.0.nb.html)
-* [xtractomatic development version vignette RNotebook](https://rmendels.github.io/Usingxtractomatic_Dev.nb.html)
-* [xtractomatic complete documention via `pkgdown](https://rmendels.github.io/xtractomatic_docs/index.html)
+[notebook](https://github.com/rmendels/fronts_pacific/blob/main/fronts_pacific.ipynb)
+
+## *MUR* SST Frontal Edges Calculations - East Coast
+
+[notebook](https://github.com/rmendels/fronts_atlantic/blob/main/fronts_atlantic.ipynb)
+
+
+## *ETOPO* and *SRTM30Plus* Seafloor Depth Gradient Calculations
+
+[notebook](https://rmendels.github.io/seafloor_gradient_doc.html)
+
+## *ETOPO_22_* Seafloor Depth Gradient Calculations - West Coast
+
+[notebook](https://github.com/rmendels/seafloor_gradient_new/blob/main/etopo_22_seafloor_gradient.ipynb)
+
+## *ETOPO_22_* Seafloor Depth Gradient Calculations - Atlantic
+
+[notebook](https://github.com/rmendels/seafloor_gradient_atlantic/blob/main/etopo_22_seafloor_gradient_atlantic.ipynb)
+
+
+# Software
+
 
 ## `rerddapXtracto` links
 
-`rerddapXtracto` is available through the [rerddapXtracto repository](https://github.com/rmendels/rerddapXtracto)
 
-* [rerddapXtracto complete documention via `pkgdown](https://rmendels.github.io/rerddapXtracto_docs)
-* [rerddapXtracto vignette RNotebook](https://rmendels.github.io/rerddapXtracto_docs/articles/UsingrerddapXtracto.html)
+* [rerddapXtracto  documentation via `pkgdown`](https://rmendels.github.io/rerddapXtracto_docs)
 
 ## `rerddap` links
 
 `rerddap` is available through CRAN,  or the development version at the [rerddap repository](https://github.com/ropensci/rerddap)
 
-* [rerddap (new) vignette RNotebook](https://rmendels.github.io/Using_rerddap.nb.html)
+* [rerddap documentation via `pkgdown`](https://rmendels.github.io/rerddap_docs)
+
+## `rerddapUtils`  links
+
+* [rerddapUtils code](https://github.com/rmendels/rerddapUtils)
+* [rerddapUtils documentation via `pkgdown`](https://rmendels.github.io/rerddapUtils_docs)
+
+## `xtractoMatlab`  links
+
+* [xtractoMatlab code](https://github.com/rmendels/xtractoMatlab)
+* [xtractoMatlab vignette](https://github.com/rmendels//rmendels.github.io/xtractoMatlab_vignette.pdfl)
+
 
 ## `plotdap`  links
 
-* [plotdap complete documention via `pkgdown](https://rmendels.github.io/plotdap_docs)
-* [plotdap vignette](https://rmendels.github.io/plotdap_docs/articles/using_plotdap.html)
+* [plotdap documentation via `pkgdown`](https://rmendels.github.io/plotdap_docs)
 
 ## `plotdap_interactive` links
 
 * [html page](https://rmendels.github.io/plotdap_interactive/make_plotdap_interactive.html)
 * [.Rmd file](https://rmendels.github.io/plotdap_interactive/make_plotdap_interactive.Rmd)
 
+## Accessing ERDDDAP Data in `R`
+
+[slides](https://rmendels.github.io/R_erddap_talk/r_erddap_talk.html)
+
+[Rmd](https://rmendels.github.io/R_erddap_talk/r_erddap_talk.Rmd)
+
+
+#  Science Talks
 
 ## PICES2017 Talk
 
@@ -61,18 +94,7 @@ The source code for the PICES2017 notebooks can be found at the [pices2017 repos
 
 [slides](https://rmendels.github.io/repro_talk/Repro_talk.html)
 
-## *MUR* SST Frontal Edges Calculations
 
-[notebook](https://rmendels.github.io/canny_doc.html)
 
-# *ETOPO* and *SRTM30Plus* Seafloor Depth Gradient Calculations
-
-[notebook](https://rmendels.github.io/seafloor_gradient_doc.html)
-
-# Accessing ERDDDAP Data in `R`
-
-[slides](https://rmendels.github.io/R_erddap_talk/r_erddap_talk.html)
-
-[Rmd](https://rmendels.github.io/R_erddap_talk/r_erddap_talk.Rmd)
 
 
