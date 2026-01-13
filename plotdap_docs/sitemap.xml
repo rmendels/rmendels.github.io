@@ -1,0 +1,23 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/using_plotdap.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/QMwind.html</loc></url>
+<url><loc>/reference/add_ggplot.html</loc></url>
+<url><loc>/reference/add_griddap.html</loc></url>
+<url><loc>/reference/add_tabledap.html</loc></url>
+<url><loc>/reference/bbox_set.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/murSST.html</loc></url>
+<url><loc>/reference/plotdap-package.html</loc></url>
+<url><loc>/reference/plotdap.html</loc></url>
+<url><loc>/reference/print.ggplotdap.html</loc></url>
+<url><loc>/reference/print.plotdap.html</loc></url>
+<url><loc>/reference/reexports.html</loc></url>
+<url><loc>/reference/sardines.html</loc></url>
+</urlset>
+
