@@ -1,7 +1,6 @@
-pandoc: 2.11.4
-pkgdown: 1.6.1
+pandoc: 3.9.0.2
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   UsingrerddapXtracto: UsingrerddapXtracto.html
-last_built: 2021-04-27T23:20Z
-
+last_built: 2026-04-19T23:35Z
