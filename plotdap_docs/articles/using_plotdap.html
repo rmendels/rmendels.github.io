@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotdap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <h1 data-toc-skip>Using plotdap</h1>
                         <h4 data-toc-skip class="author"></h4>
             
-            <h4 data-toc-skip class="date">2026-01-13</h4>
+            <h4 data-toc-skip class="date">2026-05-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rmendels/plotdap/blob/HEAD/vignettes/using_plotdap.Rmd" class="external-link"><code>vignettes/using_plotdap.Rmd</code></a></small>
       <div class="hidden name"><code>using_plotdap.Rmd</code></div>
@@ -108,7 +108,11 @@ and it’s basic usage, as well as how to utilize some of the more
 important options in the package in order to improve the map.</p>
 <p>A new feature is that the function <code><a href="../reference/bbox_set.html">bbox_set()</a></code> can now be
 used to create interactive plots using <code><a href="https://rdrr.io/pkg/plotly/man/ggplotly.html" class="external-link">plotly::ggplotly()</a></code>,
-see</p>
+see <a href="#interactive">Interactive <code>plotdap</code> objects and
+<code>bbox_set()</code></a>.</p>
+<p>A second new feature is the function
+<code><a href="../reference/add_griddap_contours.html">add_griddap_contours()</a></code> which adds contours to any
+<code><a href="../reference/add_griddap.html">plotdap::add_griddap()</a></code> object, see <a href="#contours">Contour Plots</a>.</p>
 <div class="section level3">
 <h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h3>
@@ -117,7 +121,7 @@ see</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"plotdap"</span><span class="op">)</span></span></code></pre></div>
 <p>and the development version can be installed with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">'rmendels/plotdap'</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/install-deprecated.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">'rmendels/plotdap'</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="getting-started-with-plotdap">Getting started with <code>plotdap()</code><a class="anchor" aria-label="anchor" href="#getting-started-with-plotdap"></a>
@@ -168,8 +172,8 @@ projection centered on Alaska</a>:</p>
 <p>That does not mean we can’t use this (or similar) projections – we
 just have to be careful that they are sensible given the lat/lon limits.
 By default, those limits span the entire world, but as we’ll see later,
-the limits are shrunk to the given data (i.e., <code>griddap()</code> /
-<code>tabledap()</code>) limits. In other words, we should expect this
+the limits are shrunk to the given data (i.e., <code><a href="https://docs.ropensci.org/rerddap/reference/griddap.html" class="external-link">griddap()</a></code> /
+<code><a href="https://docs.ropensci.org/rerddap/reference/tabledap.html" class="external-link">tabledap()</a></code>) limits. In other words, we should expect this
 projection to work once we “add” some data located near Alaska to the
 visualization. However, in case you want to make a map without any data,
 or want to customize the background map in some special way, you can
@@ -178,7 +182,7 @@ object (or something coercable to an <strong>sf</strong> object) to the
 <code>mapData</code> argument.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Linking to GEOS 3.14.1, GDAL 3.12.1, PROJ 9.7.1; sf_use_s2() is TRUE</span></span>
+<span><span class="co">#&gt; Linking to GEOS 3.13.0, GDAL 3.8.5, PROJ 9.5.1; sf_use_s2() is TRUE</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">mapdata</span><span class="op">)</span></span>
 <span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="fu">maps</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html" class="external-link">map</a></span><span class="op">(</span><span class="st">"world"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">us</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">w</span>, <span class="va">ID</span> <span class="op">==</span> <span class="st">"USA"</span><span class="op">)</span>, <span class="va">alaska</span><span class="op">)</span></span>
@@ -197,11 +201,10 @@ that will cross the dateline. So for example to use the hi-res outlines
 for VIIIRS SST off the coast of North America:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sstInfo</span> <span class="op">&lt;-</span> <span class="fu">rerddap</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rerddap/reference/info.html" class="external-link">info</a></span><span class="op">(</span><span class="st">'erdVHsstaWS3day'</span>, url <span class="op">=</span> <span class="st">'https://coastwatch.pfeg.noaa.gov/erddap/'</span><span class="op">)</span></span>
-<span><span class="co"># get latest 3-day composite sst</span></span>
 <span><span class="va">viirsSST</span> <span class="op">&lt;-</span> <span class="fu">rerddap</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rerddap/reference/griddap.html" class="external-link">griddap</a></span><span class="op">(</span><span class="va">sstInfo</span>, </span>
 <span>                             latitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">41.</span>, <span class="fl">31.</span><span class="op">)</span>, </span>
 <span>                             longitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">128.</span>, <span class="op">-</span><span class="fl">115</span><span class="op">)</span>, </span>
-<span>                             time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'last'</span>,<span class="st">'last'</span><span class="op">)</span>, </span>
+<span>                             time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2026-03-18T12:00:00Z'</span>,<span class="st">'2026-03-18T12:00:00Z'</span><span class="op">)</span>, </span>
 <span>                             fields <span class="op">=</span> <span class="st">'sst'</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html" class="external-link">map</a></span><span class="op">(</span><span class="st">"worldHires"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">140.</span>, <span class="op">-</span><span class="fl">114</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30.</span>, <span class="fl">42.</span><span class="op">)</span>, </span>
@@ -263,20 +266,20 @@ Customizing <code><a href="../reference/plotdap.html">plotdap()</a></code> objec
 <h3 id="adding-tabledap-layers">Adding <code>tabledap()</code> layers<a class="anchor" aria-label="anchor" href="#adding-tabledap-layers"></a>
 </h3>
 <p>The <code><a href="../reference/add_tabledap.html">add_tabledap()</a></code> function allows you to add markers
-that encode variable(s) obtained via <code>tabledap()</code> to an
+that encode variable(s) obtained via <code><a href="https://docs.ropensci.org/rerddap/reference/tabledap.html" class="external-link">tabledap()</a></code> to an
 existing <code><a href="../reference/plotdap.html">plotdap()</a></code> object. For example, suppose we have the
 following <code>sardines</code> data, and wish to understand the
 frequency of subsample counts:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_url</span> <span class="op">&lt;-</span> <span class="st">'https://coastwatch.pfeg.noaa.gov/erddap/'</span></span>
-<span><span class="va">sardines</span> <span class="op">&lt;-</span> <span class="fu">tabledap</span><span class="op">(</span></span>
+<span><span class="va">sardines</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/rerddap/reference/tabledap.html" class="external-link">tabledap</a></span><span class="op">(</span></span>
 <span>  <span class="st">'FRDCPSTrawlLHHaulCatch'</span>,</span>
 <span>  fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'latitude'</span>,  <span class="st">'longitude'</span>, <span class="st">'time'</span>, <span class="st">'scientific_name'</span>, </span>
 <span>             <span class="st">'subsample_count'</span><span class="op">)</span>,</span>
 <span>  <span class="st">'time&gt;=2010-01-01'</span>, <span class="st">'time&lt;=2012-01-01'</span>, <span class="st">'scientific_name="Sardinops sagax"'</span>,</span>
 <span>   url <span class="op">=</span> <span class="va">my_url</span><span class="op">)</span></span></code></pre></div>
 <p>At the very least, <code><a href="../reference/add_tabledap.html">add_tabledap()</a></code> needs a base map
-(i.e., a <code><a href="../reference/plotdap.html">plotdap()</a></code> object), the <code>tabledap()</code>
+(i.e., a <code><a href="../reference/plotdap.html">plotdap()</a></code> object), the <code><a href="https://docs.ropensci.org/rerddap/reference/tabledap.html" class="external-link">tabledap()</a></code>
 data, and a <em>formula</em> defining the variable of interest (for
 encoding the color of the markers). In R, you can create a formula by
 prefixing <code>~</code> to some expression. This formula can simply
@@ -334,7 +337,7 @@ rectangular tiles) to a <code><a href="../reference/plotdap.html">plotdap()</a><
 lets obtain some of the latest sea surface temperatures along the
 western coast of the US.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">murSST_west</span> <span class="op">&lt;-</span> <span class="fu">griddap</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">murSST_west</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/rerddap/reference/griddap.html" class="external-link">griddap</a></span><span class="op">(</span></span>
 <span>  <span class="st">'jplMURSST41'</span>, </span>
 <span>  latitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">22</span>, <span class="fl">51</span><span class="op">)</span>, </span>
 <span>  longitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">140</span>, <span class="op">-</span><span class="fl">105</span><span class="op">)</span>,</span>
@@ -343,7 +346,7 @@ western coast of the US.</p>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p>Again, similar to <code><a href="../reference/add_tabledap.html">add_tabledap()</a></code>,
 <code><a href="../reference/add_griddap.html">add_griddap()</a></code> needs a base map (i.e., a
-<code><a href="../reference/plotdap.html">plotdap()</a></code> object), the <code>griddap()</code> data, and a
+<code><a href="../reference/plotdap.html">plotdap()</a></code> object), the <code><a href="https://docs.ropensci.org/rerddap/reference/griddap.html" class="external-link">griddap()</a></code> data, and a
 <em>formula</em> defining the variable of interest (for encoding the
 fill of the rectangles). The <code><a href="../reference/add_griddap.html">add_griddap()</a></code> function also
 has a <code>maxpixels</code> argument which sets a maximum threshold for
@@ -366,7 +369,7 @@ multiple grids (a la <code><a href="../reference/add_tabledap.html">add_tabledap
 option to summarize multiple grids into a single grid. To demonstrate,
 lets grab some wind speeds measured along the west coast of the US.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wind</span> <span class="op">&lt;-</span> <span class="fu">griddap</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">wind</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/rerddap/reference/griddap.html" class="external-link">griddap</a></span><span class="op">(</span></span>
 <span>  <span class="st">'erdQMwindmday'</span>, </span>
 <span>  time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2016-04-16'</span>, <span class="st">'2016-06-16'</span><span class="op">)</span>,</span>
 <span>  latitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">50</span><span class="op">)</span>, </span>
@@ -504,7 +507,7 @@ defined for the high-resolution database:</p>
 <span>      maxpixels <span class="op">=</span> <span class="fl">50000</span></span>
 <span>      <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span>landmask <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="viirsSST_100000_mask.png"></p>
+<p><img src="viirsSST_hires_mask.png"></p>
 <p>The “Simple Ocean Data Assimilation (SODA)” model (see <a href="https://soda.umd.edu" class="external-link uri">https://soda.umd.edu</a>)
 reconstructs the historical physical history of the ocean since the
 beginning of the 20th century. Here is the temperature at 70m depth for
@@ -562,7 +565,7 @@ extracts.</p>
 </h3>
 <p>The <code><a href="../reference/plotdap.html">plotdap()</a></code> interface is designed so that you can plot
 both tables and grids at once (although I don’t recommend trying to plot
-more than one <code>griddap()</code> or <code>tabledap()</code> object
+more than one <code><a href="https://docs.ropensci.org/rerddap/reference/griddap.html" class="external-link">griddap()</a></code> or <code><a href="https://docs.ropensci.org/rerddap/reference/tabledap.html" class="external-link">tabledap()</a></code> object
 at once). It’s also designed to work well with the <code>%&gt;%</code>
 operator from the <strong>magrittr</strong> package so that code can be
 expressed in a left-to-right (rather than inside-out) fashion:</p>
@@ -630,7 +633,7 @@ to high values observed in landlocked water. To modify that plot:</p>
 <h3 id="animating-plotdap-objects">Animating <code>plotdap</code> objects<a class="anchor" aria-label="anchor" href="#animating-plotdap-objects"></a>
 </h3>
 <p>Since <code>time</code> is an important variable in many
-<code>tabledap()</code> and <code>griddap()</code> objects, both
+<code><a href="https://docs.ropensci.org/rerddap/reference/tabledap.html" class="external-link">tabledap()</a></code> and <code><a href="https://docs.ropensci.org/rerddap/reference/griddap.html" class="external-link">griddap()</a></code> objects, both
 functions have an <code>animate</code> argument which will animate the
 maps over the <code>time</code> variable. The animations only work for
 the <code>ggplot2</code> option, and are based on the latest version of
@@ -646,7 +649,7 @@ can be controlled by saving the animation to an object, and then
 displaying the saved object using <code><a href="https://gganimate.com/reference/animate.html" class="external-link">gganimate::animate()</a></code> to
 control the display. The</p>
 <p>Since <code>time</code> is an important variable in many
-<code>tabledap()</code> objects, <code><a href="../reference/add_tabledap.html">add_tabledap()</a></code> also has a
+<code><a href="https://docs.ropensci.org/rerddap/reference/tabledap.html" class="external-link">tabledap()</a></code> objects, <code><a href="../reference/add_tabledap.html">add_tabledap()</a></code> also has a
 <code>animate</code> argument which allows you to easily animate over
 the <code>time</code> variable. It is also easy to alter the color scale
 and symbol type via the <code>color</code> and <code>shape</code>
@@ -699,20 +702,80 @@ bounding box.</p>
 <span>  <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bbox_set.html">bbox_set</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">xlim</span>, <span class="va">ylim</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="interactive-plotdap-objects-and-bbox_set">Interactive <code>plotdap</code> objects and
-<code>bbox_set()</code><a class="anchor" aria-label="anchor" href="#interactive-plotdap-objects-and-bbox_set"></a>
+<h3 id="contours">Contour Plots<a class="anchor" aria-label="anchor" href="#contours"></a>
+</h3>
+<p>The function <code><a href="../reference/add_griddap_contours.html">add_griddap_contours()</a></code> adds contours to an
+existing <code><a href="../reference/add_griddap.html">plotdap::add_griddap()</a></code> object, using the R package
+‘isoband’. The function builds on an existing ‘plotdap’ object and also
+requires the dataframe that was used in creating the plot. The function
+<code><a href="../reference/add_griddap_contours.html">add_griddap_contours()</a></code> is defined as:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>add_griddap_contours <span class="ot">&lt;-</span> <span class="cf">function</span>(p,</span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>                                 data,</span>
+<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a>                                 var,</span>
+<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a>                                 <span class="at">n_breaks  =</span> <span class="dv">10</span><span class="dt">L</span>,</span>
+<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a>                                 <span class="at">breaks    =</span> <span class="cn">NULL</span>,</span>
+<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a>                                 <span class="at">lon_col   =</span> <span class="st">"longitude"</span>,</span>
+<span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a>                                 <span class="at">lat_col   =</span> <span class="st">"latitude"</span>,</span>
+<span id="cb35-8"><a href="#cb35-8" tabindex="-1"></a>                                 <span class="at">color     =</span> <span class="st">"black"</span>,</span>
+<span id="cb35-9"><a href="#cb35-9" tabindex="-1"></a>                                 <span class="at">linewidth =</span> <span class="fl">0.3</span>,</span>
+<span id="cb35-10"><a href="#cb35-10" tabindex="-1"></a>                                 <span class="at">alpha     =</span> <span class="dv">1</span>,</span>
+<span id="cb35-11"><a href="#cb35-11" tabindex="-1"></a>                                 <span class="at">crs       =</span> <span class="dv">4326</span><span class="dt">L</span>)</span></code></pre></div>
+<p><code><a href="../reference/add_griddap_contours.html">add_griddap_contours()</a></code> allows the setting of the number
+of contours, specified contour breaks if desired, and settings for the
+color and width of the contour lines.</p>
+<p>Repeating the previous example for the MURv4.1 SST dataset:</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">myURL</span> <span class="op">&lt;-</span> <span class="st">"https://coastwatch.pfeg.noaa.gov/erddap/"</span></span>
+<span><span class="va">info</span> <span class="op">&lt;-</span> <span class="fu">rerddap</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rerddap/reference/info.html" class="external-link">info</a></span><span class="op">(</span><span class="st">"jplMURSST41"</span>, url <span class="op">=</span> <span class="va">myURL</span><span class="op">)</span></span>
+<span><span class="va">murSST</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/rerddap/reference/griddap.html" class="external-link">griddap</a></span><span class="op">(</span><span class="va">info</span>,</span>
+<span>                   latitude  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">50</span><span class="op">)</span>,</span>
+<span>                   longitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">140</span>, <span class="op">-</span><span class="fl">110</span><span class="op">)</span>,</span>
+<span>                   time      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-06-15"</span>, <span class="st">"2020-06-15"</span><span class="op">)</span>,</span>
+<span>                   fields    <span class="op">=</span> <span class="st">"analysed_sst"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotdap.html">plotdap</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="../reference/add_griddap.html">add_griddap</a></span><span class="op">(</span><span class="va">murSST</span>, <span class="op">~</span><span class="va">analysed_sst</span><span class="op">)</span></span></code></pre></div>
+<p>a contour plot with the default 10 equally spaced contours is created
+by:</p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/add_griddap_contours.html">add_griddap_contours</a></span><span class="op">(</span><span class="va">murSST</span><span class="op">$</span><span class="va">data</span>, <span class="st">"analysed_sst"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/add_ggplot.html">add_ggplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="float">
+<img src="contour1.png" alt="Default SST contours"><div class="figcaption">Default SST contours</div>
+</div>
+<p><br><br><br></p>
+<p>and to have the landmask over the contours:</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">p1</span>, landmask <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="float">
+<img src="contour2.png" alt="Default SST contours with landmask"><div class="figcaption">Default SST contours with landmask</div>
+</div>
+<p><br><br><br></p>
+<p>Explicit contour breaks can be set:</p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/add_griddap_contours.html">add_griddap_contours</a></span><span class="op">(</span><span class="va">murSST</span><span class="op">$</span><span class="va">data</span>, <span class="st">"analysed_sst"</span>,</span>
+<span>                              breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">12</span>, <span class="fl">14</span>, <span class="fl">16</span>, <span class="fl">18</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                               <span class="fu"><a href="../reference/add_ggplot.html">add_ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                               <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span>landmask <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="float">
+<img src="contour3.png" alt="Explicit SST contours with landmask"><div class="figcaption">Explicit SST contours with landmask</div>
+</div>
+<p><br><br><br></p>
+</div>
+<div class="section level3">
+<h3 id="interactive">Interactive <code>plotdap</code> objects and
+<code>bbox_set()</code><a class="anchor" aria-label="anchor" href="#interactive"></a>
 </h3>
 <p>A new verion of the function <code><a href="../reference/bbox_set.html">bbox_set()</a></code> is now included.
 It has the arguments:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a></span>
-<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>bbox_set <span class="ot">&lt;-</span> <span class="cf">function</span>(plotobj, <span class="at">landmask =</span> <span class="cn">TRUE</span>, <span class="at">xlim =</span> <span class="cn">NULL</span>, <span class="at">ylim =</span> <span class="cn">NULL</span>, <span class="at">interactive =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a></span>
+<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a>bbox_set <span class="ot">&lt;-</span> <span class="cf">function</span>(plotobj, <span class="at">landmask =</span> <span class="cn">TRUE</span>, <span class="at">xlim =</span> <span class="cn">NULL</span>, <span class="at">ylim =</span> <span class="cn">NULL</span>, <span class="at">interactive =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>If the values for “xlim” and “ylim” are not given, then the function
 will determine the limits and projection of the <code>plotdap</code>
 object, and set this in the <code>ggplot2</code> part of the the
 <code>plotdap</code> object. If “interactive” is set to “TRUE”, then a
 <code>ggplot2</code> object is returned that works properly with the
 function <code><a href="https://rdrr.io/pkg/plotly/man/ggplotly.html" class="external-link">plotly::ggplotly()</a></code>.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://plotly-r.com" class="external-link">plotly</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">myURL</span> <span class="op">&lt;-</span> <span class="st">"https://coastwatch.pfeg.noaa.gov/erddap/"</span></span>
@@ -722,7 +785,7 @@ function <code><a href="https://rdrr.io/pkg/plotly/man/ggplotly.html" class="ext
 <span><span class="va">viirsSST</span> <span class="op">&lt;-</span> <span class="fu">rerddap</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rerddap/reference/griddap.html" class="external-link">griddap</a></span><span class="op">(</span><span class="va">sstInfo</span>, </span>
 <span>                             latitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">41.</span>, <span class="fl">31.</span><span class="op">)</span>, </span>
 <span>                             longitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">128.</span>, <span class="op">-</span><span class="fl">115</span><span class="op">)</span>, </span>
-<span>                             time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'last'</span>,<span class="st">'last'</span><span class="op">)</span>, </span>
+<span>                             time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2026-03-18T12:00:00Z'</span>,<span class="st">'2026-03-18T12:00:00Z'</span><span class="op">)</span>, </span>
 <span>                             fields <span class="op">=</span> <span class="st">'sst'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html" class="external-link">map</a></span><span class="op">(</span><span class="st">"worldHires"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">140.</span>, <span class="op">-</span><span class="fl">114</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30.</span>, <span class="fl">42.</span><span class="op">)</span>, fill <span class="op">=</span> <span class="cn">TRUE</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
