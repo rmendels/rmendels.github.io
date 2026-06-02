@@ -22,7 +22,7 @@ coordinate transformation."><!-- mathjax --><script src="https://cdnjs.cloudflar
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rerddapUtils</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2</span>
       </span>
     </div>
 
@@ -40,6 +40,9 @@ coordinate transformation."><!-- mathjax --><script src="https://cdnjs.cloudflar
       <a href="../articles/using-rerddapUtils.html">Using rerddapUtils</a>
     </li>
   </ul></li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -117,11 +120,13 @@ corresponds to a pair of input latitude and longitude values.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">myURL</span> <span class="op">&lt;-</span> <span class="st">'https://polarwatch.noaa.gov/erddap/'</span></span></span>
-<span class="r-in"><span><span class="va">myInfo</span> <span class="op">&lt;-</span> <span class="fu">rerddap</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rerddap/reference/info.html" class="external-link">info</a></span><span class="op">(</span><span class="st">'noaacwVIIRSn20icethickNP06Daily'</span>, url <span class="op">=</span> <span class="va">myURL</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># myURL &lt;- 'https://coastwatch.noaa.gov/erddap/'</span></span></span>
+<span class="r-in"><span><span class="co"># iceInfo &lt;- rerddap::info('noaacwVIIRSn20icethickNP06Daily', url = myURL)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iceInfo</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">latitude</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> <span class="fl">80.</span>, <span class="fl">85.</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">longitude</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">170.</span>, <span class="op">-</span><span class="fl">165</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">coords</span> <span class="op">&lt;-</span> <span class="fu">latlon_to_xy</span><span class="op">(</span><span class="va">myInfo</span>,  <span class="va">longitude</span>, <span class="va">latitude</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">coords</span> <span class="op">&lt;-</span> <span class="fu">latlon_to_xy</span><span class="op">(</span><span class="va">iceInfo</span>,  <span class="va">longitude</span>, <span class="va">latitude</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -136,7 +141,7 @@ corresponds to a pair of input latitude and longitude values.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

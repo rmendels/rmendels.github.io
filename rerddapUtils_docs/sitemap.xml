@@ -4,10 +4,17 @@
 <url><loc>/articles/using-rerddapUtils.html</loc></url>
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/estimate_griddap_size.html</loc></url>
+<url><loc>/reference/estimate_griddap_split_size.html</loc></url>
 <url><loc>/reference/griddap_season.html</loc></url>
 <url><loc>/reference/griddap_split.html</loc></url>
+<url><loc>/reference/iceInfo.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/latlon_to_xy.html</loc></url>
+<url><loc>/reference/proj_extract.html</loc></url>
+<url><loc>/reference/rerddapUtils.html</loc></url>
+<url><loc>/reference/wind_info.html</loc></url>
 <url><loc>/reference/xy_to_latlon.html</loc></url>
 </urlset>
 
